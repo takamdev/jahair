@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.active{
+    --tw-text-opacity:1 !important;
+    color: rgb(253 164 175 / var(--tw-text-opacity)) !important;
+}
+
+
+  .btn:hover{
+    background-color: #ff66c4da;
+  }
+  .btn{
+    background-color: #ff66c4;
+  }
+@media screen and (min-width:650px){
+  .add-card{
+    opacity: 0;
+    transition: apacity .5s;
+   }
+   .card:hover .add-card{
+    opacity: 1;
+   }
+}
+
