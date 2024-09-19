@@ -1,4 +1,4 @@
-import React from 'react'
+
 import product from './../data/product.json'
 import Card from '../components/Card'
 function Produit() {

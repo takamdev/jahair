@@ -17,7 +17,6 @@ export default function Home() {
        <img src="/img/baner.png" className="w-full lg:h-full h-72 " alt="image" loading="lazy"/>
       <p className="absolute -top-20 lg:top-2/4  lg:text-2xl italic text-black text-center w-full mt-80"> <button onClick={()=>{navigatTo("/product")}} className="btn rounded-full transition  w-40 h-10 lg:w-56 lg:h-20 ">product</button></p>
      </div>
-
     </>
     
   )
