@@ -1,0 +1,7 @@
+ [
+  { "name": "Home", "href": "/" },
+  { "name": "Product", "href": "product" },
+  { "name": "Services", "href": "services" },
+  { "name": "About Us", "href": "about-us" }, 
+  { "name": "Contact", "href": "contact" }
+]
