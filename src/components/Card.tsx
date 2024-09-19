@@ -13,7 +13,7 @@ function Card({product}:{product:product}) {
   return (
     <div className='w-auto bg-slate-100 card p-2'>
        <div className='img-container  overflow-hidden'>
-         <img src={img} alt="image" className='transition h-96 lg:hover:scale-110' />
+         <img src={img} alt="image" className='transition h-96 w-full lg:hover:scale-110' />
        </div>
         <div className='flex flex-col p-4  items- justify-center mt-2'>
             <h4 className='uppercase  lg:text-3xl mb-1 '>{category}</h4>
