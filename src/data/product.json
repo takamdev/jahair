@@ -1,0 +1,38 @@
+[
+    {
+        "_id":0,
+        "category":"Treatments",
+        "title":"Hair Spa",
+        "textprize":"Starts at",
+        "prize":50,
+        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492330103-IMG_1835.jpeg",
+        "symbolprize":"$"
+    },
+    {
+        "_id":1,
+        "category":"Treatments",
+        "title":"Keratin Treatment",
+        "textprize":"Starts at",
+        "prize":30,
+        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492697132-IMG_1877.jpeg",
+        "symbolprize":"$"
+    },
+    {
+        "_id":2,
+        "category":"Treatments",
+        "title":"Deep Conditioning",
+        "textprize":"Starts at",
+        "prize":120,
+        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1687110305095-unnamed-43.jpg",
+        "symbolprize":"$"
+    },
+    {
+        "_id":3,
+        "category":"Vietnam",
+        "title":"Vietnam raw straight wig",
+        "textprize":"Starts at",
+        "prize":45,
+        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492594648-IMG_1849.jpeg",
+        "symbolprize":"$"
+    }
+]
