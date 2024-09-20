@@ -1,27 +1,43 @@
+import {useRef, useState } from "react"
 import useStore from "../store"
 import { product } from "../store"
 function Card({product}:{product:product}) {
   const {img,category,title,prize,textprize,symbolprize} = product
-
+  const [pulse,setPulse]=useState(true) 
   const addCart = useStore((state)=>(state.addCart))  
   const Cart = useStore((state)=>(state.Cart))
-
+  const classAnimation = pulse ?"bg-slate-300 w-full  rounded-md":""
+  const ref = useRef(null)
   const addToCart = ()=>{
     const isExiste = Cart.find(item=>item._id===product._id)
     if(isExiste===undefined) addCart(product)
   }
+  const load = ()=>{
+  setPulse(false)
+    ScrollReveal().reveal(ref.current, {
+      duration: 1000,
+      distance:"100px",
+      origin: 'bottom',
+      reset: false
+  });
+  return ()=>{
+    ScrollReveal().clean(ref.current);
+  }
+  }
+
+ 
   return (
-    <div className='w-auto bg-slate-100 card p-2'>
-       <div className='img-container  overflow-hidden'>
-         <img src={img} alt="image" className='transition h-96 w-full lg:hover:scale-110' />
+    <div ref={ref} className={`w-auto ${pulse&&"animate-pulse"} card p-2`}>
+       <div className={`img-container ${classAnimation} bg-slate-300  overflow-hidden`}>
+         <img onLoad={load} src={img} alt="image" className={`transition h-96 w-full lg:hover:scale-110`} />
        </div>
-        <div className='flex flex-col p-4  items- justify-center mt-2'>
-            <h4 className='uppercase  lg:text-3xl mb-1 '>{category}</h4>
-            <span className='h-0.5 scale-y-50 bg-slate-600 w-40'></span>
-            <p className='mt-2 lg:text-2xl'>{title}</p>
-            <p className='lg:text-1xl'>{textprize} {prize} {symbolprize}</p>
+        <div className={`flex flex-col ${!pulse&&"px-4"}  items- justify-center`}>
+            <h4 className={`uppercase ${classAnimation} ${pulse&&"h-5"} lg:text-3xl mb-1 `}>{!pulse&&category}</h4>
+            <span className={`h-0.5 scale-y-50 bg-slate-300 w-40`}></span>
+            <p className={`mt-2 my-2 ${classAnimation} ${pulse&&"h-5"} lg:text-2xl`}>{!pulse&&title}</p>
+            <p className={`lg:text-1xl  ${classAnimation} ${pulse&&"h-5"} `}>{!pulse&&textprize} {!pulse&&prize} {!pulse&&symbolprize}</p>
         </div>
-        <button onClick={addToCart} className={`btn px-4 py-2 mx-4 rounded-lg add-card`}>ajouter au panier</button>
+        {!pulse&&<button onClick={addToCart} className={`btn px-4 py-2 mx-4 rounded-lg add-card`}>ajouter au panier</button>}
     </div>
   )
 }
