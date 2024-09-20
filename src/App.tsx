@@ -6,7 +6,7 @@ import social_links from "./data/social_links.json"
 
 function App() {
   return (
-    <main className="bg-white relative isolate  pt-14  h-screen">
+    <main className="bg-white relative isolate  pt-14  h-full">
         
       <Header/>
       <Outlet/>
