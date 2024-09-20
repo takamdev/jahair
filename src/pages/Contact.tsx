@@ -6,7 +6,7 @@ import { BsFacebook } from "react-icons/bs"
 import { AiOutlineInstagram } from "react-icons/ai"
 import { FaTiktok } from "react-icons/fa"
 import { ImTwitter } from "react-icons/im"
-
+import ScrollReveal from 'scrollreveal'
 type info = {
   fistname:string,
   lastname:string,
@@ -33,14 +33,14 @@ function Contact() {
 
 useEffect(()=>{
 
-  ScrollReveal().reveal(ref.current, {
+  ScrollReveal().reveal(ref.current||"", {
     duration: 1000,
     distance:"100px",
     origin: 'bottom',
     reset: false
 });
 return ()=>{
-  ScrollReveal().clean(ref.current);
+  ScrollReveal().clean(ref.current||"");
 }
 
 },[])

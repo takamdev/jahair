@@ -1,6 +1,7 @@
 import {useRef, useState } from "react"
 import useStore from "../store"
 import { product } from "../store"
+import ScrollReveal from 'scrollreveal'
 function Card({product}:{product:product}) {
   const {img,category,title,prize,textprize,symbolprize} = product
   const [pulse,setPulse]=useState(true) 
@@ -14,14 +15,14 @@ function Card({product}:{product:product}) {
   }
   const load = ()=>{
   setPulse(false)
-    ScrollReveal().reveal(ref.current, {
+    ScrollReveal().reveal(ref.current||"", {
       duration: 1000,
       distance:"100px",
       origin: 'bottom',
       reset: false
   });
   return ()=>{
-    ScrollReveal().clean(ref.current);
+    ScrollReveal().clean(ref.current||"");
   }
   }
 
