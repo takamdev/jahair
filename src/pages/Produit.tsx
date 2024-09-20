@@ -9,7 +9,7 @@ function Produit() {
         product.map((item,index)=>{
           return (
                 <div key={index} className='lg:w-auto'>
-                        <Card product={item} />
+                        <Card  product={item} />
                 </div>
           )
         })
