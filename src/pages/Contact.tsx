@@ -23,9 +23,7 @@ const schema = yup
   })
   .required()
 
-const inputClass = "w-full border-solid border-2 bg-slate-200  p-2 outline-none  rounded-sm h-12"
-const textareaClass= "w-full border-solid border-2  bg-slate-200 p-2 outline-none rounded-sm h-20 resize-none"
-const labelClass ="self-start mt-3"
+
 const contact =" contact@jahair.com"
 
 function Contact() {
@@ -75,20 +73,20 @@ return ()=>{
 
           <h1 className="text-center text-5xl font-bold text-slate-800">Contact</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-5 md:px-20 lg:px-32 py-5 lg:w-1/2 mx-auto justify-center items-center">
-            <label className={labelClass} htmlFor="fistname">Nom<span className="text-red-600 ">*</span></label>
-            <input   {...register("fistname")}   id="fistname" type="text" className={inputClass} />
+            <label className={"labelClass"} htmlFor="fistname">Nom<span className="text-red-600 ">*</span></label>
+            <input   {...register("fistname")}   id="fistname" type="text" className={"inputClass"} />
             <p className="text-red-600 ">{errors.fistname?.message}</p>
 
-            <label className={labelClass}  htmlFor="lastname">Prenom<span className="text-red-600 ">*</span></label>
-            <input {...register("lastname")}  className={inputClass} id="lastname" type="text" />
+            <label className={"labelClass"}  htmlFor="lastname">Prenom<span className="text-red-600 ">*</span></label>
+            <input {...register("lastname")}  className={"inputClass"} id="lastname" type="text" />
             <p className="text-red-600 ">{errors.lastname?.message}</p>
 
-            <label className={labelClass}  htmlFor="email">Email<span className="text-red-600 ">*</span></label>
-            <input {...register("email")}  className={inputClass} id="email" type="text" />
+            <label className={"labelClass"}  htmlFor="email">Email<span className="text-red-600 ">*</span></label>
+            <input {...register("email")}  className={"inputClass"} id="email" type="text" />
             <p className="text-red-600 ">{errors.email?.message}</p>
 
-            <label className={labelClass}  htmlFor="message">Message<span className="text-red-600 ">*</span></label>
-            <textarea {...register("message")}  className={textareaClass} id="message"></textarea>
+            <label className={"labelClass"}  htmlFor="message">Message<span className="text-red-600 ">*</span></label>
+            <textarea {...register("message")}  className={"textareaClass"} id="message"></textarea>
             <p className="text-red-600 ">{errors.message?.message}</p>
 
             <button type="submit" className="btn self-end px-4 py-2 mt-3 w-48 rounded-lg">Envoyer</button>
