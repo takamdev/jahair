@@ -1,0 +1,19 @@
+.table-container{
+  
+}
+
+.table-head th{
+width: 200px;
+text-align: start;
+}
+
+.table-body td{
+    width: 200px;
+    text-align: start;
+    padding-right: 20px;
+}
+
+input[type="file"] {
+    display: none;
+  }
+
