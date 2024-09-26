@@ -1,21 +1,12 @@
 import { create } from "zustand";
-export type product ={
-  "_id":number,
-  "category":string,
-  "title":string,
-  "textprize":string,
-  "prize":number,
-  "img":string,
-  "symbolprize":string,
-  "qte"?:number
-}
-export type cart = product[]
+import {type_product} from "./types/type_product"
+export type cart = type_product[]
 
 
 
 interface CartState {
   Cart: cart
-  addCart: (product: product) => void
+  addCart: (product: type_product) => void
   resetCart:(cart:cart) => void
 }
 const useStore = create<CartState>((set) => ({
