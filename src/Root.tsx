@@ -8,6 +8,9 @@ import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
+import Admis from "./pages/Admis";
+import Auth from "./pages/Auth";
+import ForgetPassword from "./pages/ForgetPassword";
 
 function Root() {
 const route = createBrowserRouter([
@@ -35,6 +38,18 @@ const route = createBrowserRouter([
             {
                 path:"about-us",
                 element:<AboutUs/>
+            },
+            {  // admin
+                path:"admin",
+                element:<Auth/>
+            },
+            {  // dashboard
+                path:"admin/dashboard",
+                element:<Admis/>
+            },
+            {  // forget password
+                path:"admin/forget-password",
+                element:<ForgetPassword/>
             }
         ]
     }
