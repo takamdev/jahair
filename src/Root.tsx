@@ -11,13 +11,14 @@ import Home from "./pages/Home";
 import Admis from "./pages/Admis";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
+import Error_page from "./pages/Error_page";
 
 function Root() {
 const route = createBrowserRouter([
     {
         path:"/",
         element:<App/>,
-        errorElement:<p>errreur</p>,
+        errorElement:<Error_page/>,
         children:[
             {
                 path:'',
@@ -44,7 +45,7 @@ const route = createBrowserRouter([
                 element:<Auth/>
             },
             {  // dashboard
-                path:"admin/dashboard",
+                path:"admin/dashboard/:token",
                 element:<Admis/>
             },
             {  // forget password
