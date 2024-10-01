@@ -8,11 +8,15 @@ interface CartState {
   Cart: cart
   addCart: (product: type_product) => void
   resetCart:(cart:cart) => void
+  token:string
+  setToken:(token:string) => void
 }
 const useStore = create<CartState>((set) => ({
     Cart: [],
     addCart: (product) => set((state) => ({ Cart:[...state.Cart,{...product,qte:1}]})),// dans ce cas T est de type le type de Cart
-    resetCart:(cart)=>set(()=>({Cart:cart}))
+    resetCart:(cart)=>set(()=>({Cart:cart})),
+    token:"",
+    setToken:(token)=>set(()=>({token:token}))
   }))
 
 
