@@ -1,31 +1,78 @@
+import { AiOutlinePlusCircle } from "react-icons/ai"; 
 import { CgRemove } from "react-icons/cg"; 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useRef, useState } from 'react'
+import {  useState } from 'react'
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+
+interface files {
+  name:string
+  url:string
+}
+
+interface formData {
+   name:string
+   category:string
+   prize:number
+   desc:string
+}
+const borderColor = "border-rose-300"
+
+const schema = yup
+  .object({
+    name: yup.string().required(),    
+    category: yup.string().required(),    
+    prize: yup.number().required(),    
+    desc: yup.string().required(),
+
+
+
+  })
+  .required()
 
 export default function Modal({open,onClose}:{open:boolean,onClose(value: boolean): void}) {
 
-    const [imgSelect,setImgSelect]=useState([])
-// reference ppour que le clic sur la div demande a choisir des images
-const ref = useRef<HTMLLabelElement | null>(null)
-const choseImage = ()=>{
-  if(ref.current!==null){
-    ref.current.click()
-  }
-}
-console.log(imgSelect);
+    const [imgSelect,setImgSelect]=useState<files[]>([])
 
-// transformer la liste de fichier en tableau de fichier
-const foromatFileList = (files:FileList | null)=>{
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<formData>({
+      resolver: yupResolver(schema),
+    })
+    const onSubmit = (data) =>{
+
+
+    }
+
+    
+// transformer les image en liste de url images
+const getURLFile = (files:FileList | null)=>{
+  // parcourie l'objet file
     for (const cle in files) {
-        console.log(cle + ": " + files[parseInt(cle)]);
-        setImgSelect((v)=>([...v,]))
+        const url = URL.createObjectURL(files[parseInt(cle)])
+        const name = files[parseInt(cle)].name
+
+      // verifier si le fichier existe
+        const isexiste = imgSelect.find(item=>item.name===name)
+
+        if(isexiste===undefined)  {
+          if(imgSelect.length<=3){
+            setImgSelect((v)=>([...v,{name:name,url:url}]))
+          }
+        }
+        
       }
     
 }
 
 //suprimer une image
 const removeImg = (name:string)=>{
-
+   const newFIles = imgSelect.filter(item => item.name!==name)
+   setImgSelect(newFIles)
 }
   return (
     <Dialog open={open} onClose={onClose} className="relative z-10">
@@ -47,31 +94,32 @@ const removeImg = (name:string)=>{
                   <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
                     Ajouter un Produit
                   </DialogTitle>
-                  <div className="mt-3">
+                  <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
                      <label className='labelClass'  htmlFor="name">Nom</label>
-                     <input className='inputClass' type="text" id='name' />
+                     <input {...register("name")} className={`inputClass ${errors.name?borderColor:""}`} type="text" id='name' />
 
                      <label className='labelClass mt-2' htmlFor="category">Category</label>
-                     <input className='inputClass' type="text" id='category' />
+                     <input {...register("category")} className={`inputClass ${errors.category?borderColor:""}`} type="text" id='category' />
 
                      <label className='labelClass' htmlFor="prize">Prix</label>
-                     <input className='inputClass' type="text" id='prize' />
+                     <input {...register("prize")} className={`inputClass ${errors.prize?borderColor:""}`} type="text" id='prize' />
 
-                     <label className='labelClass' ref={ref} htmlFor="img">Photo</label>
-                     <input onChange={(e)=>{foromatFileList(e.target.files)}} type="file" multiple accept=".jpg, .png, .pdf" id='img' className='hidden' />
-                      <div id='img' onClick={choseImage} className='w-full flex overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
+                     <label className='labelClass flex items-center gap-2' htmlFor="img">Photo (4 images max) <AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
+                     <input  onChange={(e)=>{getURLFile(e.target.files)}} type="file" multiple accept="image/*" id='img' className='hidden' />
+                      <div id='img' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
                         {
                         
                         
                             imgSelect.map(item=>{
-                                return (<span onClick={()=>{removeImg(item)}} className='mx-1 flex gap-1 items-center'>{item} <CgRemove className="text-red-500" /></span>)
+                                return (<span onClick={()=>{removeImg(item.name)}} className='mx-1  flex gap-0 items-center'>{item.name} <CgRemove className="text-red-500 text-2xl z-50" /></span>)
                             })
                                 
                         }
                       </div>
                       <label className='labelClass' htmlFor="desc">Description</label>
-                      <textarea className='textareaClass' id="desc"></textarea>
-                  </div>
+                      <textarea {...register("desc")} className={`textareaClass ${errors.desc?borderColor:""}`} id="desc"></textarea>
+                      <button className="btn px-4 py-2  rounded-lg" type="submit">envoyer</button>
+                  </form>
                 </div>
               </div>
             </div>
