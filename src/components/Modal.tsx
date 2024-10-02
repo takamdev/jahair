@@ -43,9 +43,10 @@ export default function Modal({open,onClose}:{open:boolean,onClose(value: boolea
     } = useForm<formData>({
       resolver: yupResolver(schema),
     })
-    const onSubmit = (data) =>{
+    const onSubmit = (data:formData) =>{
 
-
+     console.log(data);
+     
     }
 
     

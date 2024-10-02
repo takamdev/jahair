@@ -27,7 +27,8 @@ function Admis() {
 
   const changeCssClassButton = (index:number)=>{
       const newButtonActive = buttonActive.map((item,i)=>{
-        if(index===i) return true
+        
+        if(index===i&&item) return true
            else return false
       })
       setButtonActive(newButtonActive)

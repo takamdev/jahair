@@ -15,7 +15,6 @@ import EditableCell from "../table/EditableCell";
 import Modal from "../Modal";
 
 
-
 const defaultData: type_product[] =product
 const columns = ColumnHelper()
 

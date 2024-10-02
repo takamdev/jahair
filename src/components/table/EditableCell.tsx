@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { type_product } from '../../types/type_product'
 
-function EditableCell({cell,onchange,defaultCurrentValue}) {
+interface etitableCell {
+  onchange: (value: string, id: string, key: string) => void
+  defaultCurrentValue: React.Dispatch<React.SetStateAction<type_product>>
+  cell:any
+}
+
+function EditableCell({cell,onchange,defaultCurrentValue}:etitableCell) {
+
       // recherche des clée
       const index_Of = cell.id.indexOf('_')+1
-
+    
       // recuperation des key
       const key =cell.id.slice(index_Of,cell.id.length)
        
     const [value,setValue]=useState('')
 
     useEffect(()=>{
-      setValue(cell.row.original[key])
+    
+        setValue(cell.row.original[key])
+      
+     
     },[cell.row.original[key]])
 
 //modification du produit modification
