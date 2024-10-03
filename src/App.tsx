@@ -21,7 +21,7 @@ function App() {
       <Footer/>
       {
         showLogoWhat?(
-          <a href={`https://wa.me/${social_links[0].href}`} className="fixed w-12 bottom-7 right-3  md:w-16 md:bottom-7 md:right-7">
+          <a href={`https://wa.me/${social_links.whatsapp}`} className="fixed w-12 bottom-7 right-3  md:w-16 md:bottom-7 md:right-7">
           <img src="/logo_whatsapp.svg"  alt="whatsapp" />
         </a>
         ):(

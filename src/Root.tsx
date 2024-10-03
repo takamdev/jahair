@@ -12,6 +12,10 @@ import Admis from "./pages/Admis";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
 import Error_page from "./pages/Error_page";
+import Faq from "./pages/Faq";
+import Entretien from "./pages/Entretien";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms_conditions from "./pages/Terms_conditions";
 
 function Root() {
 const route = createBrowserRouter([
@@ -35,6 +39,22 @@ const route = createBrowserRouter([
             {
                 path:"services",
                 element:<Services/>
+            },
+            {
+                path:"faq",
+                element:<Faq/>
+            },
+            {
+                path:"entretien",
+                element:<Entretien/>
+            },
+            {
+                path:"privacy-policy",
+                element:<PrivacyPolicy/>
+            },
+            {
+                path:"terms-and-conditions",
+                element:<Terms_conditions/>
             },
             {
                 path:"about-us",

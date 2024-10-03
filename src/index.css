@@ -34,3 +34,7 @@
 .textareaClass{
   @apply w-full border-solid border-2  bg-slate-200 p-2 outline-none rounded-sm h-20 resize-none
 }
+
+.bordureFooter{
+ border-top: 1px solid rgb(70, 70, 70);
+}
