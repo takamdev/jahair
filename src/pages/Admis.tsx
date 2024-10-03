@@ -12,7 +12,7 @@ import Services from "../components/admin/Services";
 import Promote from "../components/admin/Promote";
 import Income from "../components/admin/Income";
 import { Navigate, useParams } from "react-router-dom";
-import useStore from "../store";
+import Cookies from "js-cookie";
 
 const cssClassButtonActive = "btn rounded-lg text-start px-3 py-2 flex gap-2 items-center text-white"
 const cssClassButtonInactive = "text-slate-500 flex gap-2 items-center text-start px-3 py-2"
@@ -20,15 +20,16 @@ const name = "Prisca"
 const onglet = [<Dashboad/>,<Product/>,<Services/>,<Promote/>,<Income/>]
 function Admis() {
   const {token}=useParams()
-  const tokenstore = useStore((state)=>(state.token))
+  const tokenstore = Cookies.get("token")
   const [buttonActive,setButtonActive]=useState([true,false,false,false,false])
   const [showOnglet,setShowOnglet]= useState(<Dashboad/>)
 
 
   const changeCssClassButton = (index:number)=>{
       const newButtonActive = buttonActive.map((item,i)=>{
+        console.log(item);
         
-        if(index===i&&item) return true
+        if(index===i) return true
            else return false
       })
       setButtonActive(newButtonActive)
