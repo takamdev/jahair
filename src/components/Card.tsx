@@ -10,7 +10,7 @@ function Card({product}:{product:type_product}) {
   const classAnimation = pulse ?"bg-slate-300 w-full  rounded-md":""
   const ref = useRef(null)
   const addToCart = ()=>{
-    const isExiste = Cart.find(item=>item._id===product._id)
+    const isExiste = Cart.find(item=>item.id===product.id)
     if(isExiste===undefined) addCart(product)
   }
   const load = ()=>{
@@ -30,7 +30,7 @@ function Card({product}:{product:type_product}) {
   return (
     <div ref={ref} className={`w-auto ${pulse&&"animate-pulse"} card p-2`}>
        <div className={`img-container ${classAnimation} bg-slate-300  overflow-hidden`}>
-         <img onLoad={load} src={img} alt="image" className={`transition h-96 w-full lg:hover:scale-110`} />
+         <img onLoad={load} src={img[0]} alt="image" className={`transition h-96 w-full lg:hover:scale-110`} />
        </div>
         <div className={`flex flex-col ${!pulse&&"px-4"}  items- justify-center`}>
             <h4 className={`uppercase ${classAnimation} ${pulse&&"h-5"} lg:text-3xl mb-1 `}>{!pulse&&title}</h4>

@@ -5,7 +5,7 @@ const ColumnHelper = ()=>{
 
 const columnHelper = createColumnHelper<type_product>()
 return [
-  columnHelper.accessor('_id', {
+  columnHelper.accessor('id', {
     header:"N",
     footer: info => info.column.id,
   }),
