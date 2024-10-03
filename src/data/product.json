@@ -1,43 +1,43 @@
 [
     {
-        "_id":"0",
+        "id":"0",
         "category":"Treatments",
         "title":"Treatments",
         "prize":50,
-        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492330103-IMG_1835.jpeg",
+        "img":["https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492330103-IMG_1835.jpeg"],
         "symbolprize":"$",
         "in_stock":true,
          "desc":"Hair Spa"
     },
     {
-        "_id":"1",
+        "id":"1",
         "category":"Treatments",
         "title":"Treatments",
         
         "prize":30,
-        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492697132-IMG_1877.jpeg",
+        "img":["https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492697132-IMG_1877.jpeg"],
         "symbolprize":"$",
         "in_stock":true,
          "desc":"Keratin Treatment"
     },
     {
-        "_id":"2",
+        "id":"2",
         "category":"Treatments",
         "title":"Treatments",
         
         "prize":120,
-        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1687110305095-unnamed-43.jpg",
+        "img":["https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1687110305095-unnamed-43.jpg"],
         "symbolprize":"$",
         "in_stock":true,
         "desc":"Deep Conditioning"
     },
     {
-        "_id":"3",
+        "id":"3",
         "category":"Vietnam",
         "title":"Vietnam",
         
         "prize":45,
-        "img":"https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492594648-IMG_1849.jpeg",
+        "img":["https://cdn.zyrosite.com/cdn-cgi/image/format=auto,w=392,h=392,fit=crop,q=100/cdn-ecommerce/store_01GSNH50WV7SGS0N21KJNT2F6P%2Fassets%2F1688492594648-IMG_1849.jpeg"],
         "symbolprize":"$",
         "in_stock":true,
         "desc":"Vietnam raw straight wig"
