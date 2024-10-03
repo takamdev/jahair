@@ -20,7 +20,6 @@ const defaultData: type_product[] =product
 const columns = ColumnHelper()
 
 function Product() {
-
   const [data, setData] = React.useState<type_product[]>(() => [...defaultData])
   const [currentRow,setCurrentRow]=useState<type_product>(data[0])
   //controle du modal
