@@ -1,10 +1,14 @@
 import { AiOutlinePlusCircle } from "react-icons/ai"; 
 import { CgRemove } from "react-icons/cg"; 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import {  useState } from 'react'
+import {  useRef, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { toast } from "sonner";
+import { type_product } from "../types/type_product";
+import { addFile } from "../firebase/addFile";
+import { addCollection } from "../firebase/addCollection";
 
 
 interface files {
@@ -32,20 +36,71 @@ const schema = yup
   })
   .required()
 
-export default function Modal({open,onClose}:{open:boolean,onClose(value: boolean): void}) {
+export default function Modal({open,onClose,setData}:{open:boolean,onClose(value: boolean): void,setData(value: React.SetStateAction<type_product[]>):void}) {
 
     const [imgSelect,setImgSelect]=useState<files[]>([])
-
+    const refInputFile = useRef<HTMLInputElement>(null)
+    const [load , setLoad]=useState(false)
     const {
+      reset,
       register,
       handleSubmit,
       formState: { errors },
     } = useForm<formData>({
       resolver: yupResolver(schema),
     })
+    const resetFrom = ()=>{
+      reset()
+      setImgSelect([])
+      if(refInputFile.current) refInputFile.current.value =""
+    }
     const onSubmit = (data:formData) =>{
-
-     console.log(data);
+    //verifier si les images sont charger et recuperer les urls locals
+     if(imgSelect.length>0){
+      setLoad(true)
+      const urlList:string[] = [] 
+      imgSelect.forEach(element =>{
+        addFile(element).then(res=>{
+          urlList.push(res)
+        }).catch(err=>console.error(err)
+        )
+      })
+     
+// construit le produit
+        const product = {
+          category: data.category,
+          title: data.name,
+          prize: data.prize,
+          img: urlList,
+          symbolprize:"$",
+          in_stock:true,
+          desc:data.desc
+        } 
+        //ajout du produit et recuperation de l'id
+        addCollection("product",product).then(res=>{
+          
+          const product = {
+            id:res.id,
+            category: data.category,
+            title: data.name,
+            prize: data.prize,
+            img: urlList,
+            symbolprize:"$",
+            in_stock:true,
+            desc:data.desc
+          } 
+          //mise a jour du tableau dans le dom
+          setData((v)=>([...v,product]))
+          //reinitialisation des champ
+          setLoad(false)
+          resetFrom()
+        }).catch(err=>console.error(err)
+        )
+     }else{
+       toast.warning("entrez les images",{
+        className:"text-red-600 text-xl"
+       })
+     }
      
     }
 
@@ -53,7 +108,8 @@ export default function Modal({open,onClose}:{open:boolean,onClose(value: boolea
 // transformer les image en liste de url images
 const getURLFile = (files:FileList | null)=>{
   // parcourie l'objet file
-    for (const cle in files) {
+    for (const cle in files) {      
+      if(files[parseInt(cle)].type==="image/webp"){
         const url = URL.createObjectURL(files[parseInt(cle)])
         const name = files[parseInt(cle)].name
 
@@ -61,11 +117,17 @@ const getURLFile = (files:FileList | null)=>{
         const isexiste = imgSelect.find(item=>item.name===name)
 
         if(isexiste===undefined)  {
+
           if(imgSelect.length<=3){
             setImgSelect((v)=>([...v,{name:name,url:url}]))
           }
         }
-        
+      }else{
+        toast.success("seul les image au format webp sont accepter",{
+          className:"text-green-500 text-xl"
+        })
+       
+      }
       }
     
 }
@@ -76,10 +138,10 @@ const removeImg = (name:string)=>{
    setImgSelect(newFIles)
 }
   return (
-    <Dialog open={open} onClose={onClose} className="relative z-10">
+    <Dialog open={open} onClose={onClose} className="relative z-10 ">
       <DialogBackdrop
         transition
-        className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+        className="fixed inset-0  bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
       />
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -106,7 +168,7 @@ const removeImg = (name:string)=>{
                      <input {...register("prize")} className={`inputClass ${errors.prize?borderColor:""}`} type="text" id='prize' />
 
                      <label className='labelClass flex items-center gap-2' htmlFor="img">Photo (4 images max) <AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
-                     <input  onChange={(e)=>{getURLFile(e.target.files)}} type="file" multiple accept="image/*" id='img' className='hidden' />
+                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputFile} type="file"  multiple accept="image/webp" id='img' className='hidden' />
                       <div id='img' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
                         {
                         
@@ -119,7 +181,11 @@ const removeImg = (name:string)=>{
                       </div>
                       <label className='labelClass' htmlFor="desc">Description</label>
                       <textarea {...register("desc")} className={`textareaClass ${errors.desc?borderColor:""}`} id="desc"></textarea>
-                      <button className="btn px-4 py-2  rounded-lg" type="submit">envoyer</button>
+                      <button disabled={load} className="btn px-4 py-2  rounded-lg" type="submit">
+                        {
+                          load?"patientez...":"envoyer"
+                        }
+                      </button>
                   </form>
                 </div>
               </div>
@@ -128,7 +194,11 @@ const removeImg = (name:string)=>{
               <button
                 type="button"
                 data-autofocus
-                onClick={() => onClose(false)}
+                onClick={() => {
+                  onClose(false)
+                  resetFrom()
+                  
+                }}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Cancel
