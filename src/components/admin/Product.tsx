@@ -1,3 +1,4 @@
+import { BiCloudUpload } from "react-icons/bi"; 
 import { AiOutlinePlus } from "react-icons/ai"; 
 import { AiFillEdit } from "react-icons/ai"; 
 import { AiFillDelete } from "react-icons/ai"; 
@@ -34,7 +35,7 @@ function Product() {
   const handleChange = (value:string,id:string,key:string)=>{
    setCurrentRow((v)=>({...v,[key]:value}))
    const updataData = data.map(item=>{
-      if(item._id===id) return currentRow
+      if(item.id===id) return currentRow
         else return item
    })
    
@@ -44,7 +45,7 @@ function Product() {
   // conrolleur de produit en stock
   const checkbox = (id:string)=>{
     const updataData = data.map(item=>{
-       if (item._id === id) {
+       if (item.id === id) {
         return { ...item, in_stock: !item.in_stock };
       }
       return item;
@@ -68,12 +69,12 @@ function Product() {
 */
   // supprimer un produit
   const deleteProduct = (id:string)=>{
-    const newData = data.filter(item=>item._id!==id)
+    const newData = data.filter(item=>item.id!==id)
     setData(newData)
   }
   return (
     <div className="container relative  bg-white p-4 h-full">
-      <Modal open={open} onClose={setOpen} />
+      <Modal open={open} onClose={setOpen} setData={setData}/>
       {
         data.length===0 ? (
           <p className="text-5xl text-center">aucun produit dans votre site</p>
@@ -112,13 +113,13 @@ function Product() {
                     )
                     if(index===5) return (
                       <td className=''  key={cell.id}>
-                        <input type="checkbox" onClick={()=>{checkbox(row.original._id)}} checked={row.original.in_stock}  />
+                        <input type="checkbox" onClick={()=>{checkbox(row.original.id)}} checked={row.original.in_stock}  />
                       </td>
                     )
                     if(index===6) return (
                       <td className='f' key={cell.id}>
                         <div className="flex items-center">
-                          <img src={row.original.img} width={50} alt="tof" />
+                          <img src={row.original.img[0]} width={50} alt="tof" />
                           <input type="file" id="image"  />
                           <label htmlFor="image"><AiFillEdit /></label>
                         </div>
@@ -135,7 +136,7 @@ function Product() {
   
                 })}
                 <td className='mx-auto'>
-                 <AiFillDelete onClick={()=>{deleteProduct(row.original._id)}} className="scale-150 text-red-600 cursor-pointer" />
+                 <AiFillDelete onClick={()=>{deleteProduct(row.original.id)}} className="scale-150 text-red-600 cursor-pointer" />
                 </td>
               </tr>
              )
@@ -144,8 +145,8 @@ function Product() {
           </table>
         )
       }
-     
-    <button onClick={()=>{setOpen(!open)}} className="btn p-4 absolute bottom-0 right-0 rounded-lg"><AiOutlinePlus /></button>
+    <button className="bg-green-500 p-4 absolute bottom-0 left-10 rounded-lg"><BiCloudUpload className="text-xl" /></button>
+    <button onClick={()=>{setOpen(!open)}} className="btn p-4 absolute bottom-0 right-10 rounded-lg"><AiOutlinePlus /></button>
     </div>
   )
 }
