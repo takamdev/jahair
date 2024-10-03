@@ -4,11 +4,11 @@ import * as yup from "yup"
 import { useEffect, useRef, useState } from "react"
 import ScrollReveal from 'scrollreveal'
 import { Link } from "react-router-dom"
-import { db } from "../firebase/config"
 import { useNavigate } from "react-router-dom"
-import {collection,getDocs ,addDoc} from "firebase/firestore/lite"
 import bcrypt from "bcryptjs"
-import useStore from "./../store"
+import { getAllCollection } from "../firebase/getCollections"
+import { addCollection } from "../firebase/addCollection"
+import Cookies from "js-cookie"
 type info = {
   email:string,
   password:string
@@ -30,7 +30,7 @@ function Auth() {
   const navigateTo = useNavigate()
   const [isAdmin,setIsAdmin]=useState(false)
   const [load,setLoad]=useState(false)
-  const setToken = useStore((state)=>state.setToken)
+  const [create,setCreate]=useState(false)
 useEffect(()=>{
 
   ScrollReveal().reveal(ref.current||"", {
@@ -66,50 +66,50 @@ return ()=>{
       email:data.email,
       password:password
      }
-
-    // verifier s'il y'a un administrateur
-        const refAdmin = collection(db,"admin")
-       try {
-        const admin = await getDocs(refAdmin)
+      // verifier s'il y'a un administrateur
+     getAllCollection("admin").then((admin)=>{
         //si pas d'admin
-        if(admin.size===0){
-          //cree l'admin
-          const docRefAdmin = await addDoc(refAdmin,newAdmin)
+      if(admin.size===0){
+        //cree l'admin
+        addCollection("admin",newAdmin).then((docRefAdmin)=>{
+          setCreate(true)
           if(docRefAdmin.id!==undefined) setLoad(false)
+        }).catch(err=>{
+        console.error(err);
+        
+        
+         
+      })
+        
+      } 
+       // si admin 
+       admin.forEach(doc=>{
+        const getAdmin = doc.data()
+        const isvalid = bcrypt.compareSync(data.password, getAdmin.password);
+       
+        if(isvalid){
+         // cree un token
+         const tab = password.split("")
+         let token =""
+         tab.forEach(element =>{
+           if(element!=="/"){
+             token=token+element
+           }
+         })
 
-
+         Cookies.set('token', token, { expires: 1 });
+         navigateTo(`dashboard/${token}`)
+         setLoad(false)
         } 
-        // si admin 
-        admin.forEach(doc=>{
-           const getAdmin = doc.data()
-           const isvalid = bcrypt.compareSync(data.password, getAdmin.password);
-          
-           if(isvalid){
-            // cree un token
-            const tab = password.split("")
-            let token =""
-            tab.forEach(element =>{
-              if(element!=="/"){
-                token=token+element
-              }
-            })
-            setToken(token)
-            navigateTo(`dashboard/${token}`)
-            setLoad(false)
-           } 
-            else {
-              setIsAdmin(true)
-              setLoad(false)
-            }
-           
-          
-        })
-       } catch (error) {
-        console.log("erreur");
+         else {
+           setIsAdmin(true)
+           setLoad(false)
+         }
         
-        console.log(error);
-        
-       }
+       
+     })
+     }).catch(errors=>console.error(errors))
+
   }
 
   return (
@@ -120,6 +120,9 @@ return ()=>{
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-5 md:px-20 lg:px-32 py-5 lg:w-1/2 mx-auto justify-center items-center">
             {
               isAdmin?<p className="text-red-600">address email ou mot de passe invalid</p>:""
+            }
+            {
+              create?<p className="text-green-500">admin crée avec success connectez vous!</p>:""
             }
             <label className={isAdmin?"self-start":labelClass}  htmlFor="email">Email<span className="text-red-600 ">*</span></label>
             <input {...register("email")}  className={inputClass} id="email" type="text" />
