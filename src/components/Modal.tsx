@@ -11,10 +11,7 @@ import { addFile } from "../firebase/addFile";
 import { addCollection } from "../firebase/addCollection";
 
 
-interface files {
-  name:string
-  url:string
-}
+
 
 interface formData {
    name:string
@@ -22,7 +19,7 @@ interface formData {
    prize:number
    desc:string
 }
-const borderColor = "border-rose-300"
+const borderColor = "border-rose-300 border-2 w-full bg-slate-200   p-2 focus:ring-0 focus:border-0  rounded-sm h-12"
 
 const schema = yup
   .object({
@@ -38,7 +35,7 @@ const schema = yup
 
 export default function Modal({open,onClose,setData}:{open:boolean,onClose(value: boolean): void,setData(value: React.SetStateAction<type_product[]>):void}) {
 
-    const [imgSelect,setImgSelect]=useState<files[]>([])
+    const [imgSelect,setImgSelect]=useState<string[]>([])
     const refInputFile = useRef<HTMLInputElement>(null)
     const [load , setLoad]=useState(false)
     const {
@@ -54,25 +51,27 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
       setImgSelect([])
       if(refInputFile.current) refInputFile.current.value =""
     }
-    const onSubmit = (data:formData) =>{
+    const onSubmit = async (data:formData) =>{
     //verifier si les images sont charger et recuperer les urls locals
      if(imgSelect.length>0){
       setLoad(true)
-      const urlList:string[] = [] 
-      imgSelect.forEach(element =>{
-        addFile(element).then(res=>{
-          urlList.push(res)
-        }).catch(err=>console.error(err)
-        )
-      })
-     
-// construit le produit
+      
+      const urlList: string[] = [];
+        for (const element of imgSelect) {
+          try {
+            const res = await addFile(element,"image/webp");
+            urlList.push(res);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+
+      // construit le produit
         const product = {
           category: data.category,
           title: data.name,
           prize: data.prize,
           img: urlList,
-          symbolprize:"$",
           in_stock:true,
           desc:data.desc
         } 
@@ -85,7 +84,6 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
             title: data.name,
             prize: data.prize,
             img: urlList,
-            symbolprize:"$",
             in_stock:true,
             desc:data.desc
           } 
@@ -96,9 +94,10 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
           resetFrom()
         }).catch(err=>console.error(err)
         )
+        
      }else{
        toast.warning("entrez les images",{
-        className:"text-red-600 text-xl"
+        className:"text-red-600"
        })
      }
      
@@ -110,21 +109,21 @@ const getURLFile = (files:FileList | null)=>{
   // parcourie l'objet file
     for (const cle in files) {      
       if(files[parseInt(cle)].type==="image/webp"){
-        const url = URL.createObjectURL(files[parseInt(cle)])
-        const name = files[parseInt(cle)].name
+        const url_name = URL.createObjectURL(files[parseInt(cle)])+ " "+files[parseInt(cle)].name
+
 
       // verifier si le fichier existe
-        const isexiste = imgSelect.find(item=>item.name===name)
+        const isexiste = imgSelect.find(item=>item.split(' ')[1]===url_name.split(' ')[1])
 
         if(isexiste===undefined)  {
 
           if(imgSelect.length<=3){
-            setImgSelect((v)=>([...v,{name:name,url:url}]))
+            setImgSelect((v)=>([...v,url_name]))
           }
         }
       }else{
         toast.success("seul les image au format webp sont accepter",{
-          className:"text-green-500 text-xl"
+          className:"text-green-500"
         })
        
       }
@@ -134,7 +133,7 @@ const getURLFile = (files:FileList | null)=>{
 
 //suprimer une image
 const removeImg = (name:string)=>{
-   const newFIles = imgSelect.filter(item => item.name!==name)
+   const newFIles = imgSelect.filter(item => item.split(" ")[1]!==name)
    setImgSelect(newFIles)
 }
   return (
@@ -159,13 +158,13 @@ const removeImg = (name:string)=>{
                   </DialogTitle>
                   <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
                      <label className='labelClass'  htmlFor="name">Nom</label>
-                     <input {...register("name")} className={`inputClass ${errors.name?borderColor:""}`} type="text" id='name' />
+                     <input {...register("name")} className={errors.name?borderColor:"inputClass"} type="text" id='name' />
 
                      <label className='labelClass mt-2' htmlFor="category">Category</label>
-                     <input {...register("category")} className={`inputClass ${errors.category?borderColor:""}`} type="text" id='category' />
+                     <input {...register("category")} className={errors.category?borderColor:"inputClass"} type="text" id='category' />
 
                      <label className='labelClass' htmlFor="prize">Prix</label>
-                     <input {...register("prize")} className={`inputClass ${errors.prize?borderColor:""}`} type="text" id='prize' />
+                     <input {...register("prize")} className={errors.prize?borderColor:"inputClass"} type="text" id='prize' />
 
                      <label className='labelClass flex items-center gap-2' htmlFor="img">Photo (4 images max) <AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
                      <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputFile} type="file"  multiple accept="image/webp" id='img' className='hidden' />
@@ -174,13 +173,13 @@ const removeImg = (name:string)=>{
                         
                         
                             imgSelect.map(item=>{
-                                return (<span onClick={()=>{removeImg(item.name)}} className='mx-1  flex gap-0 items-center'>{item.name} <CgRemove className="text-red-500 text-2xl z-50" /></span>)
+                                return (<span onClick={()=>{removeImg(item.split(' ')[1])}} className='mx-1  flex gap-0 items-center'>{item.split(' ')[1]} <CgRemove className="text-red-500 text-2xl z-50" /></span>)
                             })
                                 
                         }
                       </div>
                       <label className='labelClass' htmlFor="desc">Description</label>
-                      <textarea {...register("desc")} className={`textareaClass ${errors.desc?borderColor:""}`} id="desc"></textarea>
+                      <textarea {...register("desc")} className={errors.desc?borderColor+'h-20 resize-none':"textareaClass"} id="desc"></textarea>
                       <button disabled={load} className="btn px-4 py-2  rounded-lg" type="submit">
                         {
                           load?"patientez...":"envoyer"

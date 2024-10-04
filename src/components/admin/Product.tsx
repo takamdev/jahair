@@ -5,7 +5,6 @@ import { AiFillDelete } from "react-icons/ai";
 import React, { useState } from 'react'
 import './../css/style.css'
 import ColumnHelper from '../table/ColumnHelper'
-import product from "./../../data/product.json"
 import {
   flexRender,
   getCoreRowModel,
@@ -14,14 +13,17 @@ import {
 import { type_product } from '../../types/type_product'
 import EditableCell from "../table/EditableCell";
 import Modal from "../Modal";
+import useStore from "../../store";
 
 
-const defaultData: type_product[] =product
+
 const columns = ColumnHelper()
 
 function Product() {
-  const [data, setData] = React.useState<type_product[]>(() => [...defaultData])
+  const product = useStore((state)=>state.product)
+  const [data, setData] = React.useState<type_product[]>(() => [...product])
   const [currentRow,setCurrentRow]=useState<type_product>(data[0])
+  
   //controle du modal
   const [open, setOpen] = useState(false)
   const table = useReactTable({
@@ -111,8 +113,8 @@ function Product() {
                       </td>
                     )
                     if(index===5) return (
-                      <td className=''  key={cell.id}>
-                        <input type="checkbox" onClick={()=>{checkbox(row.original.id)}} checked={row.original.in_stock}  />
+                      <td className='border-0'  key={cell.id}>
+                        <input type="checkbox" className="checkbox" onClick={()=>{checkbox(row.original.id)}} checked={row.original.in_stock}  />
                       </td>
                     )
                     if(index===6) return (

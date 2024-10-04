@@ -35,7 +35,7 @@ const setCurrentRow = ()=>{
 }
   return (
     <>
-    <input className='border py-2 ps-1  rounded-lg outline-rose-300' type="text" onBlur={updateRow} onFocus={setCurrentRow} value={value} onChange={(e)=>{setValue(e.target.value)}}/>
+    <input className='border py-2 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text" onBlur={updateRow} onFocus={setCurrentRow} value={value} onChange={(e)=>{setValue(e.target.value)}}/>
     </>
   )
 }
