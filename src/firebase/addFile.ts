@@ -1,24 +1,11 @@
 import { storage } from "./config";
 import { getDownloadURL, ref ,uploadBytes } from "firebase/storage";
-interface jsonFile{
-    name:string
-    url:string
-}
-const CreateFile = async (jsonFile:jsonFile):Promise<File>=>{
-      // cree un objet file a partit du chemin vers le fichier
-      const cheminFichier = jsonFile.url;
+import { CreateFile } from "../helper/createfile";
 
-      const file = new File([
-        await fetch(cheminFichier).then(response => response.arrayBuffer())
-      ], jsonFile.name, {
-        type: 'image/webp',
-      });
-return file
-}
 
-export const addFile =async (jsonFile:jsonFile):Promise<string>=>{
-    const fichier = await CreateFile(jsonFile)
-    const storageRef = ref(storage, `fichiers/${jsonFile.name}`);
+export const addFile =async (url_name:string,type:string):Promise<string>=>{
+    const fichier = await CreateFile(url_name,type)
+    const storageRef = ref(storage, `fichiers/${url_name.split(' ')[1]}`);
     try {
        return await uploadBytes(storageRef, fichier).then( async()=>{
            return await getDownloadURL(storageRef)
