@@ -6,7 +6,6 @@ export type type_product = {
     title: string
     prize: number
     img: string[]
-    symbolprize:string,
     in_stock:boolean,
     desc:string
   } 
