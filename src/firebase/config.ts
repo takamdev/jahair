@@ -21,6 +21,6 @@ export const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 export const storage = getStorage(app)
-if(db) console.log("connexion etablie");
-   else console.log("echec de connexion");
+if(db) console.log("connect to success");
+   else console.log("connection failed");
    

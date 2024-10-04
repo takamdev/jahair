@@ -13,17 +13,17 @@ import Promote from "../components/admin/Promote";
 import Income from "../components/admin/Income";
 import { Navigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import useStore from "../store";
 
 const cssClassButtonActive = "btn rounded-lg text-start px-3 py-2 flex gap-2 items-center text-white"
 const cssClassButtonInactive = "text-slate-500 flex gap-2 items-center text-start px-3 py-2"
-const name = "Prisca"
 const onglet = [<Dashboad/>,<Product/>,<Services/>,<Promote/>,<Income/>]
 function Admis() {
   const {token}=useParams()
   const tokenstore = Cookies.get("token")
   const [buttonActive,setButtonActive]=useState([true,false,false,false,false])
   const [showOnglet,setShowOnglet]= useState(<Dashboad/>)
-
+  const setting = useStore((state)=>state.setting)
 
   const changeCssClassButton = (index:number)=>{
       const newButtonActive = buttonActive.map((item,i)=>{
@@ -54,9 +54,9 @@ function Admis() {
            <button onClick={()=>{changeCssClassButton(3)}}  className={buttonActive[3]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiApplenews /></span>promote</button>
            <button onClick={()=>{changeCssClassButton(4)}}  className={buttonActive[4]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiFuturelearn /></span>income</button>
           <div className="flex gap-2 mt-auto mb-2">
-            <img src="/logo.png" className="object-cover" style={{borderRadius:'100%',height:"50px" ,width:"50px"}} alt="tof" />
+            <img src={setting.profile_admis} className="object-cover" style={{borderRadius:'100%',height:"50px" ,width:"50px"}} alt="tof" />
             <p className="flex flex-col gap-0.5">
-              <span className="font-bold">{name}</span>
+              <span className="font-bold">{setting.admin_name}</span>
               <span className="text-slate-500">Project Manager</span>
             </p>
           </div>
@@ -64,7 +64,7 @@ function Admis() {
 
       </div>
       <div className="px-10 bg-slate-50 w-full overscroll-y-auto  rounded-lg ms-2 ">
-        <h1 className="flex gap-2 mx-10  items-center mt-2"><span className="font-bold text-2xl ms-3">Hello {name}</span><FaHandSparkles className="scale-150 text-orange-300" /></h1>
+        <h1 className="flex gap-2 mx-10  items-center mt-2"><span className="font-bold text-2xl ms-3">Hello {setting.admin_name}</span><FaHandSparkles className="scale-150 text-orange-300" /></h1>
           {
             showOnglet
           }
