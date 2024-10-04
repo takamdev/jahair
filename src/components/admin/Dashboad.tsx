@@ -1,13 +1,13 @@
 import { AiOutlineArrowDown } from "react-icons/ai"; 
 import { useRef, useState } from "react"
 import { type_setting } from "../../types/type_setting"
-import useStore from "../../store"
+//import useStore from "../../store"
 import { toast } from "sonner"
 
 
 function Dashboad() {
-  const settings = useStore((state)=>state.setting)
-  const [setting,setSetting]=useState<type_setting>(settings)
+  //const settings = useStore((state)=>state.setting)
+  //const [setting,setSetting]=useState<type_setting>(settings)
   const refInputPicture = useRef<HTMLInputElement>(null)  
   const refInputLogo = useRef<HTMLInputElement>(null)
   const AboutDoc = useRef<HTMLInputElement>(null)  
@@ -119,11 +119,11 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
   )
 }
 
-
+/*
 function Input({placeholder,setSetting,key}:{placeholder:string,key:string,setSetting:(value:string,key:string)=>void}){
   const [value,setValue]=useState("")
   return(
     <input  type="text" placeholder={placeholder} onBlur={()=>{setSetting(value,key)}} onChange={(e)=>{setValue(e.target.value)}} className="border py-1   focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400" value={value} />
   )
-}
+}*/
 export default Dashboad

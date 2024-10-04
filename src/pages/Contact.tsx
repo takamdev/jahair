@@ -31,7 +31,7 @@ function Contact() {
   const ref = useRef(null)
 
 useEffect(()=>{
-
+  setLoad(false)//inutil
   ScrollReveal().reveal(ref.current||"", {
     duration: 1000,
     distance:"100px",
