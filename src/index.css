@@ -14,6 +14,7 @@
   }
   .btn{
     background-color: #ff66c4;
+    color: white;
   }
 @media screen and (min-width:650px){
   .add-card{
@@ -24,15 +25,14 @@
     opacity: 1;
    }
 }
-
 .labelClass{
   @apply self-start mt-3 ;
 }
 .inputClass{
-  @apply w-full border-solid border-2 bg-slate-200  p-2 outline-none  rounded-sm h-12;
+  @apply w-full   bg-slate-200  p-2 focus:ring-0 focus:border-0 border-0 rounded-sm h-12;
 }
 .textareaClass{
-  @apply w-full border-solid border-2  bg-slate-200 p-2 outline-none rounded-sm h-20 resize-none
+  @apply w-full bg-slate-200 p-2 focus:ring-0 focus:border-0 border-0 rounded-sm h-20 resize-none
 }
 
 .bordureFooter{
