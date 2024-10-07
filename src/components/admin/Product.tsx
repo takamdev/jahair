@@ -1,8 +1,7 @@
 import { BiCloudUpload } from "react-icons/bi"; 
 import { AiOutlinePlus } from "react-icons/ai"; 
-import { AiFillEdit } from "react-icons/ai"; 
 import { AiFillDelete } from "react-icons/ai"; 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './../css/style.css'
 import ColumnHelper from '../table/ColumnHelper'
 import {
@@ -14,6 +13,8 @@ import { type_product } from '../../types/type_product'
 import EditableCell from "../table/EditableCell";
 import Modal from "../Modal";
 import useStore from "../../store";
+import { deleteDocById } from "../../firebase/deleteDoc";
+import { editDoc } from "../../firebase/editDoc";
 
 
 
@@ -21,8 +22,13 @@ const columns = ColumnHelper()
 
 function Product() {
   const product = useStore((state)=>state.product)
-  const [data, setData] = React.useState<type_product[]>(() => [...product])
-  const [currentRow,setCurrentRow]=useState<type_product>(data[0])
+  const [data, setData] = React.useState<type_product[]>([])
+  const [load,setLoad] = useState(false)
+  useEffect(()=>{
+
+     if(product.length>0) setData(product)
+
+  },[])
   
   //controle du modal
   const [open, setOpen] = useState(false)
@@ -34,14 +40,19 @@ function Product() {
   })
   //controlleur de champ 
   const handleChange = (value:string,id:string,key:string)=>{
-   setCurrentRow((v)=>({...v,[key]:value}))
-   const updataData = data.map(item=>{
-      if(item.id===id) return currentRow
-        else return item
-   })
-   
-   setData(updataData)
-   
+    
+     const updateData = data.map(doc=>{
+      if(doc.id===id){
+        const newDoc = {
+             ...doc,
+             [key]:value
+        }
+        return newDoc
+      }else{
+        return doc
+      }
+     })
+   setData(updateData)
   }
   // conrolleur de produit en stock
   const checkbox = (id:string)=>{
@@ -54,24 +65,55 @@ function Product() {
    setData(updataData)
   }
 
-  // cree un objet file a partit du chemin vers le fichier
-  /*
-      const cheminFichier = '/chemin/vers/le/fichier.txt';
 
-    const file = new File([await fetch(cheminFichier).then(response => response.arrayBuffer())], 'fichier.txt', {
-      type: 'text/plain',
-    });
-
-    const storageRef = firebase.storage().ref('fichiers/' + file.name);
-    storageRef.put(file).then((snapshot) => {
-      console.log('Fichier envoyé avec succès !');
-      console.log(snapshot.downloadURL); // URL de téléchargement du fichier
-    });
-*/
   // supprimer un produit
-  const deleteProduct = (id:string)=>{
-    const newData = data.filter(item=>item.id!==id)
-    setData(newData)
+  const deleteProduct = async (id:string)=>{
+    const refs = {
+      collection_name:"product",
+      id_doc:id
+    }
+    try {
+      const result = await deleteDocById(refs)
+      if(result.success===true){
+        const newData = data.filter(item=>item.id!==id)
+        setData(newData)
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+    
+    /**/
+  }
+
+  const updateCollection = ()=>{
+    setLoad(true)
+    
+     data.map(async (item)=>{
+      
+       // construction du document en oubliant l'id
+      const doc = Object.fromEntries(//reconvertie en objet
+        Object.entries(item).filter(([cle]) => cle !== "id")// transformer un objet en tableau de cle valeur et elemine la cle valeur id
+      );
+
+      const data = {
+        collection_name:"product",
+        id_doc:item.id,
+        data:doc
+      }
+      try {
+        const res = await editDoc(data)
+        if(res.success===true) setLoad(false)
+         
+      } catch (error) {
+        
+        console.log(error);
+        
+      }
+       
+     })
+   
+    
   }
   return (
     <div className="container relative  bg-white p-4 h-full">
@@ -120,9 +162,7 @@ function Product() {
                     if(index===6) return (
                       <td className='f' key={cell.id}>
                         <div className="flex items-center">
-                          <img src={row.original.img[0]} width={50} alt="tof" />
-                          <input type="file" id="image"  />
-                          <label htmlFor="image"><AiFillEdit /></label>
+                          <img src={row.original.img[0]} width={50}  alt="tof" />
                         </div>
                         
                       </td>
@@ -130,7 +170,7 @@ function Product() {
   
                     return (
                       <td className='' key={cell.id}>
-                        <EditableCell onchange={handleChange} defaultCurrentValue = {setCurrentRow} cell={cell}  />
+                        <EditableCell onchange={handleChange} cell={cell}  />
                       </td>
                     )
   
@@ -146,8 +186,25 @@ function Product() {
           </table>
         )
       }
-    <button className="bg-green-500 p-4 absolute bottom-0 left-10 rounded-lg"><BiCloudUpload className="text-xl" /></button>
-    <button onClick={()=>{setOpen(!open)}} className="btn p-4 absolute bottom-0 right-10 rounded-lg"><AiOutlinePlus /></button>
+    <button disabled={load} onClick={updateCollection} className="bg-green-500 p-4  absolute bottom-0 left-10 rounded-lg">
+     
+      {
+        !load?( <BiCloudUpload className="text-xl" />):(
+          <svg aria-hidden="true" role="status" className="inline w-6 h-6  text-lg text-green-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+          </svg>
+        )
+      }
+      </button>
+    
+    
+    <button onClick={()=>{setOpen(!open)}} className="btn p-4 absolute bottom-0 right-10 rounded-lg">
+      
+       <AiOutlinePlus />
+      
+     
+    </button>
     </div>
   )
 }
