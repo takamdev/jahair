@@ -1,5 +1,4 @@
 import { doc, updateDoc } from "firebase/firestore/lite";
-import { type_product } from "../types/type_product";
 import { db } from "./config";
 
 type type_params = {
