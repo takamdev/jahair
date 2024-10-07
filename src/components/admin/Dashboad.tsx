@@ -1,40 +1,99 @@
+import { AiOutlineArrowRight } from "react-icons/ai"; 
 import { AiOutlineArrowDown } from "react-icons/ai"; 
 import { useRef, useState } from "react"
 import { type_setting } from "../../types/type_setting"
 //import useStore from "../../store"
 import { toast } from "sonner"
-
+import {Modal } from "flowbite-react";
+import { BiCloudUpload } from "react-icons/bi";
 
 function Dashboad() {
   //const settings = useStore((state)=>state.setting)
   //const [setting,setSetting]=useState<type_setting>(settings)
+  const [openModal, setOpenModal] = useState(false);
   const refInputPicture = useRef<HTMLInputElement>(null)  
   const refInputLogo = useRef<HTMLInputElement>(null)
+  const refInputWelcom = useRef<HTMLInputElement>(null)
   const AboutDoc = useRef<HTMLInputElement>(null)  
   const privacy_policyDoc = useRef<HTMLInputElement>(null)
   const terms_conditionsDoc = useRef<HTMLInputElement>(null)  
   const faqDoc = useRef<HTMLInputElement>(null)
-
+  const [load,setLoad]=useState(false)
   const [CurrentSetting,setCurrentSetting]=useState<type_setting>({
-    symbole_devise: "",
-    profile_admis: "",
+    symbole_devise: "$",
+    profile_admin: "",
     admin_name: "",
     faq: "",
     privacy_policy: "",
     terms_conditions: "",
     about_us: "",
     logo: "",
+    img_welcome:"",
+    desc_site:"",
+    email_site:"",
+    social_links:{
+        whatsapp:"",
+        facebook:"",
+        instagram:"",
+        tiktok:"",
+        twitter:""
+    }
   })
 
 console.log(CurrentSetting);
+// transformer social_links en tableau
 
+//mise a jour des parametre
+const updateCollection=()=>{
+  setLoad(true)
+  // rensemblement des liens de  fichiers
+  const fileLink:{[key:string]: {[key:string]:string}} = {
+    profile_admin:{profile_admin:CurrentSetting.profile_admin,type:"webp"},
+    logo:{type:"webp",logo:CurrentSetting.logo},
+    img_welcome:{img_welcome:CurrentSetting.img_welcome,type:"webp"},
+    about_us:{about_us:CurrentSetting.about_us,type:"pdf"},
+    privacy_policy:{privacy_policy:CurrentSetting.about_us,type:"pdf"},
+    terms_conditions:{terms_conditions:CurrentSetting.terms_conditions,type:"pdf"},
+    faq:{faq:CurrentSetting.faq,type:"pdf"}
+    
+  }
+// converti en tableau
+const tabFileLink =convertObjectToArray(fileLink)
+
+
+
+}
+
+
+const convertObjectToArray = (object:{[key:string]: string|{[key:string]:string}})=>{
+  const tabLink = Object.keys(object).map((cle) => {
+    return {
+      [cle]:object[cle]
+    }
+  });
+  return tabLink
+}
   // fonction de modification d'une proprieté de l'objet de type type_setting
-  const editePropertie = (key:string,value:string)=>{
+  const editePropertie = (key:string,value:string,links?:boolean)=>{
+    if(links){
+      setCurrentSetting((v:type_setting)=>{
+        return {...v,social_links:{
+          ...v.social_links,
+          [key]:value
+        }}
+        })
+    }
     setCurrentSetting((v:type_setting)=>{
       return {...v,[key]:value}
       })
   }
 
+  //femeture du modal
+
+  function onCloseModal() {
+    setOpenModal(false);
+    
+  }
 
 // transformer les fichiers en liste de url vers ces fichiers
 const getURLFile = (files:FileList | null,field:string)=>{
@@ -65,7 +124,35 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
 
 
   return (
-    <div className='bg-white  mx-auto h-full mt-6'>
+    <>
+      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="space-y-6">
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">réseaux sociaux</h3>
+            <div className="flex flex-col  ">
+              {
+               convertObjectToArray(CurrentSetting.social_links).map(item=>{
+               const key_liste = Object.keys(item) 
+               const key =key_liste[0]
+               console.log(item[key]);
+               
+                
+                return (
+                  <p className="mt-2">
+                    <label className="block" htmlFor={key}>{key_liste[0]}</label>  
+                    <input  id={key} value={item[key]} onChange={(e)=>{editePropertie(key_liste[0],e.target.value,true)}}  className='border w-full py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
+                  </p>
+                )
+               })
+              }
+             <button onClick={onCloseModal} className="self-end  mt-3 btn  px-4 py-2  rounded-lg">Modifier</button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <div className='bg-white  mx-auto h-full mt-6'>
   
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <p className="text-center text-2xl font-semibold my-3">Réglage</p>
@@ -73,8 +160,8 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
               <tbody>
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td className="px-6 py-4">
-                          <input ref={refInputPicture} onChange={(e)=>{getURLFile(e.target.files,"profile_admis")}} type="file" accept="image/webp"/>
-                          <div id='img' onClick={()=>{focusInput(refInputPicture)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${CurrentSetting.profile_admis.length===0?"":"text-green-400"}`}>
+                          <input ref={refInputPicture} onChange={(e)=>{getURLFile(e.target.files,"profile_admin")}} type="file" accept="image/webp"/>
+                          <div id='img' onClick={()=>{focusInput(refInputPicture)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${CurrentSetting.profile_admin.length===0?"":"text-green-400"}`}>
                             photo admin<AiOutlineArrowDown />
                           </div>
                       </td>
@@ -111,11 +198,52 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
                           </div>
                       </td>
                   </tr>
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      <td className="px-6 py-4">
+                         <input value={CurrentSetting.admin_name} onChange={(e)=>{editePropertie("admin_name",e.target.value)}} maxLength={15} placeholder="nom d'admin" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
+                      </td>
+                      <td className="py-4">
+                        <label htmlFor="money" className=" me-2">devise de vente</label> 
+                        <select id="money" className="className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400'" value={CurrentSetting.symbole_devise} onChange={(e)=>{editePropertie("symbole_devise",e.target.value)}} >
+                          <option value="$">dollar</option>
+                          <option value="€">euro</option>
+                        </select>
+                      </td>
+                      <td className="ps-2 py-4">
+                      <button className="flex items-center" onClick={() => setOpenModal(true)}>Réseaux Sociaux <AiOutlineArrowRight /></button>
+                      </td>
+
+                      <td className="ps-6 py-4">
+                        <textarea  cols={20}  value={CurrentSetting.desc_site} onChange={(e)=>{editePropertie("desc_site",e.target.value)}} maxLength={15} placeholder="petite description du site" className='border py-1 ps-1 text-sm  focus:ring-0 resize-none overflow-y-scroll  rounded-lg focus:border-2 focus:border-rose-400' />
+                      </td>
+                      <td className="ps-14 py-4">
+                      <input ref={refInputWelcom} onChange={(e)=>{getURLFile(e.target.files,"img_welcome")}} type="file" accept="image/webp"/>
+                          <div id='img' onClick={()=>{focusInput(refInputWelcom)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${CurrentSetting.img_welcome.length===0?"":"text-green-400"}`}>
+                            image welcome<AiOutlineArrowDown />
+                          </div> 
+                      </td>
+                      <td className="pe-5 py-4">
+                         <input value={CurrentSetting.email_site} onChange={(e)=>{editePropertie("email_site",e.target.value)}}  placeholder="email du site" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="email"/>
+                      </td>
+                  </tr>
               </tbody>
           </table>
-      </div>
 
+          
+      </div>
+      <button disabled={load} onClick={updateCollection} className="bg-green-500 p-4  absolute bottom-0 left-80 rounded-lg">
+      {
+        !load?( <BiCloudUpload className="text-xl" />):(
+          <svg aria-hidden="true" role="status" className="inline w-6 h-6  text-lg text-green-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+          </svg>
+        )
+      }
+      </button>
     </div>
+    </>
+  
   )
 }
 

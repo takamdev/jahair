@@ -3,7 +3,7 @@ import { FaTiktok } from "react-icons/fa";
 import { AiOutlineInstagram } from "react-icons/ai"; 
 import { BsFacebook } from "react-icons/bs"; 
 import { Link } from "react-router-dom";
-import social_links from "./../data/social_links.json"
+import setting from "./../data/setting.json"
 import footer from "./../data/footer.json"
 function Footer() {
   return (
@@ -18,20 +18,18 @@ function Footer() {
                 }
             </p>
             <div className='text-neutral-500 flex gap-10 mx-5'>
-              <a className="scale-150 " href={social_links.facebook}><BsFacebook /></a>
-              <a className="scale-150"  href={social_links.instagram}><AiOutlineInstagram /></a>
-              <a className="scale-150"  href={social_links.tiktok}><FaTiktok /></a>
-              <a className="scale-150"  href={social_links.twitter}><ImTwitter /></a>
+              <a className="scale-150 " href={setting.social_links.facebook}><BsFacebook /></a>
+              <a className="scale-150"  href={setting.social_links.instagram}><AiOutlineInstagram /></a>
+              <a className="scale-150"  href={setting.social_links.tiktok}><FaTiktok /></a>
+              <a className="scale-150"  href={setting.social_links.twitter}><ImTwitter /></a>
             </div>
           </article>
           
           <article className="flex flex-col lg:flex-row gap-5">
             <div className="flex flex-col lg:mx-10">
-              <h2 className="text-gray-900 font-bold">Jahair-Style</h2>
+              <h2 className="text-gray-900 font-bold">Methode de paiment</h2>
               <p className="w-80">
-                {
-                    footer.desc_marque
-                }
+                <img src="/payment_methode.webp" className="mt-12" alt="payment methode" />
               </p>
             </div>
             <div className="flex flex-col gap-3">

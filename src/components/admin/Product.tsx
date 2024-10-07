@@ -187,7 +187,6 @@ function Product() {
         )
       }
     <button disabled={load} onClick={updateCollection} className="bg-green-500 p-4  absolute bottom-0 left-10 rounded-lg">
-     
       {
         !load?( <BiCloudUpload className="text-xl" />):(
           <svg aria-hidden="true" role="status" className="inline w-6 h-6  text-lg text-green-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
