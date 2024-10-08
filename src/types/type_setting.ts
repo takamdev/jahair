@@ -1,5 +1,5 @@
 export type type_setting = {
-    
+        id:string
         symbole_devise:string,
         profile_admin:string,
         admin_name:string,

@@ -1,5 +1,6 @@
-import Card from '../components/Card'
+import CardComponent from '../components/Card'
 import useStore from '../store'
+
 function Produit() {
   const product = useStore((state)=>state.product)
   return (
@@ -9,7 +10,7 @@ function Produit() {
         product.map((item,index)=>{
           return (
                 <div key={index} className='lg:w-auto'>
-                        <Card  product={item} />
+                        <CardComponent  product={item} />
                 </div>
           )
         })

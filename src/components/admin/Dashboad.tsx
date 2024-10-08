@@ -6,8 +6,8 @@ import { toast } from "sonner"
 import {Button, Modal } from "flowbite-react";
 import { BiCloudUpload } from "react-icons/bi";
 import { addFile } from "../../firebase/addFile";
-import { addCollection } from "../../firebase/addCollection";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { editDoc } from "../../firebase/editDoc";
 function Dashboad() {
   const CurrentSetting = useStore((state)=>state.setting)
   const setCurrentSetting=useStore(state=>state.setSetting)
@@ -64,15 +64,22 @@ const updateCollection= async ()=>{
         }
 
   }
+//modification de parametre
+const ref = {
+  collection_name:"setting",
+  id_doc:CurrentSetting.id,
+  data:settingUpdate
+}
 
-//envoie des parametres
-addCollection("setting",settingUpdate).then(()=>{
-  setLoad(false)
-}).catch(err=>{
-  console.log(err);
-  setLoad(false)
-  
-})
+ editDoc(ref).then(()=>{
+    setLoad(false)
+  }).catch(err=>{
+    console.log(err);
+    setLoad(false)
+    
+  })
+
+
   
 }
 

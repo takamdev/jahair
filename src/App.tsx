@@ -32,6 +32,7 @@ const getData = async ()=>{
     //contruction des données
     const settingData = setting.docs.map(element=>{
       const itemSetting:type_setting={
+        id:element.id,
         symbole_devise:element.data().symbole_devise,
         profile_admin:element.data().profile_admin,
         admin_name:element.data().admin_name,

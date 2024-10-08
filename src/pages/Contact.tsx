@@ -7,6 +7,7 @@ import { AiOutlineInstagram } from "react-icons/ai"
 import { FaTiktok } from "react-icons/fa"
 import { ImTwitter } from "react-icons/im"
 import ScrollReveal from 'scrollreveal'
+import useStore from "../store"
 type info = {
   fistname:string,
   lastname:string,
@@ -24,12 +25,11 @@ const schema = yup
   .required()
 
 
-const contact =" contact@jahair.com"
 
 function Contact() {
   const [load,setLoad]=useState(false)
   const ref = useRef(null)
-
+  const setting = useStore(state=>state.setting)
 useEffect(()=>{
   setLoad(false)//inutil
   ScrollReveal().reveal(ref.current||"", {
@@ -62,13 +62,13 @@ return ()=>{
           <div className="lg:flex hidden flex-col absolute bottom-32 left-60">
             <h2 className="my-1  text-3xl font-mono  text-slate-950">Contacts</h2>
 
-            <h4 className="text-slate-800">0039 32 89 70 50 26</h4>
-            <h5 className="text-slate-800">{contact}</h5>
+            <h4 className="text-slate-800">{setting.social_links.whatsapp}</h4>
+            <h5 className="text-slate-800">{setting.email_site}</h5>
             <div className='py-6 flex gap-10 justify-normal'>
-              <a className="scale-150" href=""><BsFacebook /></a>
-              <a className="scale-150" href=""><AiOutlineInstagram /></a>
-              <a className="scale-150" href=""><FaTiktok /></a>
-              <a className="scale-150" href=""><ImTwitter /></a>
+              <a className="scale-150" href={setting.social_links.facebook}><BsFacebook /></a>
+              <a className="scale-150" href={setting.social_links.instagram}><AiOutlineInstagram /></a>
+              <a className="scale-150" href={setting.social_links.tiktok}><FaTiktok /></a>
+              <a className="scale-150" href={setting.social_links.twitter}><ImTwitter /></a>
             </div>
           </div>
 

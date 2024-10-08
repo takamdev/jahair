@@ -29,7 +29,7 @@ function Footer() {
           
           <article className="flex flex-col lg:flex-row gap-5">
             <div className="flex flex-col lg:mx-10">
-              <h2 className="text-gray-900 font-bold">Methode de paiment</h2>
+              <h2 className="text-gray-900 font-bold">Méthode de paiment</h2>
               <p className="w-80">
                 <img src="/payment_methode.webp" className="mt-5 lg:mt-12" alt="payment methode" />
               </p>
