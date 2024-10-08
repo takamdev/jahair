@@ -10,6 +10,7 @@ import navigation from './../data/navigation.json'
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [shadow,setshadow]=useState('')
+ const setting = useStore(state=>state.setting)
   const cartLink = "#"
   const Cart = useStore((state)=>state.Cart)
   window.addEventListener('scroll',()=>{
@@ -24,7 +25,7 @@ function Header() {
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
-                src="/logo.png"
+                src={setting.logo}
                 className="h-14 w-28"
               />
             </a>
@@ -66,7 +67,7 @@ function Header() {
                 <span className="sr-only">Your Company</span>
                 <img
                   alt=""
-                  src="/logo.png"
+                  src={setting.logo}
                   className="h-14 w-28"
                 />
               </a>

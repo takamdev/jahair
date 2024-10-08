@@ -1,16 +1,18 @@
 import { AiOutlineArrowRight } from "react-icons/ai"; 
 import { AiOutlineArrowDown } from "react-icons/ai"; 
 import { useRef, useState } from "react"
-import { type_setting } from "../../types/type_setting"
-//import useStore from "../../store"
+import useStore from "../../store"
 import { toast } from "sonner"
-import {Modal } from "flowbite-react";
+import {Button, Modal } from "flowbite-react";
 import { BiCloudUpload } from "react-icons/bi";
-
+import { addFile } from "../../firebase/addFile";
+import { addCollection } from "../../firebase/addCollection";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 function Dashboad() {
-  //const settings = useStore((state)=>state.setting)
-  //const [setting,setSetting]=useState<type_setting>(settings)
+  const CurrentSetting = useStore((state)=>state.setting)
+  const setCurrentSetting=useStore(state=>state.setSetting)
   const [openModal, setOpenModal] = useState(false);
+  const [openModalConfirm, setOpenModalConfirm] = useState(false);
   const refInputPicture = useRef<HTMLInputElement>(null)  
   const refInputLogo = useRef<HTMLInputElement>(null)
   const refInputWelcom = useRef<HTMLInputElement>(null)
@@ -19,81 +21,88 @@ function Dashboad() {
   const terms_conditionsDoc = useRef<HTMLInputElement>(null)  
   const faqDoc = useRef<HTMLInputElement>(null)
   const [load,setLoad]=useState(false)
-  const [CurrentSetting,setCurrentSetting]=useState<type_setting>({
-    symbole_devise: "$",
-    profile_admin: "",
-    admin_name: "",
-    faq: "",
-    privacy_policy: "",
-    terms_conditions: "",
-    about_us: "",
-    logo: "",
-    img_welcome:"",
-    desc_site:"",
-    email_site:"",
-    social_links:{
-        whatsapp:"",
-        facebook:"",
-        instagram:"",
-        tiktok:"",
-        twitter:""
-    }
-  })
 
-console.log(CurrentSetting);
+
+
 // transformer social_links en tableau
 
 //mise a jour des parametre
-const updateCollection=()=>{
+const updateCollection= async ()=>{
+  //confirmation des data
+  setOpenModalConfirm(false)
+
+
+  
   setLoad(true)
   // rensemblement des liens de  fichiers
-  const fileLink:{[key:string]: {[key:string]:string}} = {
-    profile_admin:{profile_admin:CurrentSetting.profile_admin,type:"webp"},
-    logo:{type:"webp",logo:CurrentSetting.logo},
-    img_welcome:{img_welcome:CurrentSetting.img_welcome,type:"webp"},
-    about_us:{about_us:CurrentSetting.about_us,type:"pdf"},
-    privacy_policy:{privacy_policy:CurrentSetting.about_us,type:"pdf"},
-    terms_conditions:{terms_conditions:CurrentSetting.terms_conditions,type:"pdf"},
-    faq:{faq:CurrentSetting.faq,type:"pdf"}
+  const fileLink = [
+{url_name:CurrentSetting.profile_admin,type:"image/webp",key:"profile_admin"},
+{type:"image/webp",url_name:CurrentSetting.logo,key:"logo"},
+{url_name:CurrentSetting.img_welcome,type:"image/web",key:"img_welcome"},
+{url_name:CurrentSetting.about_us,type:"application/pdf",key:"about_us"},
+{url_name:CurrentSetting.privacy_policy,type:"application/pdf",key:"privacy_policy"},
+{url_name:CurrentSetting.terms_conditions,type:"application/pdf",key:"terms_conditions"},
+{url_name:CurrentSetting.faq,type:"application/pdf",key:"faq"}
     
+  ]
+
+  let settingUpdate = CurrentSetting
+  //envoie des fichiers
+  for(const item of fileLink){
+      if(item.url_name!==""){
+         try {
+          const url = await addFile(item.url_name,item.type)
+          settingUpdate={...settingUpdate,[item.key]:url}
+         } catch (error) {
+          console.log(error);
+          
+         }
+        }else{
+          toast.warning(`verifier que tout les fichiers sont entrez`,{
+            className:"text-red-200"
+          })
+        }
+
   }
-// converti en tableau
-const tabFileLink =convertObjectToArray(fileLink)
 
-
-
+//envoie des parametres
+addCollection("setting",settingUpdate).then(()=>{
+  setLoad(false)
+}).catch(err=>{
+  console.log(err);
+  setLoad(false)
+  
+})
+  
 }
 
-
-const convertObjectToArray = (object:{[key:string]: string|{[key:string]:string}})=>{
+//convertie l'objet socials-links en tableau
+const convertObjectToArray = (object:{[key:string]: string})=>{
   const tabLink = Object.keys(object).map((cle) => {
     return {
       [cle]:object[cle]
     }
   });
+  
   return tabLink
 }
   // fonction de modification d'une proprieté de l'objet de type type_setting
   const editePropertie = (key:string,value:string,links?:boolean)=>{
+    // si la proprieté a modifier est liens
     if(links){
-      setCurrentSetting((v:type_setting)=>{
-        return {...v,social_links:{
-          ...v.social_links,
-          [key]:value
-        }}
-        })
+      const newSetting = {...CurrentSetting,social_links:{
+        ...CurrentSetting.social_links,
+        [key]:value
+      }}
+      setCurrentSetting(newSetting)
+    }else{
+      
+      const newSetting={...CurrentSetting,[key]:value}
+      setCurrentSetting(newSetting)
     }
-    setCurrentSetting((v:type_setting)=>{
-      return {...v,[key]:value}
-      })
+   
   }
 
-  //femeture du modal
-
-  function onCloseModal() {
-    setOpenModal(false);
-    
-  }
 
 // transformer les fichiers en liste de url vers ces fichiers
 const getURLFile = (files:FileList | null,field:string)=>{
@@ -125,33 +134,57 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
 
   return (
     <>
-      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+    {//modal de renseignemant des social links
+    }
+      <Modal show={openModal} size="md" onClose={()=>{setOpenModal(false)}} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="space-y-6">
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">réseaux sociaux</h3>
             <div className="flex flex-col  ">
               {
-               convertObjectToArray(CurrentSetting.social_links).map(item=>{
+               convertObjectToArray(CurrentSetting.social_links).map((item)=>{
+               
                const key_liste = Object.keys(item) 
                const key =key_liste[0]
-               console.log(item[key]);
+               const value = item[key] as string
                
                 
                 return (
                   <p className="mt-2">
                     <label className="block" htmlFor={key}>{key_liste[0]}</label>  
-                    <input  id={key} value={item[key]} onChange={(e)=>{editePropertie(key_liste[0],e.target.value,true)}}  className='border w-full py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
+                    <input  id={key} value={value} onChange={(e)=>{editePropertie(key_liste[0],e.target.value,true)}}  className='border w-full py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
                   </p>
                 )
                })
               }
-             <button onClick={onCloseModal} className="self-end  mt-3 btn  px-4 py-2  rounded-lg">Modifier</button>
+             <button onClick={()=>{setOpenModal(false);}} className="self-end  mt-3 btn  px-4 py-2  rounded-lg">Modifier</button>
             </div>
           </div>
         </Modal.Body>
       </Modal>
-
+{
+  //modal de confirmation
+}
+      <Modal show={openModalConfirm} size="md" onClose={() => setOpenModalConfirm(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-red-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              éte vous sure d'avoir entré toute les données ?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="success" onClick={updateCollection}>
+                {"je, suis sure"}
+              </Button>
+              <Button color="gray" onClick={() => setOpenModalConfirm(false)}>
+                Non, Quitté
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
       <div className='bg-white  mx-auto h-full mt-6'>
   
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -214,7 +247,7 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
                       </td>
 
                       <td className="ps-6 py-4">
-                        <textarea  cols={20}  value={CurrentSetting.desc_site} onChange={(e)=>{editePropertie("desc_site",e.target.value)}} maxLength={15} placeholder="petite description du site" className='border py-1 ps-1 text-sm  focus:ring-0 resize-none overflow-y-scroll  rounded-lg focus:border-2 focus:border-rose-400' />
+                        <textarea  cols={20}  value={CurrentSetting.desc_site} onChange={(e)=>{editePropertie("desc_site",e.target.value)}}  placeholder="petite description du site" className='border py-1 ps-1 text-sm  focus:ring-0 resize-none overflow-y-scroll  rounded-lg focus:border-2 focus:border-rose-400' />
                       </td>
                       <td className="ps-14 py-4">
                       <input ref={refInputWelcom} onChange={(e)=>{getURLFile(e.target.files,"img_welcome")}} type="file" accept="image/webp"/>
@@ -231,7 +264,7 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
 
           
       </div>
-      <button disabled={load} onClick={updateCollection} className="bg-green-500 p-4  absolute bottom-0 left-80 rounded-lg">
+      <button disabled={load} onClick={() => setOpenModalConfirm(true)} className="bg-green-500 p-4  absolute bottom-0 left-80 rounded-lg">
       {
         !load?( <BiCloudUpload className="text-xl" />):(
           <svg aria-hidden="true" role="status" className="inline w-6 h-6  text-lg text-green-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

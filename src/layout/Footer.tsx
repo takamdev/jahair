@@ -3,18 +3,20 @@ import { FaTiktok } from "react-icons/fa";
 import { AiOutlineInstagram } from "react-icons/ai"; 
 import { BsFacebook } from "react-icons/bs"; 
 import { Link } from "react-router-dom";
-import setting from "./../data/setting.json"
-import footer from "./../data/footer.json"
+
+import useStore from "../store";
 function Footer() {
+  const setting = useStore(state=>state.setting)
+  
   return (
     <footer className="relative h-3/4 text-neutral-700 pb-5 bottom-0 bg-neutral-200">
        <section className="flex flex-col-reverse lg:flex-row lg:justify-center  mx-5 py-16 h-5/6">
 
           <article className="flex flex-col mt-3 ">
-            <img src="/logo.png" className="h-14 lg:mx-5 w-28" alt="logp" /> 
+            <img src={setting.logo} className="h-14 lg:mx-5 w-28" alt="logo" /> 
             <p className=" w-80 lg:mx-5 my-5">
                 {
-                  footer.desc_logo
+                  setting.desc_site
                 }
             </p>
             <div className='text-neutral-500 flex gap-10 mx-5'>
@@ -29,7 +31,7 @@ function Footer() {
             <div className="flex flex-col lg:mx-10">
               <h2 className="text-gray-900 font-bold">Methode de paiment</h2>
               <p className="w-80">
-                <img src="/payment_methode.webp" className="mt-12" alt="payment methode" />
+                <img src="/payment_methode.webp" className="mt-5 lg:mt-12" alt="payment methode" />
               </p>
             </div>
             <div className="flex flex-col gap-3">

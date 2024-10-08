@@ -1,17 +1,20 @@
 {
     "symbole_devise":"$",
-    "profile_admis":"/logo.png",
+    "profile_admin":"/profil_admin.webp",
     "admin_name":"Prisca",
     "faq":"",
     "privacy_policy":"",
     "terms_conditions":"",
     "about_us":"",
-    "logo":"/logo.png",
+    "logo":"/logo.webp",
     "social_links":{
         "whatsapp":"+393289705026",
         "facebook":"",
         "instagram":"",
         "tiktok":"",
         "twitter":""
-    }
+    },
+    "desc_site":"",
+    "img_welcome":"",
+    "email_site":""
 }

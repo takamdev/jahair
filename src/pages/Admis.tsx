@@ -54,7 +54,7 @@ function Admis() {
            <button onClick={()=>{changeCssClassButton(3)}}  className={buttonActive[3]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiApplenews /></span>promote</button>
            <button onClick={()=>{changeCssClassButton(4)}}  className={buttonActive[4]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiFuturelearn /></span>income</button>
           <div className="flex gap-2 mt-auto mb-2">
-            <img src={setting.profile_admis} className="object-cover" style={{borderRadius:'100%',height:"50px" ,width:"50px"}} alt="tof" />
+            <img src={setting.profile_admin} className="object-cover" style={{borderRadius:'100%',height:"50px" ,width:"50px"}} alt="tof" />
             <p className="flex flex-col gap-0.5">
               <span className="font-bold">{setting.admin_name}</span>
               <span className="text-slate-500">Project Manager</span>
