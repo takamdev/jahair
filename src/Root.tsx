@@ -16,6 +16,7 @@ import Faq from "./pages/Faq";
 import Entretien from "./pages/Entretien";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms_conditions from "./pages/Terms_conditions";
+import Product_Item from "./pages/Product_Item";
 
 function Root() {
 const route = createBrowserRouter([
@@ -31,6 +32,11 @@ const route = createBrowserRouter([
             {
                 path:"product",
                 element:<Produit/>
+            },
+            
+            {
+                path:"product/:id",
+                element:<Product_Item/>
             },
             {
                 path:"contact",
