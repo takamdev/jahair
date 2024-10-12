@@ -1,6 +1,5 @@
 import {
-    createBrowserRouter,
-    RouterProvider,
+    BrowserRouter, Routes, Route
   } from "react-router-dom";
 import App from "./App";
 import Produit from "./pages/Produit";
@@ -18,7 +17,64 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms_conditions from "./pages/Terms_conditions";
 import Product_Item from "./pages/Product_Item";
 
+const  children=[
+   {
+       path:'',
+       element:<Home/>
+   },
+   {
+       path:"product",
+       element:<Produit/>
+   },
+   
+   {
+       path:"product/:id",
+       element:<Product_Item/>
+   },
+   {
+       path:"contact",
+       element:<Contact/>
+   },
+   {
+       path:"services",
+       element:<Services/>
+   },
+   {
+       path:"faq",
+       element:<Faq/>
+   },
+   {
+       path:"entretien",
+       element:<Entretien/>
+   },
+   {
+       path:"privacy-policy",
+       element:<PrivacyPolicy/>
+   },
+   {
+       path:"terms-and-conditions",
+       element:<Terms_conditions/>
+   },
+   {
+       path:"about-us",
+       element:<AboutUs/>
+   },
+   {  // admin
+       path:"admin",
+       element:<Auth/>
+   },
+   {  // dashboard
+       path:"admin/dashboard/:token",
+       element:<Admis/>
+   },
+   {  // forget password
+       path:"admin/forget-password",
+       element:<ForgetPassword/>
+   }
+]
+
 function Root() {
+   /*
 const route = createBrowserRouter([
     {
         path:"/",
@@ -81,8 +137,21 @@ const route = createBrowserRouter([
         ]
     }
 ])
+    */
   return (
-    <RouterProvider router={route}/>
+   <BrowserRouter>
+      <Routes>
+         <Route path="/" errorElement={<Error_page/>} element={<App />}>
+            {
+               children.map(element=>{
+                  return (
+                     <Route path={element.path} element={element.element} />
+                  )
+               })
+            }
+         </Route>
+      </Routes>
+   </BrowserRouter>
   )
 }
 
