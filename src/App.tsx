@@ -1,5 +1,5 @@
 
-import { Outlet, useLocation } from 'react-router-dom'
+import {useLocation } from 'react-router-dom'
 import Header from './layout/Header'
 import Footer from './layout/Footer'
 
@@ -9,8 +9,11 @@ import { getAllCollection } from './firebase/getCollections'
 import { type_product } from './types/type_product'
 import product from "./data/product.json"
 import { type_setting } from './types/type_setting'
+interface Props {
+  children: React.ReactNode; // Définit le type des enfants
+}
 
-function App() {
+const App:React.FC<Props>= ({ children })=> {
   const location = useLocation()
   const [showLogoWhat,setter]=useState(true)
   const [load,setLoad]=useState(false)
@@ -107,7 +110,7 @@ const getData = async ()=>{
     return (
       <main className="bg-white relative isolate  pt-14  h-full">
         <Header/>
-        <Outlet/>
+         {children}
       
         {
           showLogoWhat?(

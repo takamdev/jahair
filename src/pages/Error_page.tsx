@@ -1,6 +1,6 @@
 function Error_page() {
   return (
-    <div>Error_page</div>
+    <div className="text-red-400 w-full">Error_page</div>
   )
 }
 
