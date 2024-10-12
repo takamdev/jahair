@@ -1,8 +1,8 @@
 import {
-    BrowserRouter,
-    Route,
-    Routes,
+    createBrowserRouter,
+    RouterProvider,
   } from "react-router-dom";
+import App from "./App";
 import Produit from "./pages/Produit";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
@@ -17,78 +17,72 @@ import Entretien from "./pages/Entretien";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms_conditions from "./pages/Terms_conditions";
 import Product_Item from "./pages/Product_Item";
-import App from "./App";
 
-const   root=[
-    {
-        path:'/',
-        element:<Home/>
-    },
-    {
-        path:"/product",
-        element:<Produit/>
-    },
-    
-    {
-        path:"/product/:id",
-        element:<Product_Item/>
-    },
-    {
-        path:"/contact",
-        element:<Contact/>
-    },
-    {
-        path:"/services",
-        element:<Services/>
-    },
-    {
-        path:"/faq",
-        element:<Faq/>
-    },
-    {
-        path:"/entretien",
-        element:<Entretien/>
-    },
-    {
-        path:"/privacy-policy",
-        element:<PrivacyPolicy/>
-    },
-    {
-        path:"/terms-and-conditions",
-        element:<Terms_conditions/>
-    },
-    {
-        path:"/about-us",
-        element:<AboutUs/>
-    },
-    {  // admin
-        path:"/admin",
-        element:<Auth/>
-    },
-    {  // dashboard
-        path:"/admin/dashboard/:token",
-        element:<Admis/>
-    },
-    {  // forget password
-        path:"/admin/forget-password",
-        element:<ForgetPassword/>
-    }
-]
 function Root() {
+const route = createBrowserRouter([
+    {
+        path:"/",
+        element:<App/>,
+        errorElement:<Error_page/>,
+        children:[
+            {
+                path:'',
+                element:<Home/>
+            },
+            {
+                path:"product",
+                element:<Produit/>
+            },
+            
+            {
+                path:"product/:id",
+                element:<Product_Item/>
+            },
+            {
+                path:"contact",
+                element:<Contact/>
+            },
+            {
+                path:"services",
+                element:<Services/>
+            },
+            {
+                path:"faq",
+                element:<Faq/>
+            },
+            {
+                path:"entretien",
+                element:<Entretien/>
+            },
+            {
+                path:"privacy-policy",
+                element:<PrivacyPolicy/>
+            },
+            {
+                path:"terms-and-conditions",
+                element:<Terms_conditions/>
+            },
+            {
+                path:"about-us",
+                element:<AboutUs/>
+            },
+            {  // admin
+                path:"admin",
+                element:<Auth/>
+            },
+            {  // dashboard
+                path:"admin/dashboard/:token",
+                element:<Admis/>
+            },
+            {  // forget password
+                path:"admin/forget-password",
+                element:<ForgetPassword/>
+            }
+        ]
+    }
+])
   return (
-    <BrowserRouter>
-      <Routes>
-      <Route path="*" element={<Error_page/>} />
-        {
-            root.map(item=>{
-                return(
-                    <Route path={item.path} element={<App>{item.element}</App>} errorElement={<Error_page/>} />
-                )
-            })
-        }
-       
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={route}/>
   )
 }
 
