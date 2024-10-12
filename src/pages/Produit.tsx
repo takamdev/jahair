@@ -5,7 +5,7 @@ function Produit() {
   const product = useStore(state=>state.product)
   return (
     <main className='container mx-auto mb-40'>
-      <div className='grid grid-cols-1 gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>
+      <div className='grid grid-cols-1 md:gap-14 gap-5 lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>
        {
         product.map((item,index)=>{
           return (
