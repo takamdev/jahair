@@ -25,52 +25,52 @@ const   root=[
         element:<Home/>
     },
     {
-        path:"product",
+        path:"/product",
         element:<Produit/>
     },
     
     {
-        path:"product/:id",
+        path:"/product/:id",
         element:<Product_Item/>
     },
     {
-        path:"contact",
+        path:"/contact",
         element:<Contact/>
     },
     {
-        path:"services",
+        path:"/services",
         element:<Services/>
     },
     {
-        path:"faq",
+        path:"/faq",
         element:<Faq/>
     },
     {
-        path:"entretien",
+        path:"/entretien",
         element:<Entretien/>
     },
     {
-        path:"privacy-policy",
+        path:"/privacy-policy",
         element:<PrivacyPolicy/>
     },
     {
-        path:"terms-and-conditions",
+        path:"/terms-and-conditions",
         element:<Terms_conditions/>
     },
     {
-        path:"about-us",
+        path:"/about-us",
         element:<AboutUs/>
     },
     {  // admin
-        path:"admin",
+        path:"/admin",
         element:<Auth/>
     },
     {  // dashboard
-        path:"admin/dashboard/:token",
+        path:"/admin/dashboard/:token",
         element:<Admis/>
     },
     {  // forget password
-        path:"admin/forget-password",
+        path:"/admin/forget-password",
         element:<ForgetPassword/>
     }
 ]
@@ -78,6 +78,7 @@ function Root() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="*" element={<Error_page/>} />
         {
             root.map(item=>{
                 return(
