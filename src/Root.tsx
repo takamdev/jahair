@@ -1,5 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "../App";
+import {
+    createBrowserRouter,
+    RouterProvider,
+  } from "react-router-dom";
+import App from "./App";
 import Produit from "./pages/Produit";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
@@ -16,72 +19,71 @@ import Terms_conditions from "./pages/Terms_conditions";
 import Product_Item from "./pages/Product_Item";
 
 function Root() {
-   const route = createBrowserRouter([
-      {
-         path: "/",
-         element: <App />,
-         errorElement: <Error_page />,
-         children: [
+const route = createBrowserRouter([
+    {
+        path:"/",
+        element:<App/>,
+        errorElement:<Error_page/>,
+        children:[
             {
-               path: "",
-               element: <Home />,
+                path:'',
+                element:<Home/>
             },
             {
-               path: "product",
-               element: <Produit />,
+                path:"product",
+                element:<Produit/>
             },
-
+            
             {
-               path: "product/:id",
-               element: <Product_Item />,
-            },
-            {
-               path: "contact",
-               element: <Contact />,
+                path:"product/:id",
+                element:<Product_Item/>
             },
             {
-               path: "services",
-               element: <Services />,
+                path:"contact",
+                element:<Contact/>
             },
             {
-               path: "faq",
-               element: <Faq />,
+                path:"services",
+                element:<Services/>
             },
             {
-               path: "entretien",
-               element: <Entretien />,
+                path:"faq",
+                element:<Faq/>
             },
             {
-               path: "privacy-policy",
-               element: <PrivacyPolicy />,
+                path:"entretien",
+                element:<Entretien/>
             },
             {
-               path: "terms-and-conditions",
-               element: <Terms_conditions />,
+                path:"privacy-policy",
+                element:<PrivacyPolicy/>
             },
             {
-               path: "about-us",
-               element: <AboutUs />,
+                path:"terms-and-conditions",
+                element:<Terms_conditions/>
             },
             {
-               // admin
-               path: "admin",
-               element: <Auth />,
+                path:"about-us",
+                element:<AboutUs/>
             },
-            {
-               // dashboard
-               path: "admin/dashboard/:token",
-               element: <Admis />,
+            {  // admin
+                path:"admin",
+                element:<Auth/>
             },
-            {
-               // forget password
-               path: "admin/forget-password",
-               element: <ForgetPassword />,
+            {  // dashboard
+                path:"admin/dashboard/:token",
+                element:<Admis/>
             },
-         ],
-      },
-   ]);
-   return <RouterProvider router={route} />;
+            {  // forget password
+                path:"admin/forget-password",
+                element:<ForgetPassword/>
+            }
+        ]
+    }
+])
+  return (
+    <RouterProvider router={route}/>
+  )
 }
 
-export default Root;
+export default Root
