@@ -7,7 +7,8 @@ export type type_product = {
     prize: number
     img: string[]
     in_stock:boolean,
-    desc:string
+    desc:string,
+    rating:number
   } 
 
   export type promiseGetAll =  Promise<QuerySnapshot<DocumentData, DocumentData>>

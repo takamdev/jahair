@@ -85,7 +85,8 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
             prize: data.prize,
             img: urlList,
             in_stock:true,
-            desc:data.desc
+            desc:data.desc,
+            rating:4
           } 
           //mise a jour du tableau dans le dom
           setData((v)=>([...v,product]))

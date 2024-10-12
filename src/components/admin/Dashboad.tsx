@@ -9,6 +9,7 @@ import { addFile } from "../../firebase/addFile";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editDoc } from "../../firebase/editDoc";
 function Dashboad() {
+
   const CurrentSetting = useStore((state)=>state.setting)
   const setCurrentSetting=useStore(state=>state.setSetting)
   const [openModal, setOpenModal] = useState(false);

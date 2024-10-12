@@ -81,7 +81,7 @@ const getData = async ()=>{
           img: element.data().img,
           in_stock:element.data().in_stock,
           desc: element.data().desc,
-
+         rating:element.data().rating|4
         }
         return itemProduct
        })
@@ -93,6 +93,7 @@ const getData = async ()=>{
     setLoad(false)
    })
   },[])
+  
   if(load){
     return(
           <div className="flex items-center justify-center w-screen h-screen border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
