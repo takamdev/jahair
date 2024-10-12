@@ -1,10 +1,10 @@
-import { ImTwitter } from "react-icons/im"; 
 import { FaTiktok } from "react-icons/fa"; 
 import { AiOutlineInstagram } from "react-icons/ai"; 
 import { BsFacebook } from "react-icons/bs"; 
 import { Link } from "react-router-dom";
 
 import useStore from "../store";
+import { FaXTwitter } from "react-icons/fa6";
 function Footer() {
   const setting = useStore(state=>state.setting)
   
@@ -23,7 +23,7 @@ function Footer() {
               <a className="scale-150 " href={setting.social_links.facebook}><BsFacebook /></a>
               <a className="scale-150"  href={setting.social_links.instagram}><AiOutlineInstagram /></a>
               <a className="scale-150"  href={setting.social_links.tiktok}><FaTiktok /></a>
-              <a className="scale-150"  href={setting.social_links.twitter}><ImTwitter /></a>
+              <a className="scale-150"  href={setting.social_links.twitter}><FaXTwitter /></a>
             </div>
           </article>
           

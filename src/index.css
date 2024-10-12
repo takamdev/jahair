@@ -38,3 +38,6 @@
 .bordureFooter{
  border-top: 1px solid rgb(70, 70, 70);
 }
+.text-color{
+  @apply text-gray-500;
+}
