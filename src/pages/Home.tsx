@@ -51,7 +51,7 @@ const product = useStore(state=>state.product)
     </section>
      <p className="my-10">
      <h2 className="text-center roboto-black text-4xl">Nos Services</h2>
-     <h5 className="text-center roboto-light text-xl">Découvrez les produits les plus populaires de notre site !</h5>
+     <h5 className="text-center roboto-light text-lg md:text-base lg:text-xl">Découvrez les produits les plus populaires de notre site !</h5>
      </p>
 
      
