@@ -19,7 +19,7 @@ console.log(rating);
 useEffect(()=>{
   ScrollReveal().reveal(ref.current||"", {
     duration: 1000,
-    distance:"100px",
+    distance:"30px",
     origin: 'bottom',
     ...reveal
 });
