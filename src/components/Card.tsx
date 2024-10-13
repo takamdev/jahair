@@ -3,7 +3,7 @@ import useStore from "../store"
 import { type_product } from "../types/type_product"
 import ScrollReveal from 'scrollreveal'
 import { useNavigate } from "react-router-dom"
-function CardComponent({product}:{product:type_product}) {
+function CardComponent({product,className,reveal}:{product:type_product,className?:string,reveal?:any}) {
   const setting = useStore(state=>state.setting)
   const {img,desc,title,rating,prize,in_stock,id} = product
   const addCart = useStore((state)=>(state.addCart))  
@@ -14,13 +14,14 @@ function CardComponent({product}:{product:type_product}) {
     const isExiste = Cart.find(item=>item.id===product.id)
     if(isExiste===undefined) addCart(product)
   }
+console.log(rating);
 
 useEffect(()=>{
   ScrollReveal().reveal(ref.current||"", {
     duration: 1000,
     distance:"100px",
     origin: 'bottom',
-    reset: false
+    ...reveal
 });
 
 return ()=>{
@@ -30,10 +31,9 @@ return ()=>{
  // rendre les notes(rating)
 
  const rating_light = []
- for (let index = 1; index < 6; index++) {
+ for (let index = 0; index < 5; index++) {
 
-  
-  if(index>=rating){
+  if(index>rating-1){
     rating_light.push( <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
     stroke="currentColor" className="w-6 h-6 cursor-pointer text-blue-gray-500">
     <path stroke-linecap="round" stroke-linejoin="round"
@@ -55,7 +55,7 @@ return ()=>{
  
  return (
  
-      <div  ref={ref} className="relative   flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+      <div  ref={ref} className={`relative   flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg w-96`}>
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <img
         onClick={()=>{navigate(`${id}`)}}
@@ -92,7 +92,7 @@ return ()=>{
         </div>
       
 
-        <button onClick={addToCart} className="rounded-md  w-40 mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+        <button onClick={addToCart} className="rounded-md roboto-regular w-40 mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
           ajouter au panier
         </button>
       </div>

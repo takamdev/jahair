@@ -81,7 +81,7 @@ const getData = async ()=>{
           img: element.data().img,
           in_stock:element.data().in_stock,
           desc: element.data().desc,
-          rating:element.data().rating|4
+          rating:element.data().rating===undefined ? 4:element.data().rating
         }
         return itemProduct
        })
@@ -105,7 +105,7 @@ const getData = async ()=>{
     )
   }else{
     return (
-      <main className="bg-white relative isolate  pt-14  h-full">
+      <main className="bg-white roboto-light relative isolate  pt-14  h-full">
         <Header/>
         <Outlet/>
       
