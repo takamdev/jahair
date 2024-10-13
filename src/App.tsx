@@ -107,7 +107,7 @@ const getData = async ()=>{
     )
   }else{
     return (
-      <main className="bg-white roboto-light relative isolate  pt-14  h-full">
+      <main className="bg-white roboto-light w-full relative isolate  pt-14  h-full">
         <Header/>
         <Outlet/>
       
