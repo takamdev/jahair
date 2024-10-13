@@ -14,7 +14,7 @@ const product = useStore(state=>state.product)
 
   return (
     <> 
-    <div style={{backgroundImage:`url(${setting.img_welcome})`}} className="mt-14 mx-auto img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative">
+    <div style={{backgroundImage:`url(${setting.img_welcome})`}} className="mt-14 img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative">
        <h1 className="lg:text-5xl italic text-blue-50 text-center  w-full"><span className="font-serif" style={{color:"#ff66c4"}}>WELCOME  TO</span>  @yourplacetobeby</h1>
        <h2 className="uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full">jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>
       <p className="lg:text-2xl italic text-black text-center w-full "> 

@@ -47,7 +47,6 @@
 
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-x: center;
 
 
 }
@@ -55,7 +54,6 @@
 .img-baner-product{
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-x: center;
 }
 .arrow{
   transition: all ease-in-out .3s;
