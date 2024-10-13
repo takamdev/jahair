@@ -81,7 +81,7 @@ const getData = async ()=>{
           img: element.data().img,
           in_stock:element.data().in_stock,
           desc: element.data().desc,
-         rating:element.data().rating|4
+          rating:element.data().rating|4
         }
         return itemProduct
        })
