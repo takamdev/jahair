@@ -9,7 +9,7 @@ function Footer() {
   const setting = useStore(state=>state.setting)
   
   return (
-    <footer className="relative h-3/4 text-neutral-700 pb-5 bottom-0 bg-neutral-200">
+    <footer className="w-full h-3/4 text-neutral-700 pb-5 bottom-0 flex flex-col justify-center bg-neutral-200">
        <section className="flex flex-col-reverse lg:flex-row lg:justify-center  mx-5 py-16 h-5/6">
 
           <article className="flex flex-col mt-3 ">
