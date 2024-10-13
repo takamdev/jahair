@@ -1,7 +1,7 @@
  [
-  { "name": "Home", "href": "/" },
-  { "name": "Product", "href": "product" },
+  { "name": "Acceuil", "href": "/" },
+  { "name": "Produits", "href": "product" },
   { "name": "Services", "href": "services" },
-  { "name": "About Us", "href": "about-us" }, 
+  { "name": "A propos", "href": "about-us" }, 
   { "name": "Contact", "href": "contact" }
 ]
