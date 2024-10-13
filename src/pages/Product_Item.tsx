@@ -164,7 +164,7 @@ if(load){
                        </div>
                        <div className="w-full">
                           <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, facilis similique, cumque sunt a esse, fugit nisi odio atque hic reprehenderit quasi in id ipsum.
+                            {product?.desc}
                           </p>
                           <ul className="max-w-md mx-10 my-5 space-y-1 text-color list-disc list-inside dark:text-gray-400">
                             <li>Lorem ipsum dolor sit amet.</li>

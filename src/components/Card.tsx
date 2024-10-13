@@ -92,7 +92,7 @@ return ()=>{
         </div>
       
 
-        <button onClick={addToCart} className="rounded-md roboto-regular w-40 mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+        <button disabled={!product.in_stock} onClick={addToCart} className="rounded-md roboto-regular w-40 mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
           ajouter au panier
         </button>
       </div>
