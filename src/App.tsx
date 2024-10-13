@@ -85,6 +85,8 @@ const getData = async ()=>{
         }
         return itemProduct
        })
+       console.log(data);
+       
        //mise a jour de l'etat
        setProduct(data)
         

@@ -10,7 +10,6 @@ import { Carousel } from "flowbite-react";
 import useStore from '../store';
 import { FaXTwitter } from "react-icons/fa6";
 import { BsFacebook } from "react-icons/bs";
-
 const theme = {
     "root": {
       "base": "relative h-full w-full",
@@ -50,12 +49,14 @@ function Product_Item() {
     const Cart = useStore(state=>state.Cart)
     const addCart = useStore(state=>state.addCart)
     const [qte,setQte]=useState(1)
-    
+    const resetCart = useStore(state=>state.resetCart)
 useEffect(()=>{
     if(id!==undefined){
         getDocument("product",id).then((res:any)=>{
+          console.log(res);
+          
             const itemProduct:type_product={
-                id: res.id,
+                id: id,
                 category:res.category,
                 title:res.title,
                 prize: res.prize,
@@ -73,19 +74,36 @@ useEffect(()=>{
    
 },[])
 const addQte=()=>{
-
-if(qte<10) setQte(v=>v+1)
-
+  
+if(qte<10&&product?.in_stock) setQte(v=>v+1)
 }
 
 const removeQte = ()=>{
-  if(qte>1) setQte(v=>v-1)
+
+  if(qte>1&&product?.in_stock) setQte(v=>v-1)
 }
 const addToCart = ()=>{
+  console.log(Cart);
+  
+  
   const isExiste = Cart.find(item=>item.id===product?.id)
   if(isExiste===undefined){
     if(product)  addCart({...product,qte:qte})
     
+  }else{
+    //ajouter la quantité du produit deja existant
+    const addQte= Cart.map(function(element){
+        if(element.qte!==undefined){
+  
+           if(element.id===product?.id)return {...element,qte:element.qte+1}
+           else return element
+  
+        }
+    })
+    // filtrage de type
+    const filterType = addQte.filter(item=>item!==undefined)
+    resetCart(filterType)
+
   } 
 }
 if(load){
@@ -136,7 +154,13 @@ if(load){
 
                             <span onClick={addQte} className="p-3 w-14 flex justify-center bg-neutral-300 cursor-pointer hover:bg-neutral-200"><BiPlus /></span>
                         </p>
-                         <button onClick={addToCart} className="w-full btn">ajouter au panier</button>
+                        {
+                          product?.in_stock?(
+                            <button onClick={addToCart}  className="w-full btn">ajouter au panier</button>
+                          ):(
+                            <p className="mt-3 roboto-regular">Rupture de stock</p>
+                          )
+                        }
                        </div>
                        <div className="w-full">
                           <p>
