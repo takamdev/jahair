@@ -179,13 +179,12 @@ if(load){
                                 partager
                             </p>
                         </div>
-                        <a href="https://www.facebook.com/sharer.php?u=[LIEN_DE_L'ARTICLE]" >Partager sur Facebook</a>
                         <div className="ms-auto">
                             <p className="w-full flex gap-5 ms-auto">
                                 <span><a href={`https://www.facebook.com/sharer.php?u=${window.location.href}`} target="_blank"><BsFacebook className="scale-150"/></a></span>
-                                <span><a href=""><FaXTwitter className="scale-150" /></a></span>
-                                <span><a href=""><BsWhatsapp className="scale-150" /></a></span>
-                                <span><a href=""><AiOutlineMail className="scale-150" /></a></span>
+                                <span><a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank"><FaXTwitter className="scale-150" /></a></span>
+                                <span><a href={`https://wa.me/?text=${window.location.href}`} target="_blank"><BsWhatsapp className="scale-150" /></a></span>
+                                <span><a href={`mailto:?subject=${product?.title}&body=${window.location.href}`} target="_blank"><AiOutlineMail className="scale-150" /></a></span>
                             
                             </p>
                         </div>
