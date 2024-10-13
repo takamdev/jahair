@@ -75,7 +75,7 @@ useEffect(()=>{
 },[])
 const addQte=()=>{
   
-if(qte<10&&product?.in_stock) setQte(v=>v+1)
+if(qte<4&&product?.in_stock) setQte(v=>v+1)
 }
 
 const removeQte = ()=>{
@@ -179,10 +179,10 @@ if(load){
                                 partager
                             </p>
                         </div>
-                       
+                        <a href="https://www.facebook.com/sharer.php?u=[LIEN_DE_L'ARTICLE]" >Partager sur Facebook</a>
                         <div className="ms-auto">
                             <p className="w-full flex gap-5 ms-auto">
-                                <span><a href=""><BsFacebook className="scale-150"/></a></span>
+                                <span><a href={`https://www.facebook.com/sharer.php?u=[${window.location.href}]`} target="_blank"><BsFacebook className="scale-150"/></a></span>
                                 <span><a href=""><FaXTwitter className="scale-150" /></a></span>
                                 <span><a href=""><BsWhatsapp className="scale-150" /></a></span>
                                 <span><a href=""><AiOutlineMail className="scale-150" /></a></span>
