@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Admis from "./pages/Admis";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
-import Error_page from "./pages/Error_page";
+import Error_page from "./pages/404";
 import Faq from "./pages/Faq";
 import Entretien from "./pages/Entretien";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
