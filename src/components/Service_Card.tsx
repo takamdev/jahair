@@ -65,7 +65,7 @@ useEffect(()=>{
       </div>
       <div className="p-4">
         <div className="mb-2 flex items-center justify-between">
-          <p className="text-slate-800 text-xl font-semibold">
+          <p className="text-slate-800 text-lg font-semibold">
           {name.slice(0,18)}
           </p>
           <p className="text-cyan-600 text-xl font-semibold">
