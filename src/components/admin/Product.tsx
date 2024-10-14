@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table'
 import { type_product } from '../../types/type_product'
 import EditableCell from "../table/EditableCell";
-import Modal from "../Modal";
+import Modal from "./../Modal_add_product";
 import useStore from "../../store";
 import { deleteDocById } from "../../firebase/deleteDoc";
 import { editDoc } from "../../firebase/editDoc";

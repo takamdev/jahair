@@ -3,7 +3,7 @@ import useStore from "../store"
 import { type_product } from "../types/type_product"
 import ScrollReveal from 'scrollreveal'
 import { useNavigate } from "react-router-dom"
-function CardComponent({product,className,reveal}:{product:type_product,className?:string,reveal?:any}) {
+function Card({product,className,reveal}:{product:type_product,className?:string,reveal?:any}) {
   const setting = useStore(state=>state.setting)
   const {img,desc,title,rating,prize,in_stock,id} = product
   const addCart = useStore((state)=>(state.addCart))  
@@ -14,7 +14,7 @@ function CardComponent({product,className,reveal}:{product:type_product,classNam
     const isExiste = Cart.find(item=>item.id===product.id)
     if(isExiste===undefined) addCart(product)
   }
-console.log(rating);
+
 
 useEffect(()=>{
   ScrollReveal().reveal(ref.current||"", {
@@ -81,10 +81,7 @@ return ()=>{
         </p>
         <div className=" flex items-center mt-2 justify-between">
             <div className="inline-flex items-center">
-              
-    {
-    rating_light
-    }
+              {rating_light} <span className="text-sm">(1 avis client)</span>
             </div>
             <p style={{textDecoration:`${!in_stock?"line-through":""}`}} className={`${in_stock?"text-cyan-600":"text-red-400"} text-xl font-semibold`}>
               en stock
@@ -108,7 +105,7 @@ return ()=>{
  
 
 
-export default CardComponent
+export default Card
 
 /*
 function Skelette(){

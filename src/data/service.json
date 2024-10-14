@@ -1,0 +1,26 @@
+[
+    {
+        "img":"/img/coup1.webp",
+        "name":"Coupe Cheveux Tres Long",
+        "rating":4,
+        "prize":45,
+        "id":"kll",
+        "desc":""
+    },
+    {
+        "img":"/img/coup2.jpeg",
+        "name":"Coupe Cheveux Tres Long",
+        "rating":4,
+        "prize":45,
+        "id":"kll",
+        "desc":""
+    },
+    {
+        "img":"/img/coup3.png",
+        "name":"Coupe Cheveux Tres Long",
+        "rating":4,
+        "prize":45,
+        "id":"kll",
+        "desc":""
+    }
+]

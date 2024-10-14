@@ -1,4 +1,4 @@
-import CardComponent from '../components/Card'
+import Card from '../components/Product_Card'
 import useStore from '../store'
 
 function Produit() {
@@ -10,7 +10,7 @@ function Produit() {
         product.map((item,index)=>{
           return (
                 <div key={index} className='lg:-ms-8 md:-ms-5'>
-                        <CardComponent className="my-6" reveal={{reset:false}}  product={item} />
+                        <Card className="my-6" reveal={{reset:false}}  product={item} />
                 </div>
           )
         })
