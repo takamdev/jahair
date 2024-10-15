@@ -3,6 +3,7 @@ import {type_product} from "./types/type_product"
 type cart =( type_product & {qte?:number})
 import {type_setting} from "./types/type_setting"
 import setting from "./data/setting.json"
+import { type_service } from "./types/type_service";
 
 interface typeStore {
   Cart: cart[]
@@ -13,16 +14,28 @@ interface typeStore {
   addProduct:(product:cart)=>void
   setting:type_setting
   setSetting:(setting:type_setting)=>void
+  service:type_service[]
+  setService:(services:type_service[])=>void
+  addService:(service:type_service)=>void
+  
 }
 const useStore = create<typeStore>((set) => ({
-    setSetting:(setting)=>set(()=>({setting:setting})),
-    setting:setting,
     Cart: [],
+    product:[],
+    service:[],
+
+
     addCart: (product) => set((state) => ({ Cart:[...state.Cart,{...product,qte:(product.qte ? product.qte : 1)}]})),// dans ce cas T est de type le type de Cart
     resetCart:(cart)=>set(()=>({Cart:cart})),
-    product:[],
+
     setProduct:(products)=>set(()=>({product:products})),
-    addProduct:(product)=>set((state)=>({product:[...state.product,product]}))
+    addProduct:(product)=>set((state)=>({product:[...state.product,product]})),
+
+    setSetting:(setting)=>set(()=>({setting:setting})),
+    setting:setting,
+    
+    setService:(services)=>set(()=>({service:services})),
+    addService:(service)=>set((state)=>({service:[...state.service,service]}))
   }))
 
 

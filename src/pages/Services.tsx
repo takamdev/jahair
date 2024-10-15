@@ -1,8 +1,8 @@
 import Card from "../components/Service_Card"
-import service from "./../data/service.json"
+import useStore from "../store"
 
 function Services() {
-
+ const service = useStore(state=>state.service)
   return (
     <main className='container mx-auto mb-40'>
     <article className='grid grid-cols-1 md:gap-14  lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>

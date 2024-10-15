@@ -64,6 +64,13 @@
 .arrow-link:hover .arrow{
  transform: scaleX(1.5);
 }
+
+.load{
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
 /*---------------------------------------------- font google---------------------------------------
 
 

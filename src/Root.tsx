@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
-import Admis from "./pages/Admis";
+import Admis from "./pages/Admin";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
 import Error_page from "./pages/404";

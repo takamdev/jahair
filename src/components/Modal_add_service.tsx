@@ -6,16 +6,15 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from "sonner";
-import { type_product } from "../types/type_product";
 import { addFile } from "../firebase/addFile";
 import { addCollection } from "../firebase/addCollection";
+import { type_service } from "../types/type_service";
 
 
 
 
 interface formData {
    name:string
-   category:string
    prize:number
    desc:string
 }
@@ -23,8 +22,7 @@ const borderColor = "border-rose-300 border-2 w-full bg-slate-200   p-2 focus:ri
 
 const schema = yup
   .object({
-    name: yup.string().required(),    
-    category: yup.string().required(),    
+    name: yup.string().required(),
     prize: yup.number().required(),    
     desc: yup.string().required(),
 
@@ -33,10 +31,11 @@ const schema = yup
   })
   .required()
 
-export default function Modal({open,onClose,setData}:{open:boolean,onClose(value: boolean): void,setData(value: React.SetStateAction<type_product[]>):void}) {
+export default function Modal({open,onClose,setData}:{open:boolean,onClose(value: boolean): void,setData(value: React.SetStateAction<type_service[]>):void}) {
 
-    const [imgSelect,setImgSelect]=useState<string[]>([])
-    const refInputFile = useRef<HTMLInputElement>(null)
+    const [fileSelect,setFileSelect]=useState<(string|undefined)>("")
+    const refInputImg = useRef<HTMLInputElement>(null)
+
     const [load , setLoad]=useState(false)
     const {
       reset,
@@ -48,44 +47,42 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
     })
     const resetFrom = ()=>{
       reset()
-      setImgSelect([])
-      if(refInputFile.current) refInputFile.current.value =""
+      setFileSelect("") 
+        refInputImg.current!.value =""
+
+      
     }
     const onSubmit = async (data:formData) =>{
     //verifier si les images sont charger et recuperer les urls locals
-     if(imgSelect.length>0){
+     if(fileSelect !== ""){
       setLoad(true)
-      
-      const urlList: string[] = [];
-        for (const element of imgSelect) {
-          try {
-            const res = await addFile(element,"image/webp");
-            urlList.push(res);
-          } catch (err) {
-            console.error(err);
-          }
-        }
+      let url: string = "";
+      try {
+        const res = await addFile(fileSelect!, "image/webp");
+          url=res
+      } catch (err) {
+        console.error(err);
+      }
+     
+
 
       // construit le produit
-        const product = {
-          category: data.category,
-          title: data.name,
-          prize: data.prize,
-          img: urlList,
-          in_stock:true,
-          desc:data.desc,
-          rating:4
+        const service = {
+            name: data.name,
+            prize: data.prize,
+            img: url,
+            rating:4,
+            desc:data.desc
         } 
         //ajout du produit et recuperation de l'id
-        addCollection("product",product).then(res=>{
+        addCollection("service",service).then(res=>{
           
-          const Product = {
+          const Service = {
             id:res.id,
-            ...product
-            
+            ...service
           } 
           //mise a jour du tableau dans le dom
-          setData((v)=>([...v,Product]))
+          setData((v)=>([...v,Service]))
           //reinitialisation des champ
           setLoad(false)
           resetFrom()
@@ -93,7 +90,7 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
         )
         
      }else{
-       toast.warning("entrez les images",{
+       toast.warning("entrez l'image",{
         className:"text-red-600"
        })
      }
@@ -101,38 +98,29 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
     }
 
     
-// transformer les image en liste de url images
+// transformer les fichier en liste de url fichier
 const getURLFile = (files:FileList | null)=>{
-  // parcourie l'objet file
-    for (const cle in files) {      
-      if(files[parseInt(cle)].type==="image/webp"){
-        const url_name = URL.createObjectURL(files[parseInt(cle)])+ " "+files[parseInt(cle)].name
+   
+    
+  // verification de type
+  const type = files?.[0].type;
+ 
+  if(type==="image/webp"){
+   // creation de l'url file
+   const url_name = URL.createObjectURL(files![0])+ " "+files![0].name.replace(/ /g, '');
+   setFileSelect(url_name)
 
-
-      // verifier si le fichier existe
-        const isexiste = imgSelect.find(item=>item.split(' ')[1]===url_name.split(' ')[1])
-
-        if(isexiste===undefined)  {
-
-          if(imgSelect.length<=3){
-            setImgSelect((v)=>([...v,url_name]))
-          }
-        }
-      }else{
-        toast.success("seul les image au format webp sont accepter",{
-          className:"text-green-500"
-        })
-       
-      }
-      }
+  }else{
+        toast.success("seul les images au format webp sont accepter",{
+            className:"text-green-500"
+          })
+    
+ 
+  }
     
 }
 
-//suprimer une image
-const removeImg = (name:string)=>{
-   const newFIles = imgSelect.filter(item => item.split(" ")[1]!==name)
-   setImgSelect(newFIles)
-}
+
   return (
     <Dialog open={open} onClose={onClose} className="relative z-10 ">
       <DialogBackdrop
@@ -151,29 +139,27 @@ const removeImg = (name:string)=>{
                
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                    Ajouter un Produit
+                    Ajouter un Service
                   </DialogTitle>
                   <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
                      <label className='labelClass'  htmlFor="name">Nom</label>
                      <input {...register("name")} className={errors.name?borderColor:"inputClass"} type="text" id='name' />
 
-                     <label className='labelClass mt-2' htmlFor="category">Category</label>
-                     <input {...register("category")} className={errors.category?borderColor:"inputClass"} type="text" id='category' />
+                     
 
                      <label className='labelClass' htmlFor="prize">Prix</label>
                      <input {...register("prize")} className={errors.prize?borderColor:"inputClass"} type="text" id='prize' />
 
-                     <label className='labelClass flex items-center gap-2' htmlFor="img">Photo (4 images max) <AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
-                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputFile} type="file"  multiple accept="image/webp" id='img' className='hidden' />
+                     <label className='labelClass flex items-center gap-2' htmlFor="img">Photo<AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
+                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputImg} type="file"  accept="image/webp" id='img' className='hidden' />
                       <div id='img' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
-                        {
+                      { 
+                        fileSelect!.length>0?(
+
+                           <span onClick={()=>{setFileSelect("")}} className='mx-1  flex gap-0 items-center'>{fileSelect!.split(' ')[1].slice(0,15)} <CgRemove className="text-red-500 text-2xl z-50" /></span>
+                         ):""
                         
-                        
-                            imgSelect.map(item=>{
-                                return (<span onClick={()=>{removeImg(item.split(' ')[1])}} className='mx-1  flex gap-0 items-center'>{item.split(' ')[1].slice(0,15)} <CgRemove className="text-red-500 text-2xl z-50" /></span>)
-                            })
-                                
-                        }
+                      }
                       </div>
                       <label className='labelClass' htmlFor="desc">Description</label>
                       <textarea {...register("desc")} className={errors.desc?borderColor+'h-20 resize-none':"textareaClass"} id="desc"></textarea>

@@ -3,5 +3,7 @@
   { "name": "Produits", "href": "product" },
   { "name": "Services", "href": "services" },
   { "name": "A propos", "href": "about-us" }, 
-  { "name": "Contact", "href": "contact" }
+  { "name": "Contact", "href": "contact" },
+  { "name": "FAQ", "href": "faq" }
+
 ]

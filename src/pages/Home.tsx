@@ -3,7 +3,6 @@ import useStore from "../store"
 import { default as Card_product} from "../components/Product_Card"
 import { default as Cart_Service } from "../components/Service_Card"
 import { Link } from "react-router-dom"
-import service from './../data/service.json'
 
 
 
@@ -11,8 +10,7 @@ import service from './../data/service.json'
 export default function Home() {
 const setting = useStore(state=>state.setting)
 const product = useStore(state=>state.product)
-
-
+const service =useStore(state=>state.service)
   return (
     <div> 
     <div style={{backgroundImage:`url(${setting.img_welcome})`}} className="mt-14 img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative">

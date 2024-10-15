@@ -5,21 +5,24 @@
         "rating":4,
         "prize":45,
         "id":"kll",
-        "desc":""
+        "video":"sffsfsf",
+        "desc":"fsfsfs"
     },
     {
-        "img":"/img/coup2.jpeg",
+        "img":"/img/coup2.webp",
         "name":"Coupe Cheveux Tres Long",
         "rating":4,
         "prize":45,
         "id":"kll",
+        "video":"",
         "desc":""
     },
     {
-        "img":"/img/coup3.png",
+        "img":"/img/coup3.webp",
         "name":"Coupe Cheveux Tres Long",
         "rating":4,
         "prize":45,
+        "video":"",
         "id":"kll",
         "desc":""
     }
