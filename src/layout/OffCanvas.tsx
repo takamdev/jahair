@@ -9,7 +9,7 @@ export function OffCanvasCart({isOpen,setIsOpen}:{setIsOpen(value:boolean):void,
 
   return (
     <>
-      <Drawer open={isOpen} onClose={handleClose} position="right" className="w-[500px] z-[1000]">
+      <Drawer open={isOpen} onClose={handleClose} position="right" className="w-full md:w-96 lg:w-[500px] z-[1000]">
         <Drawer.Header title="Drawer" />
         <Drawer.Items>
           <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
