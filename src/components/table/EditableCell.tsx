@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 interface etitableCell {
   onchange: (value: string, id: string, key: string) => void
   cell:any
+  width:string
 }
 
-function EditableCell({cell,onchange}:etitableCell) {
+function EditableCell({cell,onchange,width}:etitableCell) {
       
       // recherche des clée
       const index_Of = cell.id.indexOf('_')+1
@@ -32,7 +33,7 @@ const updateRow= ()=>{
 
   return (
     <>
-    <input className='border py-2 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text" onBlur={updateRow}  value={value} onChange={(e)=>{setValue(e.target.value)}}/>
+    <input className={`border py-2 ps-1 focus:ring-0 ${width} rounded-lg focus:border-2 focus:border-rose-400`} type="text" onBlur={updateRow}  value={value} onChange={(e)=>{setValue(e.target.value)}}/>
     </>
   )
 }

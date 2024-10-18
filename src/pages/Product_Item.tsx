@@ -10,6 +10,7 @@ import { Carousel } from "flowbite-react";
 import useStore from '../store';
 import { FaXTwitter } from "react-icons/fa6";
 import { BsFacebook } from "react-icons/bs";
+import Card from "../components/Product_Card";
 const theme = {
     "root": {
       "base": "relative h-full w-full",
@@ -50,6 +51,7 @@ function Product_Item() {
     const addCart = useStore(state=>state.addCart)
     const [qte,setQte]=useState(1)
     const resetCart = useStore(state=>state.resetCart)
+    const products = useStore(state=>state.product)
 useEffect(()=>{
     if(id!==undefined){
         getDocument("product",id).then((res:any)=>{
@@ -63,7 +65,9 @@ useEffect(()=>{
                 img: res.img,
                 in_stock:res.in_stock,
                 desc: res.desc,
-                rating:res.rating|2
+                rating:res.rating|2,
+                caracteristique:res.caracteristique,
+                taille:res.taille
               }
               setProduct(itemProduct)
               setLoad(false)
@@ -117,9 +121,10 @@ if(load){
   )
 }else{
     return (
-        <article className='lg:mt-20 lg:h-screen mb-10  lg:px-40'>
+        <article className='lg:mt-20 mb-10  lg:px-40'>
             
           <div  className='grid  grid-cols-1 lg:grid-cols-2 gap-4'>
+
           <div className="h-96 lg:h-full">
             <Carousel theme={theme}  pauseOnHover slideInterval={1000}>
                 <img className="object-cover max-w-lg " src={product?.img[0]} alt="picture" />
@@ -140,10 +145,11 @@ if(load){
                        <p className="my-3">Taile</p>
                        <select className="w-full mt-5 border-0 focus:ring-0 bg-neutral-300">
                          <option value="">Choisir une option</option>
-                         <option value="S">S(52cm)</option>
-                         <option value="M">M(54cm)</option>
-                         <option value="L">L(56cm)</option>
-
+                         {
+                          product?.taille.split(',').map(taille=>{
+                            return  <option value={taille}>{taille}</option>
+                          })
+                         }
                        </select>
 
                        <div className="w-full gap-5 flex my-10">
@@ -166,10 +172,14 @@ if(load){
                           <p>
                             {product?.desc}
                           </p>
-                          <ul className="max-w-md mx-10 my-5 space-y-1 text-color list-disc list-inside dark:text-gray-400">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Lorem ipsum dolor sit amet.</li>
+                          <h4 className="mt-5">Caracteristiques:</h4>
+                          <ul className="max-w-md mx-10  space-y-1 text-color list-disc list-inside dark:text-gray-400">
+                            {
+                              product?.caracteristique.split(',').map(element=>{
+                                return <li>{element}</li>
+
+                              })
+                            }
                           </ul>
                        </div>
 
@@ -188,11 +198,29 @@ if(load){
                             
                             </p>
                         </div>
+
+                        
                        </div>
                      </div>
 
                 </div>
             </div>
+          </div>
+
+          <h2 className="text-center text-4xl mt-40">Vous aimerez aussi…</h2>
+          
+          <div className='grid grid-cols-1 md:gap-14  lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>
+              {
+                products.filter(item=>item.id!==id).slice(0,4).map((item,index)=>{
+                  console.log(item);
+                  
+                  return (
+                        <div key={index} className='lg:-ms-8 md:-ms-5'>
+                                <Card className="my-6" reveal={{reset:false}}  product={item} />
+                        </div>
+                  )
+                })
+              }
           </div>
         </article>
       )

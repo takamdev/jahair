@@ -76,7 +76,7 @@ useEffect(()=>{
         <div className=" flex items-center mt-2 justify-between">
             <div className="inline-flex items-center">
               
-            {rating_light} <span className="text-sm">(3 avis clients)</span>
+            {rating_light} <span className="text-sm">({rating} avis clients)</span>
             </div>
            
         </div>

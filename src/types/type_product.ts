@@ -8,7 +8,9 @@ export type type_product = {
     img: string[]
     in_stock:boolean,
     desc:string,
-    rating:number
+    rating:number,
+    caracteristique:string,
+    taille:string
   } 
 
   export type promiseGetAll =  Promise<QuerySnapshot<DocumentData, DocumentData>>

@@ -25,7 +25,14 @@ return [
     header: "Prix",
     footer: info => info.column.id,
   }),
-  
+  columnHelper.accessor('caracteristique', {
+    header: "caracteristique",
+    footer: info => info.column.id,
+  }),
+  columnHelper.accessor('taille', {
+    header: "taille",
+    footer: info => info.column.id,
+  }),
   columnHelper.accessor('in_stock', {
     header: 'En stock',
     footer: info => info.column.id,

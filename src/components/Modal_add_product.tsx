@@ -18,6 +18,8 @@ interface formData {
    category:string
    prize:number
    desc:string
+   caracteristique:string
+   taille:string
 }
 const borderColor = "border-rose-300 border-2 w-full bg-slate-200   p-2 focus:ring-0 focus:border-0  rounded-sm h-12"
 
@@ -27,6 +29,8 @@ const schema = yup
     category: yup.string().required(),    
     prize: yup.number().required(),    
     desc: yup.string().required(),
+    caracteristique: yup.string().required(),
+    taille: yup.string().required(),
 
 
 
@@ -74,7 +78,9 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
           img: urlList,
           in_stock:true,
           desc:data.desc,
-          rating:4
+          rating:4,
+          caracteristique:data.caracteristique,
+          taille:data.taille
         } 
         //ajout du produit et recuperation de l'id
         addCollection("product",product).then(res=>{
@@ -162,6 +168,12 @@ const removeImg = (name:string)=>{
 
                      <label className='labelClass' htmlFor="prize">Prix</label>
                      <input {...register("prize")} className={errors.prize?borderColor:"inputClass"} type="text" id='prize' />
+                      
+                     <label className='labelClass' htmlFor="caract">Caractéristique</label>
+                     <input {...register("caracteristique")} placeholder="séparer par une virgule(,)" className={errors.caracteristique?borderColor:"inputClass"} type="text" id='caract' />
+
+                     <label className='labelClass' htmlFor="size">Taille</label>
+                     <input {...register("taille")} placeholder="séparer par une virgule(,)" className={errors.taille?borderColor:"inputClass"} type="text" id='size' />
 
                      <label className='labelClass flex items-center gap-2' htmlFor="img">Photo (4 images max) <AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
                      <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputFile} type="file"  multiple accept="image/webp" id='img' className='hidden' />

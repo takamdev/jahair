@@ -179,6 +179,7 @@ function Service() {
                               return (
                                  <td className="" key={cell.id}>
                                     <EditableCell
+                                       width="w-64"
                                        onchange={handleChange}
                                        cell={cell}
                                     />
@@ -202,7 +203,7 @@ function Service() {
          <button
             disabled={upload}
             onClick={updateCollection}
-            className="bg-green-500 p-4  absolute bottom-0 left-10 rounded-lg"
+            className="bg-green-500 p-4 absolute bottom-0 left-10 rounded-lg"
          >
             {!upload ? (
                <BiCloudUpload className="text-xl" />

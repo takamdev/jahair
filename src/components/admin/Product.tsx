@@ -40,7 +40,9 @@ function Product() {
             img: element.data().img,
             in_stock:element.data().in_stock,
             desc: element.data().desc,
-            rating:element.data().rating===undefined ? 4:element.data().rating
+            rating:element.data().rating===undefined ? 4:element.data().rating,
+            caracteristique:element.data().caracteristique,
+            taille:element.data().taille
           }
           return itemProduct
          })
@@ -172,7 +174,7 @@ function Product() {
                                        {number}
                                     </td>
                                  );
-                              if (index === 5)
+                              if (index === 7)
                                  return (
                                     <td className="border-0" key={cell.id}>
                                        <input
@@ -185,7 +187,7 @@ function Product() {
                                        />
                                     </td>
                                  );
-                              if (index === 6)
+                              if (index === 8)
                                  return (
                                     <td className="f" key={cell.id}>
                                        <div className="flex items-center">
@@ -200,7 +202,7 @@ function Product() {
 
                               return (
                                  <td className="" key={cell.id}>
-                                    <EditableCell
+                                    <EditableCell width="w-48"
                                        onchange={handleChange}
                                        cell={cell}
                                     />

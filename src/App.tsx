@@ -93,7 +93,9 @@ const getData = async ()=>{
           img: element.data().img,
           in_stock:element.data().in_stock,
           desc: element.data().desc,
-          rating:element.data().rating===undefined ? 4:element.data().rating
+          rating:element.data().rating===undefined ? 4:element.data().rating,
+          caracteristique:element.data().caracteristique,
+          taille:element.data().taille
         }
         return itemProduct
        })

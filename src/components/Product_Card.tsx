@@ -81,7 +81,7 @@ return ()=>{
         </p>
         <div className=" flex items-center mt-2 justify-between">
             <div className="inline-flex items-center">
-              {rating_light} <span className="text-sm">(1 avis client)</span>
+              {rating_light} <span className="text-sm">({rating} avis client)</span>
             </div>
             <p style={{textDecoration:`${!in_stock?"line-through":""}`}} className={`${in_stock?"text-cyan-600":"text-red-400"} text-xl font-semibold`}>
               en stock
