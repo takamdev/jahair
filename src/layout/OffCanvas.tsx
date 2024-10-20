@@ -86,7 +86,7 @@ const deleteProd = (id:string)=>{
             Cart.length===0 ?(
               <p className="text-center text-2xl mt-5">Votre panier est vide</p>
             ):(
-              <div className="h-full">
+              <div className="h-full relative">
                 <section className="overflow-x-auto mt-5">
                 <Table>
                   <Table.Head>
@@ -132,16 +132,19 @@ const deleteProd = (id:string)=>{
               
                 </section>
 
-                <p className="text-3xl absolute bottom-24 right-10  "><span className="font-bold">Total </span>:
-                  {setting.symbole_devise==="$"?setting.symbole_devise +Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0):Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0)+setting.symbole_devise}
-                
-                  </p>
-                  <a className="btn absolute bottom-10 lg:left-20 py-2 font-semibold text-lg px-24" href="">Passer au paiement</a>
+                <div className="w-full mt-10 ">
+                   <p className="text-3xl text-end me-5 mb-5 "><span className="font-bold">Total </span>:
+                    {setting.symbole_devise==="$"?setting.symbole_devise +Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0):Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0)+setting.symbole_devise}
+                  
+                    </p>
+                    <a className="btn  rounded-md  py-2 lg:w-3/4 w-96 lg:mx-10 px-10  text-center  font-semibold text-lg " href="">Passer au paiement</a>
+                </div>
               </div>
             )
           }
          
         </Drawer.Items>
+        
       </Drawer>
     </>
   );
