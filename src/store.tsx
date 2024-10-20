@@ -19,14 +19,26 @@ interface typeStore {
   addService:(service:type_service)=>void
   
 }
-const useStore = create<typeStore>((set) => ({
-    Cart: [],
+const useStore = create<typeStore>((set) => {
+  const CartStore:cart[] = JSON.parse(localStorage.getItem('cart')!)||[]
+  
+  return {
+    Cart:CartStore ,
     product:[],
     service:[],
 
 
-    addCart: (product) => set((state) => ({ Cart:[...state.Cart,{...product,qte:(product.qte ? product.qte : 1)}]})),// dans ce cas T est de type le type de Cart
-    resetCart:(cart)=>set(()=>({Cart:cart})),
+    addCart: (product) => set((state) => {
+     const newCart = [...state.Cart,{...product,qte:(product.qte ? product.qte : 1)}]
+     localStorage.setItem('cart',JSON.stringify(newCart) )
+     return { Cart: JSON.parse(localStorage.getItem('cart')!)}
+    }),// dans ce cas T est de type le type de Cart
+
+    resetCart:(cart)=>set(()=>{
+      const newCart = cart
+      localStorage.setItem('cart',JSON.stringify(newCart) )
+      return {Cart: JSON.parse(localStorage.getItem('cart')!)}
+    }),
 
     setProduct:(products)=>set(()=>({product:products})),
     addProduct:(product)=>set((state)=>({product:[...state.product,product]})),
@@ -36,7 +48,8 @@ const useStore = create<typeStore>((set) => ({
     
     setService:(services)=>set(()=>({service:services})),
     addService:(service)=>set((state)=>({service:[...state.service,service]}))
-  }))
+  }
+})
 
 
 
