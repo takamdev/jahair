@@ -99,9 +99,9 @@ const deleteProd = (id:string)=>{
                   </Table.Head>
                   <Table.Body className="divide-y">
                     {
-                      Cart.map(item=>{
+                      Cart.map((item)=>{
                         return (
-                          <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                          <Table.Row key={item.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                           <Table.Cell className="ms-o">
                             <img src={item.img[0]} alt="toff"  />
                           </Table.Cell>
