@@ -102,7 +102,8 @@ useEffect(()=>{
               setProduct(itemProduct)
               getAllCollection("avis").then(res=>{
                const newAvis = res.docs.map(doc=>doc.data() as type_avis)
-               SetAvis(newAvis)
+
+               SetAvis(newAvis.filter(item=>item.product_id===id))
                setLoad(false)
               }).catch(err=>console.log(err))
         }).catch(erreur=>{
@@ -373,7 +374,7 @@ if(load){
               <h3 className="text-center font-bold text-3xl">Avis clients!</h3>
               <div className="  overflow-y-scroll   p-5  lg:ms-14 mt-10">
                 { 
-                Avis?.length!==0 && Avis!.map((item,index)=>{
+                Avis?.length!==0 ? Avis!.map((item,index)=>{
                     return (
                       <div key={index} className="flex my-2">
                       <span><img src="/avatar.png" alt="avatar" /></span>
@@ -390,7 +391,7 @@ if(load){
                       </div>
                     </div>
                     )
-                  })
+                  }):<p className="text-center font-bold text-2xl">Aucun Avis sur ce produit</p>
                 }
                   
                 
