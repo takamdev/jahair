@@ -17,6 +17,7 @@ import { editDoc } from "../../firebase/editDoc";
 import { getAllCollection } from "../../firebase/getCollections";
 import product from "../../data/product.json"
 import Load from "../../layout/Load";
+import { deleteFile } from "../../firebase/deleteFile";
 const columns = ColumnHelper();
 
 function Product() {
@@ -102,6 +103,10 @@ function Product() {
          if (result.success === true) {
             const newData = data.filter((item) => item.id !== id);
             setData(newData);
+
+            // supression des images concerner
+            const images = data.find(item=>item.id===id)?.img
+            deleteFile(images!)
          }
       } catch (error) {
          console.log(error);

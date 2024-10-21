@@ -8,6 +8,7 @@ import { BiCloudUpload } from "react-icons/bi";
 import { addFile } from "../../firebase/addFile";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editDoc } from "../../firebase/editDoc";
+import { deleteFile } from "../../firebase/deleteFile";
 function Dashboad() {
 
   const CurrentSetting = useStore((state)=>state.setting)
@@ -74,6 +75,8 @@ const ref = {
 
  editDoc(ref).then(()=>{
     setLoad(false)
+    const images = fileLink.map(item=>item.url_name)
+    deleteFile(images)
   }).catch(err=>{
     console.log(err);
     setLoad(false)

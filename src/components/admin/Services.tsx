@@ -18,6 +18,7 @@ import { editDoc } from "../../firebase/editDoc";
 import static_service from "./../../data/service.json"
 import { getAllCollection } from "../../firebase/getCollections";
 import Load from "../../layout/Load";
+import { deleteFile } from "../../firebase/deleteFile";
 
 const columns = ColumnHelper();
 
@@ -91,6 +92,8 @@ function Service() {
          if (result.success === true) {
             const newData = data.filter((item) => item.id !== id);
             setData(newData);
+            const images = data.find(item=>item.id===id)?.img
+            deleteFile([images!])
          }
       } catch (error) {
          console.log(error);
