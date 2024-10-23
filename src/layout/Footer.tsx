@@ -36,11 +36,11 @@ function Footer() {
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="text-gray-900 font-bold">Services clientèle</h2>
-              <Link className="underline" to="/faq">FAQ</Link>
-              <Link className="underline" to="/contact">CONTACT</Link>
-              <Link className="underline" to="/entretien">ENTRETIEN PERRUQUE</Link>
-              <Link className="underline" to="/privacy-policy">POLITIQUE DE CONFIDENTIALITÉ</Link>
-              <Link className="underline" to="/terms-and-conditions">CONDITIONS GÉNÉRALES D'UTILISATION</Link>
+              <a className="underline" href="/faq">FAQ</a>
+              <a className="underline" href="/contact">CONTACT</a>
+              <a className="underline" href="/entretien">ENTRETIEN PERRUQUE</a>
+              <a className="underline" href="/privacy-policy">POLITIQUE DE CONFIDENTIALITÉ</a>
+              <a className="underline" href="/terms-and-conditions">CONDITIONS GÉNÉRALES D'UTILISATION</a>
             </div>
             <div className="flex gap-3 flex-col">
             <h2 className="text-gray-900 font-bold">À propos</h2>

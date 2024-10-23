@@ -1,8 +1,9 @@
+import Error_page from "./404"
 
 
 function Entretien() {
   return (
-    <div>Entretien</div>
+    <Error_page/>
   )
 }
 

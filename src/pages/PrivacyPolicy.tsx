@@ -13,10 +13,10 @@ function PrivacyPolicy() {
             </p>
             <p className=" text-justify mt-3">
                We have adopted this Privacy Policy, which determines how we are
-               processing the information collected by steciehair.com, which
+               processing the information collected by Jahair-Style.com, which
                also provides the reasons why we must collect certain personal
                data about you. Therefore, you must read this Privacy Policy
-               before using steciehair.com website.
+               before using Jahair-Style.com website.
             </p>
             <p className="mt-3">
                We take care of your personal data and undertake to guarantee its
