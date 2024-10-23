@@ -1,9 +1,9 @@
  [
-  { "name": "Acceuil", "href": "/" },
-  { "name": "Produits", "href": "product" },
-  { "name": "Services", "href": "services" },
-  { "name": "A propos", "href": "about-us" }, 
-  { "name": "Contact", "href": "contact" },
-  { "name": "FAQ", "href": "faq" }
+  { "name": "home", "href": "/" },
+  { "name": "products", "href": "product" },
+  { "name": "services", "href": "services" },
+  { "name": "about", "href": "about-us" }, 
+  { "name": "contact", "href": "contact" },
+  { "name": "faq", "href": "faq" }
 
 ]

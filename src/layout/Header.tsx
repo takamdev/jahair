@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import useStore from "../store";
 import navigation from './../data/navigation.json'
 import { OffCanvasCart } from "./OffCanvas";
-
+import SelectLanguage from "../components/SelectLanguage";
+import { useTranslation } from "react-i18next";
 function Header() {
+  const {t} = useTranslation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [shadow,setshadow]=useState('')
   const [isOpen,setIsOpen]=useState(false)
@@ -26,7 +28,7 @@ function Header() {
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only"></span>
               <img
                 alt=""
                 src={setting.logo}
@@ -40,16 +42,17 @@ function Header() {
               onClick={() => setMobileMenuOpen(true)}
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only"></span>
               <Bars3Icon aria-hidden="true" className="h-9 w-9" />
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
               <NavLink key={item.name} to={item.href} className="text-sm transition hover:text-rose-300  font-semibold leading-6 text-gray-900">
-                {item.name}
+                {t(item.name)}
               </NavLink>
             ))}
+           
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end me-7">
             <Link to={cartLink} onClick={()=>{setIsOpen(!isOpen)}} className="text-sm relative container-icon  font-semibold leading-6 text-gray-900 scale-150">
@@ -57,6 +60,7 @@ function Header() {
               <FaShopify className="scale-150" />
             </Link>
           </div>
+           <SelectLanguage className="hidden lg:block ms-4 "/>
             <Link to={cartLink} onClick={()=>{setIsOpen(!isOpen)}} className="text-sm lg:hidden absolute right-24 container-icon  font-semibold leading-6 text-gray-900 scale-125">
               <span className="icon absolute -top-3 -right-5 text-gray-500">({Cart.length})</span>
               <FaShopify className="scale-150" />
@@ -94,9 +98,10 @@ function Header() {
                       href={item.href}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base transition  hover:text-rose-300 font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
-                      {item.name}
+                     {t(item.name)}
                     </a>
                   ))}
+                   <SelectLanguage/>
                 </div>
                 <div className="py-6">
                   <Link
