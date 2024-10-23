@@ -59,7 +59,6 @@ const getData = async ()=>{
       return itemSetting
      })
      setSetting(settingData[0])
-     console.log(settingData[0]);
      
   } catch (error) {
     console.log(error);

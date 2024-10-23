@@ -87,7 +87,7 @@ return ()=>{
         const isvalid = bcrypt.compareSync(data.password, getAdmin.password);
        
         if(isvalid){
-         // cree un token
+         // cree un token en suppriment / du password crypté
          const tab = password.split("")
          let token =""
          tab.forEach(element =>{
@@ -101,8 +101,8 @@ return ()=>{
          setLoad(false)
         } 
          else {
-           setIsAdmin(true)
-           setLoad(false)
+           setIsAdmin(true)// afficher le messade d'erreur
+           setLoad(false)// arreté le chargement
          }
         
        
