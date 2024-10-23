@@ -1,0 +1,26 @@
+{
+    "welcome": "Bienvenue à React et react-i18next",
+    "firstname":"Nom",
+    "lastname":"Prenom",
+    "email":"Email",
+    "message":"Message",
+    "contacts":"Contacts",
+    "contact":"Contact",
+    "send":"Envoyer",
+    "sending":"Envoi",
+    "required":"ce champ est requis",
+
+    "home":"Acceuil",
+    "about":"A propos",
+    "services":"Servives",
+    "products":"Produits",
+    "faq":"FAQ",
+
+    "payment_method":"Méthode de paiment",
+    "customer_services":"Services clientèle",
+    "wig_maintenace":"ENTRETIEN PERRUQUE",
+    "priva_cypolicy":"POLITIQUE DE CONFIDENTIALITÉ",
+    "terms_conditions":"CONDITIONS GÉNÉRALES D'UTILISATION",
+    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!"
+    
+}

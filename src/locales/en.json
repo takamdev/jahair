@@ -1,0 +1,27 @@
+{
+    "welcome": "Welcome to React and react-i18next",
+    "firstname":"Firstname",
+    "lastname":"Lastname",
+    "email":"Email",
+    "message":"Message",
+    "contacts":"Contacts",
+    "contact":"Contact",
+    "send":"send",
+    "sending":"sending",
+    "required":"this field is required",
+
+    "home":"Home",
+    "about":"About",
+    "services":"Servives",
+    "products":"Products",
+    "faq":"FAQ",
+    
+    "payment_method":"Payment method",
+    "customer_services":"Customer services",
+    "wig_maintenace":"WIG MAINTENANCE",
+    "priva_cypolicy":"PRIVACY POLICY",
+    "terms_conditions":"TERMS CONDITIONS",
+    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!"
+
+    
+}
