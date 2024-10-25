@@ -5,10 +5,10 @@ import useStore from "../../store"
 import { toast } from "sonner"
 import {Button, Modal } from "flowbite-react";
 import { BiCloudUpload } from "react-icons/bi";
-import { addFile } from "../../firebase/addFile";
+import { addFile } from "../../database/firebase/addFile";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { editDoc } from "../../firebase/editDoc";
-import { deleteFile } from "../../firebase/deleteFile";
+import { editDoc } from "../../database/firebase/editDoc";
+import { deleteFile } from "../../database/firebase/deleteFile";
 function Dashboad() {
 
   const CurrentSetting = useStore((state)=>state.setting)
@@ -59,10 +59,6 @@ const updateCollection= async ()=>{
           console.log(error);
           
          }
-        }else{
-          toast.warning(`verifier que tout les fichiers sont entrez`,{
-            className:"text-red-200"
-          })
         }
 
   }

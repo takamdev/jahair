@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from "sonner";
-import { addFile } from "../firebase/addFile";
-import { addCollection } from "../firebase/addCollection";
+import { addFile } from "../database/firebase/addFile";
+import { addCollection } from "../database/firebase/addCollection";
 import { type_service } from "../types/type_service";
 
 
@@ -168,6 +168,10 @@ const getURLFile = (files:FileList | null)=>{
                           load?"patientez...":"envoyer"
                         }
                       </button>
+                      <p className="mt-3 text-justify">
+                        <span className="font-bold">NB: </span>
+                        reseignez les differentes langue en separant pas une virgule et dans l'ordre Fr En It 
+                      </p>
                   </form>
                 </div>
               </div>

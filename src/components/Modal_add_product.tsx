@@ -7,8 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from "sonner";
 import { type_product } from "../types/type_product";
-import { addFile } from "../firebase/addFile";
-import { addCollection } from "../firebase/addCollection";
+import { addFile } from "../database/firebase/addFile";
+import { addCollection } from "../database/firebase/addCollection";
 
 
 

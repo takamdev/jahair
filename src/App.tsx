@@ -5,7 +5,7 @@ import Footer from './layout/Footer'
 
 import { useEffect, useState } from 'react'
 import useStore from './store'
-import { getAllCollection } from './firebase/getCollections'
+import { getAllCollection } from './database/firebase/getCollections'
 import { type_product } from './types/type_product'
 import product from "./data/product.json"
 import service from './data/service.json'

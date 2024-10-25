@@ -1,4 +1,4 @@
-import { promiseAddDocc } from "../types/type_product";
+import { promiseAddDocc } from "../../types/type_product";
 import { db } from "./config";
 import { addDoc ,collection} from "firebase/firestore/lite";
 

@@ -7,7 +7,6 @@ import { type_service } from "../types/type_service"
 function Card({service,className,reveal}:{service:type_service,className?:string,reveal?:any}) {
 
 
-
     const setting = useStore(state=>state.setting)
     const {img,name,rating,prize,id} = service
     const ref = useRef(null)

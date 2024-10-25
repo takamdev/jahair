@@ -12,13 +12,13 @@ import {
 import { type_service  } from "../../types/type_service";
 import EditableCell from "../table/EditableCell";
 import Modal from "./../Modal_add_service";
-import { deleteDocById } from "../../firebase/deleteDoc";
-import { editDoc } from "../../firebase/editDoc";
+import { deleteDocById } from "../../database/firebase/deleteDoc";
+import { editDoc } from "../../database/firebase/editDoc";
 
 import static_service from "./../../data/service.json"
-import { getAllCollection } from "../../firebase/getCollections";
+import { getAllCollection } from "../../database/firebase/getCollections";
 import Load from "../../layout/Load";
-import { deleteFile } from "../../firebase/deleteFile";
+import { deleteFile } from "../../database/firebase/deleteFile";
 
 const columns = ColumnHelper();
 
@@ -131,7 +131,7 @@ function Service() {
          <Modal open={open} onClose={setOpen} setData={setData} />
          {data.length === 0 ? (
             <p className="text-5xl text-center">
-               aucun produit dans votre site
+               aucun service enregistrér dans votre site
             </p>
          ) : (
             <table className="table-container me-auto">

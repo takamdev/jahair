@@ -1,6 +1,6 @@
 import { storage } from "./config";
 import { getDownloadURL, ref ,uploadBytes } from "firebase/storage";
-import { CreateFile } from "../helper/createfile";
+import { CreateFile } from "../../helper/createfile";
 
 
 export const addFile =async (url_name:string,type:string):Promise<string>=>{

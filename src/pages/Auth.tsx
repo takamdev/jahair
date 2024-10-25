@@ -6,8 +6,8 @@ import ScrollReveal from 'scrollreveal'
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import bcrypt from "bcryptjs"
-import { getAllCollection } from "../firebase/getCollections"
-import { addCollection } from "../firebase/addCollection"
+import { getAllCollection } from "../database/firebase/getCollections"
+import { addCollection } from "../database/firebase/addCollection"
 import Cookies from "js-cookie"
 type info = {
   email:string,
@@ -68,7 +68,7 @@ return ()=>{
       // verifier s'il y'a un administrateur
      getAllCollection("admin").then((admin)=>{
         //si pas d'admin
-      if(admin.size===0){
+      if(admin.size===0){  
         //cree l'admin
         addCollection("admin",newAdmin).then((docRefAdmin)=>{
           setCreate(true)
@@ -84,6 +84,8 @@ return ()=>{
        // si admin 
        admin.forEach(doc=>{
         const getAdmin = doc.data()
+         console.log(getAdmin);
+         
         const isvalid = bcrypt.compareSync(data.password, getAdmin.password);
        
         if(isvalid){

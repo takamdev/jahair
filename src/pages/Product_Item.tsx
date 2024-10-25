@@ -6,8 +6,7 @@ import { BiPlus } from "react-icons/bi";
 import { useParams } from 'react-router-dom'
 import { type_product } from '../types/type_product'
 import { useEffect, useState } from 'react'
-import { getAllCollection, getDocument } from '../firebase/getCollections'
-import { Carousel } from "flowbite-react";
+import { getAllCollection, getDocument } from '../database/firebase/getCollections'
 import useStore from '../store';
 import * as yup from "yup"
 import { FaXTwitter } from "react-icons/fa6";
@@ -17,40 +16,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Rating from "../components/Rating";
 import Note_product from "../components/Note_product";
-import { addCollection } from "../firebase/addCollection";
+import { addCollection } from "../database/firebase/addCollection";
 import { type_avis } from "../types/type_avis";
 import { moyenne } from "../helper/mean";
-import { editDoc } from "../firebase/editDoc";
-const theme = {
-    "root": {
-      "base": "relative h-full w-full",
-      "leftControl": "absolute left-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none",
-      "rightControl": "absolute right-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none"
-    },
-    "indicators": {
-      "active": {
-        "off": "bg-slate-300  hover:bg-white dark:bg-gray-800/50 dark:hover:bg-gray-800",
-        "on": "bg-slate-600 dark:bg-gray-800"
-      },
-      "base": "h-3 w-3 rounded-full",
-      "wrapper": "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3"
-    },
-    "item": {
-      "base": "absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2",
-      "wrapper": {
-        "off": "w-full flex-shrink-0 transform cursor-default snap-center",
-        "on": "w-full flex-shrink-0 transform cursor-grab snap-center"
-      }
-    },
-    "control": {
-      "base": "inline-flex h-8 w-8 items-center justify-center rounded-full sm:h-10 sm:w-10",
-      "icon": "h-5 w-5 text-black dark:text-gray-800 sm:h-6 sm:w-6"
-    },
-    "scrollContainer": {
-      "base": "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",
-      "snap": "snap-x"
-    }
-  }
+import { editDoc } from "../database/firebase/editDoc";
+import { FeaturedImageGallery } from "../components/Gallery";
+
 type info = {
   fistname:string,
     email:string,
@@ -229,14 +200,8 @@ if(load){
           {
                  // debut division de carousel
             }   
-          <div className="h-96 lg:h-full">
-            <Carousel theme={theme}  pauseOnHover slideInterval={1000}>
-                <img className="object-cover max-w-lg " src={product?.img[0]} alt="picture" />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-            </Carousel>
+          <div className="h-96  lg:h-full">
+            <FeaturedImageGallery/>
          </div>
          {
               // fin division de carousel

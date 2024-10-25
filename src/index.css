@@ -6,6 +6,11 @@
 .active{
     --tw-text-opacity:1 !important;
     color: rgb(253 164 175 / var(--tw-text-opacity)) !important;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 3.5px; /* ajustez la valeur selon vos besoins */
+    text-decoration-style: solid;
+    
 }
 
 
