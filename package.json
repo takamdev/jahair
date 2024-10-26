@@ -26,6 +26,7 @@
     "flowbite-react": "^0.10.2",
     "framer-motion": "^11.11.0",
     "googleapis": "105",
+    "html-react-parser": "^5.1.18",
     "i18next": "^23.16.2",
     "js-cookie": "^3.0.5",
     "outline": "link:@heroicons/react/24/outline",

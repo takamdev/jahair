@@ -3,12 +3,22 @@ import useStore from "../store"
 import ScrollReveal from 'scrollreveal'
 import { useNavigate } from "react-router-dom"
 import { type_service } from "../types/type_service"
+import { useTranslation } from "react-i18next"
 
 function Card({service,className,reveal}:{service:type_service,className?:string,reveal?:any}) {
 
 
     const setting = useStore(state=>state.setting)
-    const {img,name,rating,prize,id} = service
+    const {i18n,t}=useTranslation()
+
+      // recuperation des tradustions
+  const prepareTranslate = (object:string)=>{
+    return {fr:object.split(",")[0],en:object.split(',')[1],it:object.split(',')[2]}
+  }
+    const {img,name,rating,prize,id} = {
+      ...service,
+      name:prepareTranslate(service.name),
+    }
     const ref = useRef(null)
     const navigate=useNavigate()
     const MakeAppointment = ()=>{
@@ -53,7 +63,7 @@ useEffect(()=>{
     }
    
   return (
-    <div  ref={ref} className={`relative   flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
+    <div  ref={ref} className={`relative h-[550px]   flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <img
         onClick={()=>{navigate(`/service/${id}`)}}
@@ -65,22 +75,22 @@ useEffect(()=>{
       <div className="p-4">
         <div className="mb-2 flex items-center justify-between">
           <p className="text-slate-800 text-lg font-semibold">
-          {name.slice(0,18)}
+          {name[i18n.language as keyof typeof name].slice(0,18)}
           </p>
           <p className="text-cyan-600 text-xl font-semibold">
-          A parti de {setting.symbole_devise==="$"?(setting.symbole_devise.concat(prize.toString())):prize.toString().concat(setting.symbole_devise)}
+          {t("starting_from")} {setting.symbole_devise==="$"?(setting.symbole_devise.concat(prize.toString())):prize.toString().concat(setting.symbole_devise)}
           
           </p>
         </div>
         <div className=" flex items-center mt-2 justify-between">
             <div className="inline-flex items-center">
               
-            {rating_light} <span className="text-sm">({rating} avis clients)</span>
+            {rating_light} <span className="text-sm">({rating} {t("client_reviews")})</span>
             </div>
            
         </div>
         <button onClick={MakeAppointment} className="rounded-md roboto-regular w-full mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-          je demande un rendez vous
+        {t("make_appointment")}
         </button>
       </div>
       </div>

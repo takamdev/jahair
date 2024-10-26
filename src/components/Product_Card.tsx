@@ -3,9 +3,21 @@ import useStore from "../store"
 import { type_product } from "../types/type_product"
 import ScrollReveal from 'scrollreveal'
 import Rating from "./Rating"
+import { useTranslation } from "react-i18next"
 function Card({product,className,reveal}:{product:type_product,className?:string,reveal?:any}) {
   const setting = useStore(state=>state.setting)
-  const {img,desc,title,rating,prize,in_stock,id} = product
+
+  // recuperation des tradustions
+  const prepareTranslate = (object:string)=>{
+    return {fr:object.split(",")[0],en:object.split(',')[1],it:object.split(',')[2]}
+  }
+  const {i18n,t}=useTranslation()
+  
+  const {img,desc,title,rating,prize,in_stock,id} = {
+    ...product,
+    title:prepareTranslate(product.title),
+    desc: prepareTranslate(product.desc),
+  }
   const addCart = useStore((state)=>(state.addCart))  
   const Cart = useStore((state)=>(state.Cart))
   const ref = useRef(null)
@@ -13,7 +25,7 @@ function Card({product,className,reveal}:{product:type_product,className?:string
     const isExiste = Cart.find(item=>item.id===product.id)
     if(isExiste===undefined) addCart(product)
   }
-
+ 
 
 useEffect(()=>{
   ScrollReveal().reveal(ref.current||"", {
@@ -30,7 +42,7 @@ return ()=>{
 
  return (
  
-      <div  ref={ref} className={`relative   flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
+      <div  ref={ref} className={`relative h-[550px]  flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <a href={`/product/${id}`}>
         <img
@@ -45,16 +57,16 @@ return ()=>{
       <div className="p-4">
         <div className="mb-2 flex items-center justify-between">
           <p className="text-slate-800 text-lg font-semibold">
-          {title.slice(0,18)}
+          {title[i18n.language as keyof typeof title].slice(0,18)}
           </p>
           <p className="text-cyan-600 text-xl font-semibold">
-          A parti de {setting.symbole_devise==="$"?(setting.symbole_devise.concat(prize.toString())):prize.toString().concat(setting.symbole_devise)}
+          {t("starting_from")} {setting.symbole_devise==="$"?(setting.symbole_devise.concat(prize.toString())):prize.toString().concat(setting.symbole_devise)}
           
           </p>
         </div>
         <p className="text-slate-600 leading-normal font-light">
           {
-            desc.length<114 ?desc:desc.slice(0,114)
+            desc[i18n.language as keyof typeof desc].length<114 ?desc[i18n.language as keyof typeof desc]:desc[i18n.language as keyof typeof desc].slice(0,114)
           }
         </p>
         <div className=" flex items-center mt-2 justify-between">
@@ -62,13 +74,13 @@ return ()=>{
               <Rating iconSize="w-6 h-6" showAvis={true} rating={rating}/>
             </div>
             <p style={{textDecoration:`${!in_stock?"line-through":""}`}} className={`${in_stock?"text-cyan-600":"text-red-400"} text-xl font-semibold`}>
-              en stock
+            {t("in_stock")}
             </p>
         </div>
       
 
         <button disabled={!product.in_stock} onClick={addToCart} className="rounded-md roboto-regular w-40 mt-3 btn py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg  focus:shadow-none   active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-          ajouter au panier
+        {t("add_to_cart")}
         </button>
       </div>
       </div>

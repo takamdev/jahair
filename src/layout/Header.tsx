@@ -103,7 +103,7 @@ function Header() {
                      {t(item.name)}
                     </NavLink>
                   ))}
-                   <SelectLanguage/>
+                   
                 </div>
                 <div className="py-6">
                   <Link

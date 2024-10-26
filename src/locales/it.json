@@ -1,5 +1,4 @@
 {
-    "welcome": "Benvenuto a React e react-i18next",
     "firstname":"Nome",
     "lastname":"cognome",
     "email":"Email",
@@ -21,6 +20,39 @@
     "wig_maintenace":"MANUTENZIONE DELLA PARRUCCA",
     "priva_cypolicy":"POLITIQUE DE CONFIDENTIALITÉ",
     "terms_conditions":"INFORMATIVA SULLA PRIVACY",
-    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!"
+    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!",
 
+    "add_to_cart":"Aggiungi al carrello",
+    "in_stock":"in magazzino",
+    "starting_from":"Da",
+    "client_reviews":"avvisi chiave",
+    "make_appointment":"Vorrei fissare un appuntamento",
+
+    "size":"dimensioni",
+    "choose_an_option":"scegliere un'opzione",
+    "no_reviews_product":"nessuna recensione per questo prodotto",
+    "share":"quota",
+    "you_like":"Ti piacerà anche...",
+    "notes":"note",
+    "features":"Caratteristiche",
+    "not_published_mail":"Il vostro indirizzo e-mail non sarà pubblicato.",
+    "leave_your_Review":"Lascia la tua opinione",
+    "out_of_stock":"Esaurito",
+    "discover_products":"scopri i nostri prodotti",
+    "discover_our_products":"Scoprite i prodotti più popolari sul nostro sito!",
+    "our_services":"i nostri servizi",
+    "discover_our_services":"Scoprite i servizi più richiesti sul nostro sito!",
+    "our_products":"i nostri prodotti",
+    "welcome":"<h1 className='lg:text-5xl italic text-blue-50 text-center  w-full'><span className='font-serif' style='color: #ff66c4;'>BENVENUTI A</span>  @iltuopostoabepar</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
+
+    "picture":"Immagine",
+    "action":"Azione",
+    "prize":"prezzo",
+    "cart_empty":"Il carrello è vuoto",
+    "proceed_to_payment":"Procedere al pagamento",
+    "Cart":"Cestino",
+    "total":"Totale"
+
+
+   
 }

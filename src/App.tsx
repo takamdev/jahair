@@ -12,6 +12,7 @@ import service from './data/service.json'
 import { type_setting } from './types/type_setting'
 import Load from './layout/Load'
 import { type_service } from './types/type_service'
+import SelectLanguage from './components/SelectLanguage'
 
 function App() {
   const location = useLocation()
@@ -143,6 +144,7 @@ const getData = async ()=>{
             <>
   
                 <Footer/>
+                <SelectLanguage className='lg:hidden fixed bottom-7 left-3 overflow-y-scroll'/>
                 <a target='blank' href={`https://wa.me/${setting.social_links.whatsapp.trim()}`} className="fixed w-12 bottom-7 right-3  md:w-16 md:bottom-7 md:right-7">
                   <img src="/logo_whatsapp.svg"  alt="whatsapp" />
                 </a>

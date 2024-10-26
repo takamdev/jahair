@@ -21,6 +21,7 @@ import { type_avis } from "../types/type_avis";
 import { moyenne } from "../helper/mean";
 import { editDoc } from "../database/firebase/editDoc";
 import { FeaturedImageGallery } from "../components/Gallery";
+import { useTranslation } from "react-i18next";
 
 type info = {
   fistname:string,
@@ -52,7 +53,8 @@ function Product_Item() {
     const [Avis,SetAvis]=useState<type_avis[]|null>(null)
     const date = new Date()
     const mounts = ["Janv","Févr","Mars","Avr","Mai","Juin","Juil","Août","Sept","Oct","Nov","Déc"]
-    
+    const {i18n,t}=useTranslation()
+
     // recuperation du roduict
 useEffect(()=>{
     if(id!==undefined){
@@ -181,6 +183,27 @@ getAllCollection('avis').then( async res=>{
 })
   
 }
+// description en fonction des langues
+const desc = {
+  fr:product?.desc.split(',')[0],
+  en:product?.desc.split(',')[1],
+  it:product?.desc.split(',')[2]
+}
+
+//carateristique en fonction des langues
+const caract = {
+  fr:product?.caracteristique.split('&')[0].split(','),
+  en:product?.caracteristique.split('&')[1].split(','),
+  it:product?.caracteristique.split('&')[2].split(','),
+
+}
+
+// titre en fonction des langues
+const title = {
+  fr:product?.title.split(',')[0],
+  en:product?.title.split(',')[1],
+  it:product?.title.split(',')[2]
+}
 
 if(load){
     return(
@@ -196,18 +219,18 @@ if(load){
         <article className='lg:mt-20 mb-10 h-full lg:px-40'>
             
         
-          <div  className='grid  grid-cols-1 lg:grid-cols-2 gap-4'>
+          <div  className='grid   grid-cols-1 lg:grid-cols-2  gap-4'>
           {
                  // debut division de carousel
             }   
-          <div className="h-96  lg:h-full">
+          <div className="h-96 md:h-auto p-1 lg:h-full">
             <FeaturedImageGallery/>
          </div>
          {
               // fin division de carousel
           }   
             <div className='lg:px-10 px-4 mx-3'>
-                <h1 className='text-capitalize text-3xl'>{product?.title}</h1>
+                <h1 className='text-capitalize text-3xl'>{title[i18n.language as keyof typeof title]}</h1>
                 <p className="flex mt-2"><Rating iconSize="w-6 h-6" showAvis={true} rating={product!.rating}/></p>
                 <div className='text-color border-t-stone-400 border-t pt-5  mt-5'>
                          {
@@ -216,10 +239,10 @@ if(load){
                      <p className="text-slate-950">
                        {setting.symbole_devise==="$"?(setting.symbole_devise+product?.prize):product?.prize.toString().concat(setting.symbole_devise)}
                      </p>
-                     <div className='lg:h-96 w-full'>
-                       <p className="my-3">Taile</p>
+                     <div className='h-auto w-full'>
+                       <p className="my-3">{t("size")}</p>
                        <select className="w-full mt-5 border-0 focus:ring-0 bg-neutral-300">
-                         <option value="">Choisir une option</option>
+                         <option value="">{t('choose_an_option')}</option>
                          {
                           product?.taille.split(',').map(taille=>{
                             return  <option value={taille}>{taille}</option>
@@ -237,9 +260,9 @@ if(load){
                         </p>
                         {
                           product?.in_stock?(
-                            <button onClick={addToCart}  className="w-full py-2 mb:py-0  btn">ajouter au panier</button>
+                            <button onClick={addToCart}  className="w-full py-2 mb:py-0  btn">{t("add_to_cart")}</button>
                           ):(
-                            <p className="mt-3 roboto-regular">Rupture de stock</p>
+                            <p className="mt-3 roboto-regular">{t("out_of_stock")}</p>
                           )
                         }
                        </div>
@@ -251,14 +274,14 @@ if(load){
                          {
                           // debut division de caracteristique
                          }   
-                       <div className="w-full">
-                          <p>
-                            {product?.desc}
+                       <div className="w-full h-full">
+                          <p className="h-full">
+                            {desc[i18n.language as keyof typeof desc]}
                           </p>
-                          <h4 className="mt-5">Caracteristiques:</h4>
+                          <h4 className="mt-5">{t("features")}:</h4>
                           <ul className="max-w-md mx-10  space-y-1 text-color list-disc list-inside dark:text-gray-400">
                             {
-                              product?.caracteristique.split(',').map(element=>{
+                              caract[i18n.language as keyof typeof caract]?.map(element=>{
                                 return <li>{element}</li>
 
                               })
@@ -276,7 +299,7 @@ if(load){
                        <div className='text-color flex items-center  w-full border-t-stone-400 border-t pt-5  mt-5'>
                         <div>
                             <p className="text-slate-900">
-                                partager
+                                {t('share')}
                             </p>
                         </div>
                         <div className="ms-auto">
@@ -302,24 +325,24 @@ if(load){
           </div>
         
 
-          <div className="lg:my-28 my-10 flex lg:flex-row flex-col mx-5">
+          <div className="lg:my-28 my-10 relative flex lg:flex-row flex-col mx-5">
             <div className="lg:w-1/3 w-full ">
-            <h3 className="text-start font-bold text-3xl">Laissez votre Avis</h3>
-            <p className="mb-3 text-color">Votre adresse e-mail ne sera pas publiée.</p>
+            <h3 className="text-start font-bold text-3xl underline mb-2">{t("leave_your_Review")}</h3>
+            <p className="mb-3 text-color">{t("not_published_mail")}</p>
               <form onSubmit={handleSubmit(onSubmit)}>
-                  <label className={"labelClass"} htmlFor="fistname">Nom<span className="text-red-600 ">*</span></label>
+                  <label className={"labelClass"} htmlFor="fistname">{t("firstname")}<span className="text-red-600 ">*</span></label>
                   <input   {...register("fistname")}   id="fistname" type="text" className={"inputClass focus:border-0 "} />
                   <p className="text-red-600 ">{errors.fistname?.message}</p>
 
-                  <label className={"labelClass"}  htmlFor="email">Email<span className="text-red-600 ">*</span></label>
+                  <label className={"labelClass"}  htmlFor="email">{t("email")}<span className="text-red-600 ">*</span></label>
                   <input {...register("email")}  className={"inputClass"} id="email" type="text" />
                   <p className="text-red-600 ">{errors.email?.message}</p>
 
-                  <label className={"labelClass"}  htmlFor="message">Message<span className="text-red-600 ">*</span></label>
+                  <label className={"labelClass"}  htmlFor="message">{t("message")}<span className="text-red-600 ">*</span></label>
                   <textarea {...register("message")}  className={"textareaClass"} id="message"></textarea>
                   <p className="text-red-600 ">{errors.message?.message}</p>
 
-                  <p className="mt-3 flex"><span className="me-2">Notes:</span> <Note_product Note={setNote}/> </p>
+                  <p className="mt-3 flex"><span className="me-2 capitalize">{t("notes")}:</span> <Note_product Note={setNote}/> </p>
                   
                   <button type="submit" disabled={submiting}  className={`text-white ${submiting&&"cursor-wait"} mt-3 btn self-end focus:ring-0  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center`}>
               {submiting?(
@@ -328,15 +351,15 @@ if(load){
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
                 </svg>
-                envoi...
+                {t('sending')}...
                 </>
-              ):<p className="flex items-center gap-2">envoyer <BiSend className="mt-1 scale-150" /></p>} 
+              ):<p className="flex items-center gap-2"> {t('send')} <BiSend className="mt-1 scale-150" /></p>} 
                
               </button>
               </form>
             </div>
             <div className="w-full lg:mx-5 my-2">
-              <h3 className="text-center font-bold text-3xl">Avis clients!</h3>
+              <h3 className="text-center font-bold text-3xl underline">{t('client_reviews')}</h3>
               <div className="  overflow-y-scroll   p-5  lg:ms-14 mt-10">
                 { 
                 Avis?.length!==0 ? Avis!.map((item,index)=>{
@@ -356,7 +379,7 @@ if(load){
                       </div>
                     </div>
                     )
-                  }):<p className="text-center font-bold text-2xl">Aucun Avis sur ce produit</p>
+                  }):<p className="text-center font-light text-2xl">{t("no_reviews_product")}</p>
                 }
                   
                 
@@ -365,9 +388,9 @@ if(load){
             </div>
           </div> 
 
-          <h2 className="text-center text-4xl ">Vous aimerez aussi…</h2>
+          <h2 className="text-center text-4xl ">{t("you_like")}...</h2>
           
-          <div className='grid grid-cols-1 md:gap-14  lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>
+          <div className='grid grid-cols-1 md:gap-14 p-5 lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2 mt-4 lg:mt-14'>
               {
                 products.filter(item=>item.id!==id).slice(0,4).map((item,index)=>{
                   

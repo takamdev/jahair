@@ -1,8 +1,9 @@
+import { useTranslation } from "react-i18next"
 
 function Rating({rating,showAvis,iconSize}:{rating:number,showAvis:boolean,iconSize:string}) {
 
      // rendre les notes(rating)
-    
+    const {t}=useTranslation()
  const rating_light = []
  for (let index = 0; index < 5; index++) {
 
@@ -25,7 +26,7 @@ function Rating({rating,showAvis,iconSize}:{rating:number,showAvis:boolean,iconS
   }
  }
   return (
-    <>{rating_light} {showAvis&& <span className="text-sm">({rating}  avis client )</span>} </>
+    <>{rating_light} {showAvis&& <span className="text-sm">({rating}  {t("client_reviews")})</span>} </>
   )
 }
 

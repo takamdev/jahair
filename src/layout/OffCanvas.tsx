@@ -5,6 +5,7 @@ import { Table } from "flowbite-react";
 import {Drawer } from "flowbite-react";
 import useStore from "../store";
 import { BiMinus, BiPlus } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 const theme={
   "root": {
     "base": "fixed z-40 overflow-y-auto bg-white p-4 transition-transform dark:bg-gray-800",
@@ -48,12 +49,17 @@ const theme={
 
 export function OffCanvasCart({isOpen,setIsOpen}:{setIsOpen(value:boolean):void,isOpen:boolean}) {
  const Cart = useStore(state=>state.Cart)
+ // cart qui incluree les titre sur differente langue
+
+const carttiltle = Cart.map(item=>{
+  return {...item,title:{fr:item.title.split(",")[0],en:item.title.split(",")[1],it:item.title.split(",")[2]}}
+ })
  const resetCart = useStore(state=>state.resetCart)
 const handleClose = () => setIsOpen(false);
 const setting = useStore(state=>state.setting)
 
-
-const removeQte = (item:typeof Cart[0])=>{
+const {i18n,t} = useTranslation()
+const removeQte = (item:typeof carttiltle[0])=>{
   if(item.qte!>1){
     const newCart = Cart.map(element=>{
       return  element.id ===item.id ? {...element,qte:element.qte! - 1}:element
@@ -62,7 +68,7 @@ const removeQte = (item:typeof Cart[0])=>{
   }
  
 }
-const addQte =(item:typeof Cart[0])=>{
+const addQte =(item:typeof carttiltle[0])=>{
   if(item.qte! <5){
     const newCart = Cart.map(element=>{
       return  element.id ===item.id ? {...element,qte:element.qte! + 1}:element
@@ -80,32 +86,32 @@ const deleteProd = (id:string)=>{
   return (
     <>
       <Drawer theme={theme}  open={isOpen} onClose={handleClose} position="right" className="w-full md:w-96 lg:w-[500px] z-[1000]">
-        <Drawer.Header  titleText="text-2xl" title="Panier" titleIcon={()=><CgShoppingCart className="me-2 scale-150" />} />
+        <Drawer.Header  titleText="text-2xl" title={t("cart")} titleIcon={()=><CgShoppingCart className="me-2 scale-150" />} />
         <Drawer.Items>
           {
             Cart.length===0 ?(
-              <p className="text-center text-2xl mt-5">Votre panier est vide</p>
+              <p className="text-center text-2xl mt-5">{t("cart_empty")}</p>
             ):(
               <div className="h-full relative">
                 <section className="overflow-x-auto mt-5">
                 <Table>
                   <Table.Head>
-                  <Table.HeadCell>Image</Table.HeadCell>
-                    <Table.HeadCell>Nom</Table.HeadCell>
-                    <Table.HeadCell>Prix</Table.HeadCell>
+                  <Table.HeadCell>{t('picture')}</Table.HeadCell>
+                    <Table.HeadCell>{t('firstname')}</Table.HeadCell>
+                    <Table.HeadCell>{t('prize')}</Table.HeadCell>
                     <Table.HeadCell>qte</Table.HeadCell>
-                    <Table.HeadCell>action</Table.HeadCell>
+                    <Table.HeadCell>{t('action')}</Table.HeadCell>
     
                   </Table.Head>
                   <Table.Body className="divide-y">
                     {
-                      Cart.map((item)=>{
+                      carttiltle.map((item)=>{
                         return (
                           <Table.Row key={item.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                           <Table.Cell className="ms-o">
                             <img src={item.img[0]} alt="toff"  />
                           </Table.Cell>
-                          <Table.Cell>{item.title}</Table.Cell>
+                          <Table.Cell>{item.title[i18n.language as keyof typeof item.title]}</Table.Cell>
                           <Table.Cell>{setting.symbole_devise==="$"?setting.symbole_devise +item.prize:item.prize+setting.symbole_devise}</Table.Cell>
                           <Table.Cell>
                         
@@ -133,11 +139,11 @@ const deleteProd = (id:string)=>{
                 </section>
 
                 <div className="w-full mt-10 ">
-                   <p className="text-3xl text-end me-5 mb-5 "><span className="font-bold">Total </span>:
+                   <p className="text-3xl text-end me-5 mb-5 "><span className="font-bold">{t("total")} </span>:
                     {setting.symbole_devise==="$"?setting.symbole_devise +Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0):Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0)+setting.symbole_devise}
                   
                     </p>
-                    <a className="btn  rounded-md  py-2 lg:w-3/4 w-96 lg:mx-10 px-10  text-center  font-semibold text-lg " href="">Passer au paiement</a>
+                    <a className="btn  rounded-md  py-2 lg:w-3/4 w-96 lg:mx-10 px-10  text-center  font-semibold text-lg " href="">{t("proceed_to_payment")}</a>
                 </div>
               </div>
             )

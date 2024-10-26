@@ -1,5 +1,4 @@
 {
-    "welcome": "Bienvenue à React et react-i18next",
     "firstname":"Nom",
     "lastname":"Prenom",
     "email":"Email",
@@ -21,6 +20,37 @@
     "wig_maintenace":"ENTRETIEN PERRUQUE",
     "priva_cypolicy":"POLITIQUE DE CONFIDENTIALITÉ",
     "terms_conditions":"CONDITIONS GÉNÉRALES D'UTILISATION",
-    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!"
-    
+    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!",
+
+    "add_to_cart":"ajouter au panier",
+    "in_stock":"en stock",
+    "starting_from":"A parti de",
+    "client_reviews":"avis clents",
+    "make_appointment":"je demande un rendez vous",
+
+    "size":"taille",
+    "choose_an_option":"Choisir une option",
+    "no_reviews_product":"Aucun Avis sur ce produit",
+    "share":"partager",
+    "you_like":"Vous aimerez aussi…",
+    "notes":"notes",
+    "not_published_mail":"Votre adresse e-mail ne sera pas publiée.",
+    "leave_your_Review":"Laissez votre Avis",
+    "features":"Caractéristiques",
+    "discover_products":"découvrez nos produits",
+    "discover_our_products":"Découvrez les produits les plus demander de notre site !",
+    "our_services":"nos services",
+    "discover_our_services":"Découvrez les services les plus demander de notre site !",
+    "our_products":"nos Produits",
+    "welcome":"<h1 className='lg:text-5xl italic text-blue-50 text-center  w-full'><span className='font-serif' style='color: #ff66c4;' >BIENVENUE À</span>  @votreplacetobepar</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
+    "out_of_stock":"Rupture de stock",
+
+    "picture":"Image",
+    "action":"Action",
+    "prize":"prix",
+    "cart_empty":"Votre panier est vide",
+    "proceed_to_payment":"Passer au paiement",
+    "cart":"Panier",
+    "total":"Total"
+
 }

@@ -194,6 +194,12 @@ const removeImg = (name:string)=>{
                           load?"patientez...":"envoyer"
                         }
                       </button>
+                      <p>
+                        <span>NB: </span>
+                        renseignez chaque propriéter en differante langue en respectant l'ordre FR,EN,IT. ex: prop_fr,prop_en,prop_it.
+                        pour les caracteristiques voici le format : carac1_fr,carac2_fr,... & carac1_en,carac2_en,... & carac1_it,carac2_it,... & ...
+
+                      </p>
                   </form>
                 </div>
               </div>

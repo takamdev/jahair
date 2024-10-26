@@ -19,10 +19,10 @@ function SelectLanguage({className}:{className?:string}) {
 
   return (
     <>
-       <select  value={currentLangage} onChange={(e)=>setCurrentLangage(e.target.value)} id="language" className={`h-10 w-28  ${className} px-1 focus:ring-black focus:border-0 border-1 rounded-lg`} required>
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="it">Italien</option>
+       <select  value={currentLangage} onChange={(e)=>setCurrentLangage(e.target.value)} id="language" className={`h-10   ${className} px-1 focus:ring-black focus:border-0 border-1 rounded-lg`} required>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="it">IT</option>
           </select>
     </>
   )

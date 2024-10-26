@@ -1,5 +1,4 @@
 {
-    "welcome": "Welcome to React and react-i18next",
     "firstname":"Firstname",
     "lastname":"Lastname",
     "email":"Email",
@@ -21,7 +20,38 @@
     "wig_maintenace":"WIG MAINTENANCE",
     "priva_cypolicy":"PRIVACY POLICY",
     "terms_conditions":"TERMS CONDITIONS",
-    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!"
+    "desc_site":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, atque!",
+    
+    "add_to_cart":"add to cart",
+    "in_stock":"in stock",
+    "starting_from":"starting from",
+    "client_reviews":"client reviews",
+    "make_appointment":"I request an appointment",
+    
+    "size":"size",
+    "choose_an_option":"choose an option",
+    "no_reviews_product":"No Reviews for this product",
+    "share":"share",
+    "you_like":"You may also like",
+    "notes":"notes",
+    "not_published_mail":"Your e-mail address will not be published.",
+    "leave_your_Review":"Leave your Review",
+    "out_of_stock":"Out of stock",
+    "features":"Features",
+    "discover_products":"Discover our products",
+    "discover_our_products":"Discover the most popular products on our site!",
+    "our_services":"our services",
+    "discover_our_services":"Discover the most popular services on our site!",
+    "our_products":"our products",
+    "welcome":"<h1 className='lg:text-5xl italic text-blue-50 text-center  w-full'><span className='font-serif'  style='color: #ff66c4;' >WELCOME  TO</span>  @yourplacetobeby</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
+
+    "picture":"Picture",
+    "action":"Action",
+    "prize":"prize",
+    "cart_empty":"Your shopping cart is empty",
+    "proceed_to_payment":"Proceed to payment",
+    "Cart":"Cart",
+    "total":"Total"
 
     
 }
