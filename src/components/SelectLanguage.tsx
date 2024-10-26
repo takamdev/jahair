@@ -16,10 +16,13 @@ function SelectLanguage({className}:{className?:string}) {
         i18n.changeLanguage(currentLangage)
         
     },[currentLangage])
-
+ const changeLanguage = (language:string)=>{
+  setCurrentLangage(language)
+  localStorage.setItem("language",language)
+ }
   return (
     <>
-       <select  value={currentLangage} onChange={(e)=>setCurrentLangage(e.target.value)} id="language" className={`h-10   ${className} px-1 focus:ring-black focus:border-0 border-1 rounded-lg`} required>
+       <select  value={currentLangage} onChange={(e)=>changeLanguage(e.target.value)} id="language" className={`h-10   ${className} px-1 focus:ring-black focus:border-0 border-1 rounded-lg`} required>
             <option value="fr">FR</option>
             <option value="en">EN</option>
             <option value="it">IT</option>

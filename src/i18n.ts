@@ -13,7 +13,7 @@ i18n
       fr: { translation: frTranslation },
       it:{ translation: itTranslation },
     },
-    lng: navigator.language.split("-")[0], // Langue par défaut
+    lng: localStorage.getItem("language")===null ? navigator.language.split("-")[0]:localStorage.getItem("language") as string, // Langue par défaut
     fallbackLng: 'en',
     interpolation: { escapeValue: false }
   });
