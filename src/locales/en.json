@@ -43,7 +43,7 @@
     "our_services":"our services",
     "discover_our_services":"Discover the most popular services on our site!",
     "our_products":"our products",
-    "welcome":"<h1 className='lg:text-5xl italic text-blue-50 text-center  w-full'><span className='font-serif'  style='color: #ff66c4;' >WELCOME  TO</span>  @yourplacetobeby</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
+    "welcome":"<h1 className='lg:text-5xl italic text-white text-center  w-full'><span className='font-serif'  style='color: #ff66c4;' >WELCOME  TO</span>  @yourplacetobeby</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-white my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
 
     "picture":"Picture",
     "action":"Action",

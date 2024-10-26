@@ -42,7 +42,7 @@
     "our_services":"nos services",
     "discover_our_services":"Découvrez les services les plus demander de notre site !",
     "our_products":"nos Produits",
-    "welcome":"<h1 className='lg:text-5xl italic text-blue-50 text-center  w-full'><span className='font-serif' style='color: #ff66c4;' >BIENVENUE À</span>  @votreplacetobepar</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-blue-50 my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
+    "welcome":"<h1 className='lg:text-5xl italic text-white text-center  w-full'><span className='font-serif' style='color: #ff66c4;' >BIENVENUE À</span>  @votreplacetobepar</h1><h2 className='uppercase text-white lg:top-60 lg:text-5xl  my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
     "out_of_stock":"Rupture de stock",
 
     "picture":"Image",
