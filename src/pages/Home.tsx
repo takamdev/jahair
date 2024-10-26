@@ -30,7 +30,7 @@ const {t}=useTranslation()
      {
       // debut de section produits
      }
-
+     
      <section className="flex justify-center">
      <article className='grid grid-cols-1 md:gap-14 lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
        {
