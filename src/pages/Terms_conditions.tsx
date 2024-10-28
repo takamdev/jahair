@@ -7,7 +7,7 @@ function Terms_conditions() {
          <div className="lg:w-1/2 px-5 mx-auto policyPrivacy  roboto-regular ">
             <h1 className="font-medium text-2xl text-center">General Terms and Conditions of Use</h1>
             <h2 className="font-medium text-3xl my-3 text-center font-serif italic">JAHAIRSTYLE</h2>
-            <p className="my-8 font-medium ">1. Welcome to Jahair-Style!</p>
+            <p className="my-8 font-medium ">1. Welcome to JahairStyle!</p>
             <p className="mt-3">
             These General Terms and Conditions of Use (GTCU) govern access to and use of the JAHAIRSTYLE
             website, accessible at the following address: <a href={site}>jahairstyle.com</a>. By

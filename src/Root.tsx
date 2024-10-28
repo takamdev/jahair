@@ -1,7 +1,4 @@
-import {
-    createBrowserRouter,
-    RouterProvider,
-  } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Produit from "./pages/Produit";
 import Contact from "./pages/Contact";
@@ -17,73 +14,93 @@ import Entretien from "./pages/Entretien";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms_conditions from "./pages/Terms_conditions";
 import Product_Item from "./pages/Product_Item";
+import Test from "./pages/Test";
+import Service_item from "./pages/Service_item";
+import RequestAppointment from "./pages/RequestAppointment";
 
 function Root() {
-const route = createBrowserRouter([
-    {
-        path:"/",
-        element:<App/>,
-        errorElement:<Error_page/>,
-        children:[
+   const route = createBrowserRouter([
+      {
+         path: "/",
+         element: <App />,
+         errorElement: <Error_page />,
+         children: [
             {
-                path:'',
-                element:<Home/>
+               path: "",
+               element: <Home />,
             },
             {
-                path:"product",
-                element:<Produit/>
+               path: "product",
+               element: <Produit />,
+            },
+
+            {
+               path: "product/:id",
+               element: <Product_Item />,
+            },
+            {
+               path: "contact",
+               element: <Contact />,
+            },
+            {
+               path: "services",
+               element: <Services />,
             },
             
             {
-                path:"product/:id",
-                element:<Product_Item/>
+               path: "service/:id",
+               element: <Service_item />,
+            },
+
+            {
+               path: "faq",
+               element: <Faq />,
             },
             {
-                path:"contact",
-                element:<Contact/>
+               path: "entretien",
+               element: <Entretien />,
             },
             {
-                path:"services",
-                element:<Services/>
+               path: "privacy-policy",
+               element: <PrivacyPolicy />,
             },
             {
-                path:"faq",
-                element:<Faq/>
+               path: "terms-and-conditions",
+               element: <Terms_conditions />,
             },
             {
-                path:"entretien",
-                element:<Entretien/>
+               path: "about-us",
+               element: <AboutUs />,
             },
             {
-                path:"privacy-policy",
-                element:<PrivacyPolicy/>
+               // admin
+               path: "admin",
+               element: <Auth />,
             },
             {
-                path:"terms-and-conditions",
-                element:<Terms_conditions/>
+               // dashboard
+               path: "admin/dashboard/:token",
+               element: <Admis />,
             },
             {
-                path:"about-us",
-                element:<AboutUs/>
+               // forget password
+               path: "admin/forget-password",
+               element: <ForgetPassword />,
             },
-            {  // admin
-                path:"admin",
-                element:<Auth/>
+            {
+               // test
+               path: "service/request-appointment/:id",
+               element: <RequestAppointment />,
             },
-            {  // dashboard
-                path:"admin/dashboard/:token",
-                element:<Admis/>
+            {
+               // test
+               path: "test",
+               element: <Test />,
             },
-            {  // forget password
-                path:"admin/forget-password",
-                element:<ForgetPassword/>
-            }
-        ]
-    }
-])
-  return (
-    <RouterProvider router={route}/>
-  )
+         ],
+      },
+   ]);
+   return <RouterProvider router={route} />;
 }
 
-export default Root
+export default Root;

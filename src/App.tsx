@@ -26,7 +26,10 @@ function App() {
   
     if(location.pathname.includes("admin")) setter(false)
       else setter(true)
-   
+    
+    document.title=`Jahairstyle-${location.pathname === "/" ? "Home":location.pathname.replace('/','')}`
+
+    
   },[location.pathname])
 
 
@@ -109,7 +112,7 @@ const getData = async ()=>{
         
           //contruction des données services
       const data_service = querySnapshots[1].docs.map(element=>{
-        const itemProduct:type_service={
+        const itemService:type_service={
           id: element.id,
           name:element.data().name,
           prize: element.data().prize,
@@ -117,7 +120,7 @@ const getData = async ()=>{
           desc: element.data().desc,
           rating:element.data().rating===undefined ? 4:element.data().rating
         }
-        return itemProduct
+        return itemService
        })
       
        //mise a jour de l'etat

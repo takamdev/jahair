@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 
 function Card({service,className,reveal}:{service:type_service,className?:string,reveal?:any}) {
 
-
+    const navigateTo = useNavigate()
     const setting = useStore(state=>state.setting)
     const {i18n,t}=useTranslation()
 
@@ -22,7 +22,7 @@ function Card({service,className,reveal}:{service:type_service,className?:string
     const ref = useRef(null)
     const navigate=useNavigate()
     const MakeAppointment = ()=>{
-      
+      navigateTo(`service/request-appointment/${id}`)
     }
 
 useEffect(()=>{

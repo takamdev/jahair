@@ -68,7 +68,7 @@ useEffect(()=>{
                 img: res.img,
                 in_stock:res.in_stock,
                 desc: res.desc,
-                rating:res.rating||2,
+                rating:res.rating||4,
                 caracteristique:res.caracteristique,
                 taille:res.taille
               }

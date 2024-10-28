@@ -13,6 +13,7 @@ const setting = useStore(state=>state.setting)
 const product = useStore(state=>state.product)
 const service =useStore(state=>state.service)
 const {t}=useTranslation()
+
   return (
     <div> 
     <div style={{backgroundImage:`url(${setting.img_welcome})`}} className="mt-14 img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative">
