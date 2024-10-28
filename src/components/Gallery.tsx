@@ -106,6 +106,7 @@ export function FeaturedVideoGallery() {
               src={videolink}
               className={`h-20 w-full ${videolink===active && "grayscale"} cursor-pointer rounded-lg object-cover`}
               muted
+              loop
               autoPlay
             />
           </div>
