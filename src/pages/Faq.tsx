@@ -1,7 +1,7 @@
 import useStore from "../store"
 import { useTranslation } from "react-i18next"
 import parse from "html-react-parser"
-import {faq} from "./../data/doc"
+import {faq} from "../locales/doc"
 
 function Faq() {
   const setting = useStore(state=>state.setting)

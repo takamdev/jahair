@@ -24,7 +24,7 @@ export function FeaturedImageGallery() {
     <div className="grid gap-4">
       <div>
         <img
-          className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
+          className="h-96 w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
           src={active}
           alt=""
         />
