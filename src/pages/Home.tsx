@@ -33,11 +33,11 @@ const {t}=useTranslation()
      }
      
      <section className="flex justify-center">
-     <article className='grid grid-cols-1 md:gap-14 lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
+     <article className='grid grid-cols-1 px-3 md:gap-14 lg:gap-14 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
        {
         product.map((item,index)=>{
           return (
-                <div key={index} className='lg:-ms-8 md:-ms-5'>
+                <div key={index} className="mb-3">
                         <Card_product reveal={{reset:true}}  product={item} />
                 </div>
           )
@@ -74,12 +74,12 @@ const {t}=useTranslation()
       // debut de section services
      }
 
-     <section className="flex justify-center">
-     <article className='grid grid-cols-1 md:gap-14 lg:gap-20 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
+     <section className="flex mb-5 justify-center">
+     <article className='grid grid-cols-1 md:gap-14 lg:gap-14 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
        {
         service.map((item,index)=>{
           return (
-                <div key={index} className='lg:-ms-8 md:-ms-5'>
+                <div key={index}>
                         <Cart_Service reveal={{reset:true}}  service={item} />
                 </div>
           )

@@ -8,7 +8,7 @@
     "send":"send",
     "sending":"sending",
     "required":"this field is required",
-
+    "invalid_email":"invalid email",
     "home":"Home",
     "about":"About",
     "services":"Servives",

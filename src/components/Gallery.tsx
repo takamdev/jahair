@@ -66,6 +66,7 @@ export function FeaturedVideoGallery() {
   
   const [active,setActive]=useState<string>(data[0].videolink) 
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [matchMedia,setMatchMedia] = useState<boolean>(window.innerWidth>1000)
   useEffect(()=>{
     if(videoRef.current!==null){
       videoRef.current.playbackRate=2
@@ -73,14 +74,20 @@ export function FeaturedVideoGallery() {
 
 
     }
+    const mediaQuery = window.matchMedia('(min-width: 1000px)');
+    mediaQuery.addListener((e)=>{
+      setMatchMedia(e.matches)
+      
+    })
   },[])
 
   const setStatusPlay = (pause:boolean)=>{
-    if(videoRef.current!==null){
-     if (pause)  videoRef.current.pause()
-      else videoRef.current.play()
-
-    }
+    if(matchMedia as boolean) if(videoRef.current!==null){
+      if (pause)  videoRef.current.pause()
+       else videoRef.current.play()
+ 
+     }
+    
   }
 
   return (

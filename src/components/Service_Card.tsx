@@ -63,7 +63,7 @@ useEffect(()=>{
     }
    
   return (
-    <div  ref={ref} className={`relative h-[550px]   flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
+    <div  ref={ref} className={`relative h-[550px]   flex flex-col ${className} bg-white shadow-sm  rounded-lg lg:w-96 w-auto`}>
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <img
         onClick={()=>{navigate(`/service/${id}`)}}

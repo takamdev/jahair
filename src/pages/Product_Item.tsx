@@ -223,7 +223,7 @@ if(load){
           {
                  // debut division de carousel
             }   
-          <div className="h-96 md:h-auto p-1 lg:h-full">
+          <div className=" md:h-auto p-1 lg:h-full">
             <FeaturedImageGallery/>
          </div>
          {

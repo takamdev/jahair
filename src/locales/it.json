@@ -8,7 +8,7 @@
     "send":"Inviare",
     "sending":"invio",
     "required":"questo campo è obbligatorio",
-
+    "invalid_email":"e-mail non valida",
     "home":"Benvenuto",
     "about":"A propos",
     "services":"servizi",

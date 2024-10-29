@@ -48,7 +48,7 @@ function Header() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <NavLink key={item.name} to={item.href} className="text-sm transition hover:text-rose-300  font-semibold leading-6 text-gray-900">
+              <NavLink key={item.name} to={item.href} className="text-sm transition hover:text-rose-400  font-semibold leading-6 text-gray-900">
                 {t(item.name)}
               </NavLink>
             ))}

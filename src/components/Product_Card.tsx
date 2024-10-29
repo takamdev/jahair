@@ -42,7 +42,7 @@ return ()=>{
 
  return (
  
-      <div  ref={ref} className={`relative h-[550px]  flex flex-col ${className} bg-white shadow-sm border border-slate-200 rounded-lg lg:w-96 w-auto`}>
+      <div  ref={ref} className={`relative h-[550px]  flex flex-col ${className} bg-white shadow-sm  rounded-lg lg:w-96 w-auto`}>
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <a href={`/product/${id}`}>
         <img
@@ -54,7 +54,7 @@ return ()=>{
         </a>
         
       </div>
-      <div className="p-4">
+      <div className="p-4 ">
         <div className="mb-2 flex items-center justify-between">
           <p className="text-slate-800 text-lg font-semibold">
           {title[i18n.language as keyof typeof title].slice(0,18)}

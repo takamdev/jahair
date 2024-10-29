@@ -20,10 +20,10 @@ type info = {
 
 const schema = yup
   .object({
-    fistname: yup.string().required("this field is required"),  
-    lastname: yup.string().required("this field is required"),    
-    email: yup.string().required("this field is required").matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,"invalid email"),    
-    message: yup.string().required("this field is required"),
+    fistname: yup.string().required("required"),  
+    lastname: yup.string().required("required"),    
+    email: yup.string().required("required").matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,"invalid_email"),    
+    message: yup.string().required("required"),
   })
   .required()
 
@@ -81,19 +81,19 @@ return ()=>{
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col px-5 md:px-20 lg:px-32 py-5 lg:w-1/2 mx-auto justify-center items-center">
             <label className={"labelClass"} htmlFor="fistname">{t('firstname')}<span className="text-red-600 ">*</span></label>
             <input   {...register("fistname")}   id="fistname" type="text" className={"inputClass focus:border-0 "} />
-            <p className="text-red-600 ">{errors.fistname?.message}</p>
+            <p className="text-red-600 ">{t(errors.fistname?.message as string)}</p>
 
             <label className={"labelClass"}  htmlFor="lastname">{t('lastname')}<span className="text-red-600 ">*</span></label>
             <input {...register("lastname")}  className={"inputClass"} id="lastname" type="text" />
-            <p className="text-red-600 ">{errors.lastname?.message}</p>
+            <p className="text-red-600 ">{t(errors.lastname?.message as string)}</p>
 
             <label className={"labelClass"}  htmlFor="email">{t('email')}<span className="text-red-600 ">*</span></label>
             <input {...register("email")}  className={"inputClass"} id="email" type="text" />
-            <p className="text-red-600 ">{errors.email?.message}</p>
+            <p className="text-red-600 ">{t(errors.email?.message as string)}</p>
 
             <label className={"labelClass"}  htmlFor="message">{t('message')}<span className="text-red-600 ">*</span></label>
             <textarea {...register("message")}  className={"textareaClass"} id="message"></textarea>
-            <p className="text-red-600 ">{errors.message?.message}</p>
+            <p className="text-red-600 ">{t(errors.message?.message as string)}</p>
 
             <button type="submit" disabled={load}  className="text-white mt-3 btn self-end focus:ring-0  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
               

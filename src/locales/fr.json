@@ -8,6 +8,7 @@
     "send":"Envoyer",
     "sending":"Envoi",
     "required":"ce champ est requis",
+    "invalid_email":"email non valide",
 
     "home":"Acceuil",
     "about":"A propos",
