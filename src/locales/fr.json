@@ -52,6 +52,17 @@
     "cart_empty":"Votre panier est vide",
     "proceed_to_payment":"Passer au paiement",
     "cart":"Panier",
-    "total":"Total"
+    "total":"Total",
+    "adresse" :"Adresse",
+    "postcode":"Code Postal",
+    "city":"Ville",
+    "phone":"Téléphone",
+    "appointment_for":"Je demande un rendez vous pour",
+    "date":"date souhaité"
+
+
+
+
+
 
 }

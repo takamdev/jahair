@@ -10,7 +10,7 @@ export const firebaseConfig = {
   projectId: "jahair-style",
   storageBucket: "jahair-style.appspot.com",
   messagingSenderId: "437994101250",
-  appId: "1:437994101250:web:0819a8dd06e4d7d7dbe51b"
+  appId:import.meta.env.appId
 };
 
 // Initialize Firebase

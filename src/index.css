@@ -31,7 +31,7 @@
    }
 }
 .labelClass{
-  @apply self-start mt-3 ;
+  @apply self-start mt-3;
 }
 .inputClass{
   @apply w-full   bg-slate-200  p-2 focus:ring-0 focus:border-0 border-0 rounded-sm h-12;

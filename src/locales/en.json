@@ -51,7 +51,12 @@
     "cart_empty":"Your shopping cart is empty",
     "proceed_to_payment":"Proceed to payment",
     "Cart":"Cart",
-    "total":"Total"
-
+    "total":"Total",
+    "adresse" :"Adresse",
+    "postcode":"Postcode",
+    "city":"City",
+    "phone":"Phone",
+    "appointment_for":"I request an appointment for",
+    "date":"Desired date"
     
 }

@@ -1,18 +1,42 @@
-import { useTranslation } from 'react-i18next';
-import '../i18n'; // Assure-toi d'importer la configuration i18n
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
-function Test() {
-  const { t, i18n } = useTranslation();
+type FormData = {
+  file: FileList;
+};
+
+const Test: React.FC = () => {
+  const { register, handleSubmit } = useForm<FormData>();
+  
+  const onSubmit = async (data: FormData) => {
+    const formData = new FormData();
+    formData.append('file', data.file[0]);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/sauvefile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error uploading the file', error);
+    }
+  };
 
   return (
-    <div className='mt-28'>
-      <h1>{t('welcome')}</h1>
-      <button onClick={() => i18n.changeLanguage('fr')}>Français</button>
-      <button onClick={() => i18n.changeLanguage('en')}>English</button>
-      <button onClick={() => i18n.changeLanguage('it')}>Italien</button>
-
-    </div>
+   <>
+    <form className='mt-28' onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="file">choisir un fichier</label>
+      <input id='file' type="file" {...register('file')} />
+      <button type="submit">Upload</button>
+    </form>
+     <img src="https://drive.google.com/thumbnail?id=1CLzOXbcTdsQjG71g9NRi9M-5jOEfw33b&sz=s4000" alt="img" />
+    
+   
+   </>
   );
-}
+};
 
 export default Test;

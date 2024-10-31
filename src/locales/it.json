@@ -51,8 +51,19 @@
     "cart_empty":"Il carrello è vuoto",
     "proceed_to_payment":"Procedere al pagamento",
     "Cart":"Cestino",
-    "total":"Totale"
+    "total":"Totale",
+    "adresse" :"Indirizzo",
+    "postcode":"Codice postale",
+    "city":"Città",
+    "phone":"Telefono",
+    "appointment_for":"Desidero un appuntamento per",
+    "date":"data desiderata"
 
+
+
+
+
+    
 
    
 }

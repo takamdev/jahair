@@ -8,7 +8,7 @@ function PrivacyPolicy() {
          <div className="lg:w-1/2 px-5 mx-auto policyPrivacy  roboto-regular ">
             <h1 className="font-medium text-3xl">Privacy Policy</h1>
             <p className="mt-8">
-               {setting.email_site} website is owned by Jahair Style, which is a
+               {setting.email_site} website is owned by Jahairstyle, which is a
                data controller of your personal data.
             </p>
             <p className=" text-justify mt-3">
@@ -16,7 +16,7 @@ function PrivacyPolicy() {
                processing the information collected by Jahair-Style.com, which
                also provides the reasons why we must collect certain personal
                data about you. Therefore, you must read this Privacy Policy
-               before using Jahair-Style.com website.
+               before using Jahairstyle.com website.
             </p>
             <p className="mt-3">
                We take care of your personal data and undertake to guarantee its
@@ -27,7 +27,7 @@ function PrivacyPolicy() {
             </h2>
 
             <p className=" text-justify mt-3">
-               When you visit the jahair-style.com, we automatically collect
+               When you visit the jahairstyle.com, we automatically collect
                certain information about your device, including information
                about your web browser, IP address, time zone, and some of the
                installed cookies on your device. Additionally, as you browse the
