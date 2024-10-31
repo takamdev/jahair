@@ -83,7 +83,7 @@ return ()=>{
   const onSubmit = (data:info) => console.log(data)
 
   return (
-    <div className="container my-14 lg:my-48 h-full mx-auto">
+    <div className="container my-14 lg:my-24 h-full mx-auto">
       
       <div className="relative bg-slate-50 lg:p-10" ref={ref}>
           <h1 className="text-center text-4xl font-medium  text-slate-800">{t('appointment_for')} <span className="font-bold text-red-600">{serviceName!==undefined&&serviceName[i18n.language as keyof typeof serviceName]}</span></h1>
