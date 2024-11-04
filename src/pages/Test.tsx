@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import StripeContainer from '../stripe/StripeContainer';
 
 type FormData = {
   file: FileList;
@@ -24,7 +25,7 @@ const Test: React.FC = () => {
       console.error('Error uploading the file', error);
     }
   };
-
+/*
   return (
    <>
     <form className='mt-28' onSubmit={handleSubmit(onSubmit)}>
@@ -37,6 +38,14 @@ const Test: React.FC = () => {
    
    </>
   );
+  */
+
+  return (
+    <div className='mt-14'>
+       <h1>test stripe</h1>
+      <StripeContainer amount={50}/>
+    </div>
+  )
 };
 
 export default Test;

@@ -5,10 +5,10 @@ import useStore from "../../store"
 import { toast } from "sonner"
 import {Button, Modal } from "flowbite-react";
 import { BiCloudUpload } from "react-icons/bi";
-import { addFile } from "../../database/firebase/addFile";
+import { addFile } from "../../firebase/addFile";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { editDoc } from "../../database/firebase/editDoc";
-import { deleteFile } from "../../database/firebase/deleteFile";
+import { editDoc } from "../../firebase/editDoc";
+import { deleteFile } from "../../firebase/deleteFile";
 function Dashboad() {
 
   const CurrentSetting = useStore((state)=>state.setting)

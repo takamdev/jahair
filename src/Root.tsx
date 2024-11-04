@@ -17,6 +17,7 @@ import Product_Item from "./pages/Product_Item";
 import Test from "./pages/Test";
 import Service_item from "./pages/Service_item";
 import RequestAppointment from "./pages/RequestAppointment";
+import Init_payment from "./pages/Init_payment";
 
 function Root() {
    const route = createBrowserRouter([
@@ -96,6 +97,11 @@ function Root() {
                // test
                path: "test",
                element: <Test />,
+            },
+            {
+               // test
+               path: "init-payment",
+               element: <Init_payment />,
             },
          ],
       },

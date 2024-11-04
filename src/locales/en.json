@@ -57,6 +57,22 @@
     "city":"City",
     "phone":"Phone",
     "appointment_for":"I request an appointment for",
-    "date":"Desired date"
+    "date":"Desired date",
+    "pay":"pay",
+    "previous":"previous",
+    "Livason":"Livason",
+    "standard_delivery":"Standard delivery",
+    "total_of":"Total of",
+    "shopping_info":"Shipping information",
+    "shopping_desti":"Shipping destination",
+    "shopping_opt":"Shipping options",
+    "continue":"Continue",
+    "fullname":"fullname",
+    "postal_code":"postal code",
+    "address":"Address",
+    "popular_payment":"Popular payment",
+    "pay_now":"Pay now"
+
+
     
 }

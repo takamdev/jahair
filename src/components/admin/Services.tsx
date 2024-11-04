@@ -12,13 +12,13 @@ import {
 import { type_service  } from "../../types/type_service";
 import EditableCell from "../table/EditableCell";
 import Modal from "./../Modal_add_service";
-import { deleteDocById } from "../../database/firebase/deleteDoc";
-import { editDoc } from "../../database/firebase/editDoc";
+import { deleteDocById } from "../../firebase/deleteDoc";
+import { editDoc } from "../../firebase/editDoc";
 
 import static_service from "./../../data/service.json"
-import { getAllCollection } from "../../database/firebase/getCollections";
+import { getAllCollection } from "../../firebase/getCollections";
 import Load from "../../layout/Load";
-import { deleteFile } from "../../database/firebase/deleteFile";
+import { deleteFile } from "../../firebase/deleteFile";
 
 const columns = ColumnHelper();
 

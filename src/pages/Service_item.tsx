@@ -3,7 +3,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { BsWhatsapp } from "react-icons/bs"; 
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getAllCollection, getDocument } from '../database/firebase/getCollections'
+import { getAllCollection, getDocument } from '../firebase/getCollections'
 import useStore from '../store';
 import * as yup from "yup"
 import { FaXTwitter } from "react-icons/fa6";
@@ -12,10 +12,10 @@ import Card from "../components/Service_Card";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Rating from "../components/Rating";
-import { addCollection } from "../database/firebase/addCollection";
+import { addCollection } from "../firebase/addCollection";
 import { type_avis } from "../types/type_avis";
 import { moyenne } from "../helper/mean";
-import { editDoc } from "../database/firebase/editDoc";
+import { editDoc } from "../firebase/editDoc";
 import { FeaturedVideoGallery } from "../components/Gallery";
 import { useTranslation } from "react-i18next";
 import { type_service } from '../types/type_service';

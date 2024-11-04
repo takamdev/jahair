@@ -6,8 +6,8 @@ import ScrollReveal from 'scrollreveal'
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import bcrypt from "bcryptjs"
-import { getAllCollection } from "../database/firebase/getCollections"
-import { addCollection } from "../database/firebase/addCollection"
+import { getAllCollection } from "../firebase/getCollections"
+import { addCollection } from "../firebase/addCollection"
 import Cookies from "js-cookie"
 type info = {
   email:string,

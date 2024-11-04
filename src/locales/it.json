@@ -57,8 +57,21 @@
     "city":"Città",
     "phone":"Telefono",
     "appointment_for":"Desidero un appuntamento per",
-    "date":"data desiderata"
-
+    "date":"data desiderata",
+    "pay":"paga",
+    "previous":"indietro",
+    "Livason":"Consegna",
+    "standard_delivery":"Consegna standard",
+    "total_of":"Totale dovuto",
+    "shopping_info":"Informazioni di spedizione",
+    "shopping_desti":"Destinazione di spedizione",
+    "shopping_opt":"Opzioni di spedizione",
+    "continue":"Continua",
+    "fullname":"Nome completo",
+    "postal_code":"Codice postale",
+    "address":"Indirizzo",
+    "popular_payment":"Opzioni di pagamento più diffuse",
+    "pay_now":"Paga ora"
 
 
 

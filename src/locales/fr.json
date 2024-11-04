@@ -58,7 +58,21 @@
     "city":"Ville",
     "phone":"Téléphone",
     "appointment_for":"Je demande un rendez vous pour",
-    "date":"date souhaité"
+    "date":"date souhaité",
+    "pay":"payer",
+    "previous":"retour",
+    "Livason":"Livraison",
+    "standard_delivery":"Livraison Standard",
+    "total_of":"Total dû",
+    "shopping_info":"Informations sur l'expédition",
+    "shopping_desti":"Destination d'expédition",
+    "shopping_opt":"Options d'expédition",
+    "continue":"Continuer",
+    "fullname":"Nom complet",
+    "postal_code":"Code postal",
+    "address":"Addresse",
+    "popular_payment":"Options de paiment populaires",
+    "pay_now":"Payer maintenant"
 
 
 

@@ -12,12 +12,12 @@ import {
 import { type_product } from "../../types/type_product";
 import EditableCell from "../table/EditableCell";
 import Modal from "./../Modal_add_product";
-import { deleteDocById } from "../../database/firebase/deleteDoc";
-import { editDoc } from "../../database/firebase/editDoc";
-import { getAllCollection } from "../../database/firebase/getCollections";
+import { deleteDocById } from "../../firebase/deleteDoc";
+import { editDoc } from "../../firebase/editDoc";
+import { getAllCollection } from "../../firebase/getCollections";
 import product from "../../data/product.json"
 import Load from "../../layout/Load";
-import { deleteFile } from "../../database/firebase/deleteFile";
+import { deleteFile } from "../../firebase/deleteFile";
 const columns = ColumnHelper();
 
 function Product() {

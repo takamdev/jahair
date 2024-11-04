@@ -1,6 +1,6 @@
 import { db } from "./config";
 import { collection,getDocs,doc ,getDoc} from "firebase/firestore/lite";
-import { promiseGetAll } from "../../types/type_product";
+import { promiseGetAll } from "../types/type_product";
 //recuperer une collection entiere
 export const getAllCollection=async (collection_name:string):promiseGetAll=>{
     const collection_ref = collection(db,collection_name)
@@ -10,6 +10,7 @@ export const getAllCollection=async (collection_name:string):promiseGetAll=>{
         return error
     }
 }
+
 
 //recuperer une collection specifique
 export const getDocument = async (collection_name: string, document_id: string) => {

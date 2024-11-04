@@ -143,7 +143,7 @@ const deleteProd = (id:string)=>{
                     {setting.symbole_devise==="$"?setting.symbole_devise +Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0):Cart.reduce((acc,item)=>acc+(item.prize*item.qte!),0)+setting.symbole_devise}
                   
                     </p>
-                    <a className="btn  rounded-md  py-2 lg:w-3/4 w-96 lg:mx-10 px-10  text-center  font-semibold text-lg " href="">{t("proceed_to_payment")}</a>
+                    <a className="btn  rounded-md  py-2 lg:w-3/4 w-96 lg:mx-10 px-10  text-center  font-semibold text-lg " href="/init-payment">{t("proceed_to_payment")}</a>
                 </div>
               </div>
             )
