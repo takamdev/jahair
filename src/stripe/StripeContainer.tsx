@@ -51,7 +51,7 @@ function StripeContainer({amount,email}:{amount:number,email:string}) {
       amount:amount,
       currency:setting.symbole_devise==="$"?"usd":"eur"
     }
-    axios.post('http://localhost:3000/api/create-payment-intent',data).then(res=>{
+    axios.post(`${import.meta.env.baseURL}/api/create-payment-intent`,data).then(res=>{
      const getSecret = res.data.clientSecret
      console.log(getSecret);
      
