@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckoutForm";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useStore from "../store";
-const stripePromise = loadStripe('pk_test_51QGSkNIIFmT8VnaxVTg3v7sZCqmgd7koz0h6856XPCnoNHLKVZBG1aatssxSE1ODLzRCgwlWa88sLgc32sLj7kLf00uTYQKs0Q');
+const stripePromise = loadStripe(import.meta.env.PUBLIC_KEY);
 const appearance:Appearance = {
   theme: 'stripe',
   variables: {
