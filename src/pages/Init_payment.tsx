@@ -1,13 +1,14 @@
 import { BiArrowBack } from "react-icons/bi"; 
 import useStore from "../store";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Label, Radio } from "flowbite-react";
 import StripeContainer from "../stripe/StripeContainer";
+import axios from "axios";
 type info = {
     fullname:string,
     address:string,
@@ -23,6 +24,22 @@ type info = {
       "base": "h-4 w-4 border border-gray-300 text-[#ff66c4]  focus:ring-0  dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-cyan-600 dark:focus:ring-cyan-600"
     }
   }
+  
+  const country = [
+    {code:"CM",label:"Cameroon"},
+    {code:"CA",label:"Canada"},
+    {code:"FR",label:"France"},
+    {code:"SN",label:"Sénégal"},
+    {code:"CY",label:"Chypre"},
+    {code:"CV",label:"Cote D'Ivoire"},
+    {code:"US",label:"États-Unis"},
+    {code:"IT",label:"Italie"},
+    {code:"CH",label:"Suisse"},
+    {code:"GB",label:"Royaume-Uni"},
+    {code:"LU",label:"Luxembourg"},
+    {code:"BE",label:"Belgique"},
+  ]
+  
   const schema = yup
     .object({
       fullname: yup.string().required("required"),       
@@ -36,14 +53,23 @@ type info = {
 function Init_payment() {
     const Cart = useStore(state=>state.Cart)
     const setting = useStore(state=>state.setting)
+
     const {i18n,t} = useTranslation()
+
     const [activeVue, setActiveVue]=useState<boolean[]>([true,false])
+
     const [methode,setMethode]=useState<string>('paypal')
+
     const navigation = useNavigate()
+
     const [dataForm,setDataForm]=useState<info|null>(null)
+
+    const [defaultCountry,setDefaultCountry] = useState<string|null>(null)
+
     const carttiltle = Cart.map(item=>{
         return {...item,title:{fr:item.title.split(",")[0],en:item.title.split(",")[1],it:item.title.split(",")[2]}}
     })
+
      const livrason_price = 20
 
      const {
@@ -55,7 +81,18 @@ function Init_payment() {
         resolver: yupResolver(schema),
       })
     
+useEffect(()=>{
+   axios.get('https://ipapi.co/json/').then(res=>{
+    
+    // verifier si la livarson est disponible pour le pays
+     
+     const isdelivery = country.find(item=>item.code===res.data.country)
+      setDefaultCountry(isdelivery?.code as string)
 
+      if(isdelivery===undefined) setDefaultCountry('FR')
+      
+   }).catch(err=>console.log(err))
+},[])
 
 const navigate =()=>{
     reset()
@@ -114,12 +151,12 @@ const onSubmit = (data:info) => {
                     <h1 className="text-lg font-medium text-slate-700"> {t("shopping_info")} </h1>
                         <div className="block w-full mt-5">
                             <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-600 w-full"> {t("shopping_desti")} </label>
-                            <select id="countries" className="h-12 bg-slate-100 focus:ring-0 border-0 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
-                            <option className="" selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
+                            <select defaultValue={defaultCountry as string} id="countries"  className="h-12 bg-slate-100 focus:ring-0 border-0 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                            {
+                              country.map((item,index)=>{
+                                return <option key={index} value={item.code}>{item.label}</option>
+                              })
+                            }
                             </select>
                         
                        
@@ -154,7 +191,7 @@ const onSubmit = (data:info) => {
 
                                 <label className={"labelClass"}  htmlFor="city">{t('city')}<span className="text-red-600 ">*</span></label>
                                 <input {...register("city")}  className={"inputClass"} id="city" type="text" />
-                                <p className="text-red-600 ">{t(errors.phone?.message as string)}</p>
+                                <p className="text-red-600 ">{t(errors.city?.message as string)}</p>
 
                                 <label className={"labelClass"} htmlFor="address"> {t("address")} <span className="text-red-600 ">*</span></label>
                                 <input   {...register("address")}   id="fullname" type="text" className={"inputClass focus:border-0 "} />
