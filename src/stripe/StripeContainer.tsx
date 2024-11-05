@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckoutForm";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useStore from "../store";
-const stripePromise = loadStripe(import.meta.env.PUBLIC_KEY);
+const stripePromise = loadStripe(process.env.PUBLIC_KEY as string);
 const appearance:Appearance = {
   theme: 'stripe',
   variables: {
@@ -47,16 +47,16 @@ function StripeContainer({amount,email}:{amount:number,email:string}) {
 
   
   useEffect(()=>{
-    const data = {
+     const data = {
       amount:amount,
       currency:setting.symbole_devise==="$"?"usd":"eur"
     }
-    axios.post(`${import.meta.env.baseURL}/api/create-payment-intent`,data).then(res=>{
+    axios.post(`https://backend-jahairstyle.vercel.app/api/create-payment-intent`,data).then(res=>{
      const getSecret = res.data.clientSecret
      console.log(getSecret);
      
      setClientSecret(getSecret)
-    }).catch(err=>{console.log(err);
+    }).catch(err=>{console.log(err.data);
     })
   },[])
 

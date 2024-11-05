@@ -5,12 +5,12 @@ import { getStorage } from "firebase/storage";
 
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.apiKey,
+  apiKey: process.env.apiKey,
   authDomain: "jahair-style.firebaseapp.com",
   projectId: "jahair-style",
   storageBucket: "jahair-style.appspot.com",
   messagingSenderId: "437994101250",
-  appId:import.meta.env.appId
+  appId:process.env.appId
 };
 
 // Initialize Firebase

@@ -28,6 +28,7 @@ const CheckoutForm = ({email}:{email:string}) => {
     });
 
     setIsLoading(false);
+    
   }
   return (
    <>

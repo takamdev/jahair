@@ -120,7 +120,7 @@ const onSubmit = (data:info) => {
                     </p>
                     {
                     carttiltle.map((item,index)=>{
-                        return  <p key={index} className="text-slate-700 font-normal flex">
+                        return  <p key={index} className="text-slate-700 mb-2 font-normal flex">
                             <span>{item.title[i18n.language as keyof typeof item.title]}</span> 
                             <span className="ms-auto">{setting.symbole_devise==="$"?setting.symbole_devise +item.prize*item.qte!:item.prize*item.qte!+setting.symbole_devise}
                             </span>
@@ -215,7 +215,7 @@ const onSubmit = (data:info) => {
                                             </p>
 
 
-                                            <Label   htmlFor="card" className="w-1/2 h-6 cursor-pointer ms-auto -me-20 ">
+                                            <Label   htmlFor="card" className="w-1/2 h-6 cursor-pointer ms-auto lg:-me-20 ">
                                                 <img src="/paypal.svg" className="w-full cursor-pointer h-full "  alt="paypal methode" />
                                             </Label>
                                           </div>
@@ -225,7 +225,7 @@ const onSubmit = (data:info) => {
                                             <Label htmlFor="card" className="cursor-pointer">Options de paiment populaires</Label>
                                             </p>
 
-                                            <Label htmlFor="card" className="w-1/2 ms-auto cursor-pointer -me-11 h-6">
+                                            <Label htmlFor="card" className="w-1/2 ms-auto cursor-pointer lg:-me-11 h-6">
                                                 <img src="/cards_payment.svg" className="w-full h-6 cursor-pointer"  alt="card methode" />
                                             </Label>
                                           </div>

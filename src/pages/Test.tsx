@@ -14,7 +14,7 @@ const Test: React.FC = () => {
     formData.append('file', data.file[0]);
 
     try {
-      const response = await axios.post(`${import.meta.env.baseURL}/api/sauvefile`, formData, {
+      const response = await axios.post(`${process.env.baseURL}/api/sauvefile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -18,6 +18,7 @@ import Test from "./pages/Test";
 import Service_item from "./pages/Service_item";
 import RequestAppointment from "./pages/RequestAppointment";
 import Init_payment from "./pages/Init_payment";
+import Completion from "./pages/Complation";
 
 function Root() {
    const route = createBrowserRouter([
@@ -99,9 +100,14 @@ function Root() {
                element: <Test />,
             },
             {
-               // test
+               
                path: "init-payment",
                element: <Init_payment />,
+            },
+            {
+               
+               path: "completion",
+               element: <Completion />,
             },
          ],
       },
