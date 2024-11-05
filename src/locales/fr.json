@@ -9,7 +9,7 @@
     "sending":"Envoi",
     "required":"ce champ est requis",
     "invalid_email":"email non valide",
-
+    "discover_services":"découvrez nos services",
     "home":"Acceuil",
     "about":"A propos",
     "services":"Servives",
@@ -72,7 +72,10 @@
     "postal_code":"Code postal",
     "address":"Addresse",
     "popular_payment":"Options de paiment populaires",
-    "pay_now":"Payer maintenant"
+    "pay_now":"Payer maintenant",
+    "motivation":"Nous ne sommes pas simplement dans le business pour faire des affaires, mais pour créer des clients satisfaits.",
+    "motivation_footer":"Révélez votre beauté intérieure avec nos perruques élégantes et confortables. Nous vous offrons une gamme de solutions capillaires adaptées à vos besoins, sans compromis sur la qualité et l'environnement."
+
 
 
 

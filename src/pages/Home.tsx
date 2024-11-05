@@ -35,7 +35,7 @@ const {t}=useTranslation()
      <section className="flex justify-center">
      <article className='grid grid-cols-1 px-3 md:gap-14 lg:gap-14 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
        {
-        product.map((item,index)=>{
+        product.slice(0,4).map((item,index)=>{
           return (
                 <div key={index} className="mb-3">
                         <Card_product reveal={{reset:true}}  product={item} />
@@ -49,23 +49,23 @@ const {t}=useTranslation()
       // fin de section services
      }
 
-    {
-      // debut de section banier produits
+{
+      // debut de section banier service
      }
 
-    <section style={{backgroundImage:`url(/img/baner-product.jpg)`}} className="mt-14 img-baner-product  h-60 lg:h-[300px] md:h-96 roboto-regular origin-top relative">
+    <section style={{backgroundImage:`url(/img/baner-product.png)`}} className="mt-14 img-baner-product  h-60 lg:h-[300px] md:h-96 roboto-regular origin-top relative ">
        <div className="h-full w-full text-white backdrop-brightness-75 flex flex-col items-center justify-center ">
-          <p className="text-center roboto-bold  text-3xl lg:text-5xl">{t('discover_products')}</p>
-          <Link to={"product"} className="mt-5 btn px-10 py-3 rounded-full flex items-center arrow-link">{t("products")} <AiOutlineArrowRight className="arrow hidden lg:block origin-top-left ms-2" /> </Link>
+          <p className="text-center roboto-bold  text-3xl lg:text-5xl">{t('discover_services')}</p>
+          <Link to={"services"} className="mt-5 btn px-10 py-3 rounded-full flex items-center arrow-link">{t("services")} <AiOutlineArrowRight className="arrow hidden lg:block origin-top-left ms-2" /> </Link>
        </div>
     </section>
 
 
     {
-      // fin de section banier produits
+      // fin de section banier service
      }
 
-     <p className="my-10">
+     <p className="my-5">
      <h2 className="text-center roboto-black text-4xl capitalize">{t('our_services')}</h2>
      <h5 className="text-center roboto-light text-lg md:text-base lg:text-xl">{t('discover_our_services')}</h5>
      </p>
@@ -77,7 +77,7 @@ const {t}=useTranslation()
      <section className="flex mb-5 justify-center">
      <article className='grid grid-cols-1 md:gap-14 lg:gap-14 place-content-center lg:grid-cols-4 md:grid-cols-2  '>
        {
-        service.map((item,index)=>{
+        service.slice(0,4).map((item,index)=>{
           return (
                 <div key={index}>
                         <Cart_Service reveal={{reset:true}}  service={item} />
@@ -91,6 +91,17 @@ const {t}=useTranslation()
      {
       // fin de section services
      }
+
+
+   <section style={{backgroundImage:`url(/img/baner2.png)`}} className="mt-14 img-baner-product  h-60 lg:h-[300px] md:h-96 roboto-regular origin-top relative ">
+       <div className="h-full w-full text-white backdrop-brightness-75 flex flex-col items-center justify-center ">
+          <p className="text-center roboto-medium  text-2xl p-2 lg:w-1/2">
+          <span className="roboto-medium-italic">"</span> {t("motivation")} <span className="roboto-medium-italic">"</span> <br /> <span className="roboto-light pt-2">- Walt Disney</span>
+          </p>
+        
+       </div>
+    </section>
+
     </div>
     
   )

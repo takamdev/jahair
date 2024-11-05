@@ -14,6 +14,7 @@
     "services":"servizi",
     "products":"prodotti",
     "faq":"FAQ",
+    "discover_services":"scopri i nostri servizi",
 
     "payment_method":"Metodo di pagamento",
     "customer_services":"Servizi al cliente",
@@ -71,8 +72,9 @@
     "postal_code":"Codice postale",
     "address":"Indirizzo",
     "popular_payment":"Opzioni di pagamento più diffuse",
-    "pay_now":"Paga ora"
-
+    "pay_now":"Paga ora",
+    "motivation":"Non siamo in affari solo per fare affari, ma per creare clienti soddisfatti.",
+    "motivation_footer":"Rivelate la vostra bellezza interiore con le nostre parrucche eleganti e confortevoli. Offriamo una gamma di soluzioni per capelli su misura per le vostre esigenze, senza compromettere la qualità o l'ambiente."
 
 
 

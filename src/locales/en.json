@@ -44,7 +44,7 @@
     "discover_our_services":"Discover the most popular services on our site!",
     "our_products":"our products",
     "welcome":"<h1 className='lg:text-5xl italic text-white text-center  w-full'><span className='font-serif'  style='color: #ff66c4;' >WELCOME  TO</span>  @yourplacetobeby</h1><h2 className='uppercase lg:top-60 lg:text-5xl  text-white my-10 text-center w-full'>jahairstyle, so’lashes <br /> &  <br /> makeup artist</h2>",
-
+    "discover_services":"discover our services",
     "picture":"Picture",
     "action":"Action",
     "prize":"prize",
@@ -71,7 +71,9 @@
     "postal_code":"postal code",
     "address":"Address",
     "popular_payment":"Popular payment",
-    "pay_now":"Pay now"
+    "pay_now":"Pay now",
+    "motivation":"We're not in business simply to do business, but to create satisfied customers.",
+    "motivation_footer":"Reveal your inner beauty with our elegant, comfortable wigs. We offer a range of hair solutions tailored to your needs, without compromising on quality or the environment."
 
 
     

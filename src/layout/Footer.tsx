@@ -13,10 +13,10 @@ function Footer() {
     <footer className="h-3/4 text-neutral-700 pb-5 bottom-0  bg-neutral-200">
        <section className="flex flex-col-reverse lg:flex-row lg:justify-center  mx-5 py-16 h-5/6">
 
-          <article className="flex flex-col mt-3 ">
+          <article className="flex flex-col mt-1 ">
             <img src={setting.logo} className="h-14 lg:mx-5 w-28" alt="logo" /> 
             <p className=" w-80 lg:mx-5 my-5">
-              {t("desc_site")}
+              {t("motivation_footer")} 
             </p>
             <div className='text-neutral-500 flex gap-10 mx-5'>
               <a className="scale-150 " href={setting.social_links.facebook}><BsFacebook /></a>
