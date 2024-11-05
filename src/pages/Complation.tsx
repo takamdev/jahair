@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import useStore from '../store';
 const stripePromise =loadStripe(process.env.PUBLIC_KEY as string);
 
-function Completion(props:any) {
+function Completion() {
   const [ messageBody, setMessageBody ] = useState<any>('');
   const resetCart = useStore(state=>state.resetCart)
   useEffect(() => {
