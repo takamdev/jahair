@@ -58,7 +58,7 @@ function Init_payment() {
 
     const [activeVue, setActiveVue]=useState<boolean[]>([true,false])
 
-    const [methode,setMethode]=useState<string>('paypal')
+    const [methode,setMethode]=useState<string>('card')
 
     const navigation = useNavigate()
 
@@ -210,7 +210,7 @@ const onSubmit = (data:info) => {
 
                                           <div className="border-[1px] cursor-pointer flex items-center  rounded-t-md p-4  ">
                                             <p className="flex cursor-pointer  items-center gap-2">
-                                            <Radio className="cursor-pointer" theme={radiotheme} id="paypal" name="methode" value="paypal"  defaultChecked onChange={(e)=>{setMethode(e.target.value)}} />
+                                            <Radio className="cursor-pointer" theme={radiotheme} id="paypal" name="methode" value="paypal"   onChange={(e)=>{setMethode(e.target.value)}} />
                                             <Label className="cursor-pointer" htmlFor="paypal">Paypal</Label>
                                             </p>
 
@@ -221,7 +221,7 @@ const onSubmit = (data:info) => {
                                           </div>
                                           <div className="border-[1px] w-full cursor-pointer flex items-center rounded-b-md p-4 ">
                                             <p className="flex  items-center gap-2">
-                                            <Radio className="cursor-pointer" theme={radiotheme} id="card" name="methode" value="card" onChange={(e)=>{setMethode(e.target.value)}}  />
+                                            <Radio className="cursor-pointer" theme={radiotheme} id="card" name="methode" value="card" defaultChecked onChange={(e)=>{setMethode(e.target.value)}}  />
                                             <Label htmlFor="card" className="cursor-pointer">Options de paiment populaires</Label>
                                             </p>
 

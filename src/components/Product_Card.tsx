@@ -64,7 +64,7 @@ return ()=>{
           
           </p>
         </div>
-        <p className="text-slate-600 leading-normal font-light">
+        <p className="text-slate-600 h-20 leading-normal font-light">
           {
             desc[i18n.language as keyof typeof desc].length<114 ?desc[i18n.language as keyof typeof desc]:desc[i18n.language as keyof typeof desc].slice(0,114)
           }
