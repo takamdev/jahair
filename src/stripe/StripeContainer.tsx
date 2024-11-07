@@ -52,9 +52,7 @@ function StripeContainer({amount,email}:{amount:number,email:string}) {
       currency:setting.symbole_devise==="$"?"usd":"eur"
     }
     axios.post(`https://backend-jahairstyle.vercel.app/api/create-payment-intent`,data).then(res=>{
-     const getSecret = res.data.clientSecret
-     console.log(getSecret);
-     
+     const getSecret = res.data.clientSecret     
      setClientSecret(getSecret)
     }).catch(err=>{console.log(err.data);
     })

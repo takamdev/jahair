@@ -6,6 +6,7 @@ const stripePromise =loadStripe(process.env.PUBLIC_KEY as string);
 function Completion() {
   const [ messageBody, setMessageBody ] = useState<any>('');
   const resetCart = useStore(state=>state.resetCart)
+  /*
   useEffect(() => {
     resetCart([])
     if (!stripePromise) return;
@@ -20,13 +21,11 @@ function Completion() {
         )
     });
   }, [stripePromise]);
-
+*/
   return (
-    <>
-      <h1>Thank you!</h1>
-      <a href="/">home</a>
-      <div id="messages" role="alert" style={messageBody ? {display: 'block'} : {}}>{messageBody}</div>
-    </>
+    <main className='mt-14'>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quaerat blanditiis ab velit dolor? Illum blanditiis saepe explicabo aperiam a accusantium. Facere unde quia nesciunt. Debitis magni placeat nam pariatur.
+    </main>
   );
 }
 

@@ -1,6 +1,7 @@
 import {LinkAuthenticationElement, PaymentElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 
 const CheckoutForm = ({email}:{email:string}) => {
@@ -8,6 +9,7 @@ const CheckoutForm = ({email}:{email:string}) => {
   const elements = useElements();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {t} =useTranslation()
+  const navigateTo = useNavigate()
   const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -19,16 +21,19 @@ const CheckoutForm = ({email}:{email:string}) => {
 
     setIsLoading(true);
 
-      await stripe.confirmPayment({
+     const confirm = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/completion`,
-      },
+      redirect:'if_required'
     });
 
-    setIsLoading(false);
+    console.log(confirm);
     
+/*
+    if(confirm.paymentIntent?.status==="succeeded") {
+      navigateTo("payment-succeeded")
+      setIsLoading(false);
+    }
+    */
   }
   return (
    <>

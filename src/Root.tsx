@@ -106,7 +106,7 @@ function Root() {
             },
             {
                
-               path: "completion",
+               path: "init-payment/payment-succeeded",
                element: <Completion />,
             },
          ],
