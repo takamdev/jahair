@@ -23,14 +23,7 @@ const CheckoutForm = ({email}:{email:string}) => {
 
      const confirm = await stripe.confirmPayment({
       elements,
-<<<<<<< HEAD
       redirect:'if_required'
-=======
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/init-payment/paymant-success`,
-      },
->>>>>>> main
     });
     if(confirm.paymentIntent?.status==="succeeded") {
 

@@ -80,6 +80,9 @@ function Init_payment() {
       } = useForm({
         resolver: yupResolver(schema),
       })
+      useEffect(()=>{
+        window.scrollTo({top:0,  behavior: 'smooth'});
+      },[activeVue])
     
 useEffect(()=>{
    axios.get('https://ipapi.co/json/').then(res=>{

@@ -106,11 +106,7 @@ function Root() {
             },
             {
                
-<<<<<<< HEAD
                path: "init-payment/payment-succeeded",
-=======
-               path: "init-payment/paymant-success",
->>>>>>> main
                element: <Completion />,
             },
          ],
