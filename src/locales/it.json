@@ -71,6 +71,8 @@
     "fullname":"Nome completo",
     "postal_code":"Codice postale",
     "address":"Indirizzo",
+    "failed_payment":"Ci scusiamo per l'inconveniente, stiamo effettuando dei lavori di manutenzione. Si prega di contattare <a className='underline hover:text-rose-400' href='/contact'>jahair</a> per ulteriori informazioni.",
+    "success_payment":"pagamento andato a buon fine grazie per la fiducia in ",
     "popular_payment":"Opzioni di pagamento più diffuse",
     "pay_now":"Paga ora",
     "motivation":"Non siamo in affari solo per fare affari, ma per creare clienti soddisfatti.",

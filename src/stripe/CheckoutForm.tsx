@@ -25,8 +25,11 @@ const CheckoutForm = ({email}:{email:string}) => {
       elements,
       redirect:'if_required'
     });
-    console.log(confirm.paymentIntent?.status);
     if(confirm.paymentIntent?.status==="succeeded") {
+
+     // envoie d'email de validation au client
+
+
       navigateTo(`payment-succeeded?id=${confirm.paymentIntent.id}&amount=${confirm.paymentIntent.amount}&currency=${confirm.paymentIntent.currency}&status=${confirm.paymentIntent.status}`)
       setIsLoading(false);
     }

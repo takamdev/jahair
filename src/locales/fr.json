@@ -28,6 +28,9 @@
     "starting_from":"A parti de",
     "client_reviews":"avis clents",
     "make_appointment":"demander un rendez vous",
+    "success_payment":"paiement réussi merci de faire confiance à  ",
+    "failed_payment":"Désolé pour la gêne occasionnée, nous effectuons des travaux de maintenance. Vous pouvez contacter <a className='underline hover:text-rose-400' href='/contact'>jahair</a> pour plus d'informations",
+
 
     "size":"taille",
     "choose_an_option":"Choisir une option",
