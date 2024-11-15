@@ -33,8 +33,11 @@ const schema = yup
 
 export default function Modal({open,onClose,setData}:{open:boolean,onClose(value: boolean): void,setData(value: React.SetStateAction<type_service[]>):void}) {
 
-    const [fileSelect,setFileSelect]=useState<(string|undefined)>("")
+    const [fileSelect,setFileSelect]=useState<(string[]|undefined)>([])
+    const [imgSelect,setImgSelect]=useState<string>("")
     const refInputImg = useRef<HTMLInputElement>(null)
+    const refInputVideo = useRef<HTMLInputElement>(null)
+
 
     const [load , setLoad]=useState(false)
     const {
@@ -47,50 +50,60 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
     })
     const resetFrom = ()=>{
       reset()
-      setFileSelect("") 
+      setFileSelect([]) 
         refInputImg.current!.value =""
+        refInputVideo.current!.value =""
+
+
 
       
     }
     const onSubmit = async (data:formData) =>{
-    //verifier si les images sont charger et recuperer les urls locals
-     if(fileSelect !== ""){
+    //verifier si les fichiers sont charger et recuperer les urls locals
+     if(fileSelect?.length !== 0 && imgSelect?.length!==0){
       setLoad(true)
-      let url: string = "";
-      try {
-        const res = await addFile(fileSelect!, "image/webp");
-          url=res
-      } catch (err) {
-        console.error(err);
-      }
-     
+      const url: string[] = [];
+      let img =  ""
+
+      // envoie des fichiers et recuperaation des urls de partage sur firebase
+     for (const element of fileSelect as string[]) {
+      const res = await addFile(element, "video/mp4");
+      console.log(res);
+      
+      url.push(res)
+     }
+     img = await addFile(imgSelect as string, "image/webp")
+    // fin d'envoie de fichiers sur firebase
 
 
-      // construit le produit
+        // construit le produit
         const service = {
-            name: data.name,
-            prize: data.prize,
-            img: url,
-            rating:4,
-            desc:data.desc
-        } 
-        //ajout du produit et recuperation de l'id
-        addCollection("service",service).then(res=>{
-          
-          const Service = {
-            id:res.id,
-            ...service
-          } 
-          //mise a jour du tableau dans le dom
-          setData((v)=>([...v,Service]))
-          //reinitialisation des champ
-          setLoad(false)
-          resetFrom()
-        }).catch(err=>console.error(err)
-        )
+          name: data.name,
+          prize: data.prize,
+          video: url,
+          rating:4,
+          desc:data.desc,
+          img: img
+      } 
+      //ajout du produit et recuperation de l'id
+      addCollection("service",service).then(res=>{
         
+        const Service = {
+          id:res.id,
+          ...service
+        } 
+        //mise a jour du tableau dans le dom
+        setData((v)=>([...v,Service]))
+        //reinitialisation des champ
+        setLoad(false)
+        resetFrom()
+      }).catch(err=>console.error(err)
+      )
+    
+   
+
      }else{
-       toast.warning("entrez l'image",{
+       toast.warning("entrez les videos",{
         className:"text-red-600"
        })
      }
@@ -100,24 +113,53 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
     
 // transformer les fichier en liste de url fichier
 const getURLFile = (files:FileList | null)=>{
-   
-    
-  // verification de type
-  const type = files?.[0].type;
- 
-  if(type==="image/webp"){
-   // creation de l'url file
-   const url_name = URL.createObjectURL(files![0])+ " "+files![0].name.replace(/ /g, '');
-   setFileSelect(url_name)
+     // parcourie l'objet file
+     for (const cle in files) {      
+     
+      
+      if(files[parseInt(cle)].type==="video/mp4"&&fileSelect?.length as number <=4){
+      
+        const url_name = URL.createObjectURL(files[parseInt(cle)])+ " "+files[parseInt(cle)].name
 
-  }else{
-        toast.success("seul les images au format webp sont accepter",{
-            className:"text-green-500"
-          })
+        
+      // verifier si le fichier existe
+        const isexiste = fileSelect?.find(item=>item.split(' ')[1]===url_name.split(' ')[1])
+
+            if(fileSelect!== undefined && fileSelect.length<=3 && isexiste===undefined){
+                const a = [...fileSelect,url_name]
+                setFileSelect(a)
+            }
+      }else if(files[parseInt(cle)].type==="image/webp"&&fileSelect?.length as number ===0){
+        const url_name = URL.createObjectURL(files[parseInt(cle)])+ " "+files[parseInt(cle)].name
+        setImgSelect(url_name)
+      }else{
+
+
+       if(files[parseInt(cle)].type==="video/*"){
+        toast.warning("seul les videos au format mp4 sont accepter ",{
+          className:"text-green-500"
+        })
+       } else if(files[parseInt(cle)].type==="image/*"){
+        toast.warning("seul les images au format webp  sont accepter ou ",{
+          className:"text-green-500"
+        })
+       }else{
+        toast.warning("seul les images ou videos sont acceptés",{
+          className:"text-green-500"
+        })
+       }
+        
     
  
   }
+      }
     
+    
+}
+
+const removeInSelect = (name:string)=>{
+  const newFiles = fileSelect?.filter(file=>file!==name)
+  setFileSelect(newFiles)
 }
 
 
@@ -150,17 +192,31 @@ const getURLFile = (files:FileList | null)=>{
                      <label className='labelClass' htmlFor="prize">Prix</label>
                      <input {...register("prize")} className={errors.prize?borderColor:"inputClass"} type="text" id='prize' />
 
-                     <label className='labelClass flex items-center gap-2' htmlFor="img">Photo<AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
-                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputImg} type="file"  accept="image/webp" id='img' className='hidden' />
-                      <div id='img' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
+                     <label className='labelClass flex items-center gap-2' htmlFor="video">Videos<AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
+                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputVideo} type="file"   accept="video/mp4" multiple = {true} id='video' className='hidden' />
+                      <div id='video' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
                       { 
-                        fileSelect!.length>0?(
-
-                           <span onClick={()=>{setFileSelect("")}} className='mx-1  flex gap-0 items-center'>{fileSelect!.split(' ')[1].slice(0,15)} <CgRemove className="text-red-500 text-2xl z-50" /></span>
+                        fileSelect?.length as number >0?(
+                          
+                          
+                          fileSelect?.map(file=>{
+                             
+                             return  <span onClick={()=>{removeInSelect(file)}} className='mx-1  flex gap-0 items-center'>{file.split(' ')[1].slice(0,15)} <CgRemove className="text-red-500 text-2xl z-50" /></span>
+                          }) 
                          ):""
                         
                       }
                       </div>
+
+                      <label className='labelClass flex items-center gap-2' htmlFor="img">Photo<AiOutlinePlusCircle className="text-green-500 text-xl" /></label>
+                     <input  onChange={(e)=>{getURLFile(e.target.files)}} ref={refInputImg} type="file"   accept="image/webp" id='img' className='hidden' />
+                      <div id='img' className='w-full grid grid-cols-2 gap-4 overflow-y-scroll border-solid border-2 bg-slate-100  p-2 outline-none  rounded-sm h-12'>
+                        {
+                          imgSelect.length!==0&&<span onClick={()=>{setImgSelect('')}} className='mx-1  flex gap-0 items-center'>{imgSelect?.split(' ')[1].slice(0,15)} <CgRemove className="text-red-500 text-2xl z-50" /></span>
+
+                        }
+                      </div>
+
                       <label className='labelClass' htmlFor="desc">Description</label>
                       <textarea {...register("desc")} className={errors.desc?borderColor+'h-20 resize-none':"textareaClass"} id="desc"></textarea>
                       <button disabled={load} className="btn px-4 py-2  rounded-lg" type="submit">
