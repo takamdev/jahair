@@ -54,11 +54,13 @@ export function OffCanvasCart({isOpen,setIsOpen}:{setIsOpen(value:boolean):void,
 const carttiltle = Cart.map(item=>{
   return {...item,title:{fr:item.title.split(",")[0],en:item.title.split(",")[1],it:item.title.split(",")[2]}}
  })
+ 
  const resetCart = useStore(state=>state.resetCart)
 const handleClose = () => setIsOpen(false);
 const setting = useStore(state=>state.setting)
 
 const {i18n,t} = useTranslation()
+
 const removeQte = (item:typeof carttiltle[0])=>{
   if(item.qte!>1){
     const newCart = Cart.map(element=>{
@@ -68,6 +70,8 @@ const removeQte = (item:typeof carttiltle[0])=>{
   }
  
 }
+
+
 const addQte =(item:typeof carttiltle[0])=>{
   if(item.qte! <5){
     const newCart = Cart.map(element=>{

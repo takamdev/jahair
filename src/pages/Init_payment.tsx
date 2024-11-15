@@ -92,7 +92,7 @@ useEffect(()=>{
      const isdelivery = country.find(item=>item.code===res.data.country)
       setDefaultCountry(isdelivery?.code as string)
 
-      if(isdelivery===undefined) setDefaultCountry('FR')
+      if(!isdelivery) setDefaultCountry('FR')
       
    }).catch(err=>console.log(err))
 },[])

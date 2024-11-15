@@ -73,6 +73,8 @@ useEffect(()=>{
                 taille:res.taille
               }
               setProduct(itemProduct)
+              console.log(itemProduct);
+              
               getAllCollection("avis").then(res=>{
                const newAvis = res.docs.map(doc=>doc.data() as type_avis)
 
@@ -102,7 +104,7 @@ const addToCart = ()=>{
   
   
   const isExiste = Cart.find(item=>item.id===product?.id)
-  if(isExiste===undefined){
+  if(!isExiste){
     if(product)  addCart({...product,qte:qte})
     
   }else{
@@ -171,7 +173,7 @@ getAllCollection('avis').then( async res=>{
    };
    try {
       const res = await editDoc(data);
-      if (res.success === true) {
+      if (res.success) {
         setSubmiting(false) 
         reset()
         SetAvis((v)=>([avis,...v!]))
@@ -224,7 +226,7 @@ if(load){
                  // debut division de carousel
             }   
           <div className=" md:h-auto p-1 lg:h-full">
-            <FeaturedImageGallery/>
+            <FeaturedImageGallery img={product?.img as string[]}/>
          </div>
          {
               // fin division de carousel

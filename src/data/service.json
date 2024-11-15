@@ -1,28 +1,25 @@
 [
     {
-        "img":"/img/coup1.webp",
         "name":"Coupe Cheveux Tres Long",
         "rating":4,
         "prize":45,
         "id":"kll",
-        "video":"sffsfsf",
+        "video":["sffsfsf"],
         "desc":"fsfsfs"
     },
     {
-        "img":"/img/coup2.webp",
         "name":"Coupe Cheveux Tres Long",
         "rating":4,
         "prize":45,
         "id":"kll",
-        "video":"",
+        "video":[""],
         "desc":""
     },
     {
-        "img":"/img/coup3.webp",
         "name":"Coupe Cheveux Tres Long",
         "rating":4,
         "prize":45,
-        "video":"",
+        "video":[""],
         "id":"kll",
         "desc":""
     }

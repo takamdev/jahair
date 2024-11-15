@@ -60,7 +60,8 @@ function Service_item() {
               prize: res.prize,
               img: res.img,
               desc: res.desc,
-              rating:res.rating===undefined ? 4:res.rating
+              rating:res.rating===undefined ? 4:res.rating,
+              video:res.video
             }
                 setService(itemService)
                 getAllCollection("avis").then(res=>{
@@ -124,7 +125,7 @@ getAllCollection('avis').then( async res=>{
    };
    try {
       const res = await editDoc(data);
-      if (res.success === true) {
+      if (res.success) {
         setSubmiting(false) 
         reset()
         SetAvis((v)=>([avis,...v!]))
@@ -177,7 +178,7 @@ const name = {
                    // debut division de carousel
               }   
             <div className="md:h-auto p-1 lg:h-full">
-              <FeaturedVideoGallery/>
+              <FeaturedVideoGallery videos={service?.video as string[]}/>
            </div>
            {
                 // fin division de carousel
