@@ -39,13 +39,14 @@ function Service() {
               id: element.id,
               name:element.data().name,
               prize: element.data().prize,
-              img: element.data().img,
+              video: element.data().video,
               desc: element.data().desc,
               rating:element.data().rating===undefined ? 4:element.data().rating
             }
             return itemProduct
            })
-
+         console.log(data);
+         
            setData(data);
            setLoad(false)
        }).catch(err=>{
@@ -92,8 +93,8 @@ function Service() {
          if (result.success === true) {
             const newData = data.filter((item) => item.id !== id);
             setData(newData);
-            const images = data.find(item=>item.id===id)?.img
-            deleteFile([images!])
+            const video = data.find(item=>item.id===id)?.video
+            deleteFile(video!)
          }
       } catch (error) {
          console.log(error);
@@ -167,17 +168,32 @@ function Service() {
                                     </td>
                                  );
                               if (index === 4)
+                                 
                                  return (
-                                    <td className="f" key={cell.id}>
-                                       <div className="flex items-center">
-                                          <img
-                                             src={row.original.img}
-                                             width={50}
-                                             alt="tof"
+                                    <td  key={cell.id}>
+                                       <div className="flex  items-center">
+                                          <video
+                                             src={row.original.video[0]}
+                                             width={30}
+                                            autoPlay
+                                            muted
                                           />
                                        </div>
                                     </td>
                                  );
+
+                                 if (index === 5)
+                                 
+                                    return (
+                                       <td  key={cell.id}>
+                                          <div className="flex  items-center">
+                                             <img
+                                                src={row.original.img}
+                                              width={50}
+                                             />
+                                          </div>
+                                       </td>
+                                    );
 
                               return (
                                  <td className="" key={cell.id}>

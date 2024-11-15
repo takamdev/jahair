@@ -20,8 +20,12 @@ return [
     header: "Prix",
     footer: info => info.column.id,
   }),
+  columnHelper.accessor('video', {
+    header: 'Video',
+    footer: info => info.column.id,
+  }),
   columnHelper.accessor('img', {
-    header: 'Images',
+    header: 'Image',
     footer: info => info.column.id,
   })
 ]
