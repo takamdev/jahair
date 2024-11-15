@@ -100,7 +100,7 @@ function Product() {
       };
       try {
          const result = await deleteDocById(refs);
-         if (result.success === true) {
+         if (result.success) {
             const newData = data.filter((item) => item.id !== id);
             setData(newData);
 
@@ -132,7 +132,7 @@ function Product() {
          };
          try {
             const res = await editDoc(data);
-            if (res.success === true) setUpload(false);
+            if (res.success) setUpload(false);
          } catch (error) {
             console.log(error);
          }
