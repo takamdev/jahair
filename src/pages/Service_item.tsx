@@ -141,7 +141,7 @@ getAllCollection('avis').then( async res=>{
 
 
   const MakeAppointment = ()=>{
-    navigateTo(`/service/request-appointment/${id}`)
+    navigateTo(`/service/request-appointment/${id}`,{unstable_viewTransition:true})
   }
 
 

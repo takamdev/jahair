@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
-function SearchBar() {
+function SearchBar({closeDialog}:{closeDialog?:(state:boolean)=>void}) {
   const [value,setValue]=useState("")
   const navigateTo = useNavigate()
     const searchToggle = ()=>{
-       if(value.trim().length!==0) navigateTo(`/search/results?value=${value.split(" ").join('+')}`)
+
+       if(value.trim().length!==0) {
+         if(closeDialog){
+          closeDialog(false)
+          navigateTo(`/search/results?value=${value.split(" ").join('+')}`,{unstable_viewTransition:true})
+         }
+         navigateTo(`/search/results?value=${value.split(" ").join('+')}`,{unstable_viewTransition:true})
+       }
     }
   return (
       <div className="search-holder text-black inline -mt-2">

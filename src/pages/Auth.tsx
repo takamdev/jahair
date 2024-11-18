@@ -99,7 +99,7 @@ return ()=>{
          })
 
          Cookies.set('token', token, { expires: 1 });
-         navigateTo(`dashboard/${token}`)
+         navigateTo(`dashboard/${token}`,{unstable_viewTransition:true})
          setLoad(false)
         } 
          else {

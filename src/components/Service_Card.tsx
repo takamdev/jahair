@@ -22,7 +22,7 @@ function Card({service,className,reveal}:{service:type_service,className?:string
     const ref = useRef(null)
     const navigate=useNavigate()
     const MakeAppointment = ()=>{
-      navigateTo(`/service/request-appointment/${id}`)
+      navigateTo(`/service/request-appointment/${id}`,{unstable_viewTransition:true})
     }
 
 useEffect(()=>{

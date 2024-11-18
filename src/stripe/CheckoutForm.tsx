@@ -30,7 +30,7 @@ const CheckoutForm = ({email}:{email:string}) => {
      // envoie d'email de validation au client
 
 
-      navigateTo(`payment-succeeded?id=${confirm.paymentIntent.id}&amount=${confirm.paymentIntent.amount}&currency=${confirm.paymentIntent.currency}&status=${confirm.paymentIntent.status}`)
+      navigateTo(`payment-succeeded?id=${confirm.paymentIntent.id}&amount=${confirm.paymentIntent.amount}&currency=${confirm.paymentIntent.currency}&status=${confirm.paymentIntent.status}`,{unstable_viewTransition:true})
       setIsLoading(false);
     }
     

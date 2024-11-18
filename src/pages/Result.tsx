@@ -11,7 +11,6 @@ function Result() {
     const produits = useStore(state=>state.product)
     const [data,setData]=useState<any>(undefined)
     const {t} =useTranslation()
-
 useEffect(()=>{
  const url = new URL(window.location.href)   
  const value = url.searchParams.get("value")?.split('+') as string[]

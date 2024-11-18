@@ -112,7 +112,7 @@ function Header() {
                      {t(item.name)}
                     </NavLink>
                   ))}
-                     <SearchBar/>
+                     <SearchBar closeDialog={setMobileMenuOpen}/>
                 </div>
                 {
                 !location.pathname.includes('payment') && <div className="py-6">
