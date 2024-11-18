@@ -19,6 +19,7 @@ import Service_item from "./pages/Service_item";
 import RequestAppointment from "./pages/RequestAppointment";
 import Init_payment from "./pages/Init_payment";
 import Completion from "./pages/Complation";
+import Result from "./pages/Result";
 
 function Root() {
    const route = createBrowserRouter([
@@ -108,6 +109,11 @@ function Root() {
                
                path: "init-payment/payment-succeeded",
                element: <Completion />,
+            },
+            {
+               
+               path: "search/results",
+               element: <Result />,
             },
          ],
       },

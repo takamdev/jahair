@@ -76,8 +76,8 @@
     "failed_payment":"Sorry for the inconvenience, we are carrying out maintenance work. Please contact <a className='underline hover:text-rose-400' href='/contact'>jahair</a> for further information.",
 
     "motivation":"We're not in business simply to do business, but to create satisfied customers.",
-    "motivation_footer":"Reveal your inner beauty with our elegant, comfortable wigs. We offer a range of hair solutions tailored to your needs, without compromising on quality or the environment."
-
+    "motivation_footer":"Reveal your inner beauty with our elegant, comfortable wigs. We offer a range of hair solutions tailored to your needs, without compromising on quality or the environment.",
+    "no_fount_search":"NO RESULTS FOUND"
 
     
 }
