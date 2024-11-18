@@ -12,7 +12,6 @@ function SearchBar({closeDialog}:{closeDialog?:(state:boolean)=>void}) {
          }
          navigateTo(`/search/results?value=${value.split(" ").join('+')}`,{unstable_viewTransition:true})
        }
-       if(value.trim().length!==0) window.location.href=`/search/results?value=${value.split(" ").join('+')}`
     }
   return (
       <div className="search-holder text-black inline -mt-2">
