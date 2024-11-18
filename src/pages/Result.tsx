@@ -5,25 +5,27 @@ import { type_service } from "../types/type_service";
 import CardService from "../components/Service_Card";
 import CardPorduct from "../components/Product_Card";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 function Result() {
     const services = useStore(state=>state.service)
     const produits = useStore(state=>state.product)
     const [data,setData]=useState<any>(undefined)
     const {t} =useTranslation()
-useEffect(()=>{
- const url = new URL(window.location.href)   
- const value = url.searchParams.get("value")?.split('+') as string[]
-    value.forEach(element=>{
-        const find_data_in_products = produits.filter(item=>item.title.includes(element)) 
-        const find_data_in_services = services.filter(item=>item.name.includes(element)) 
+    const location = useLocation()
+    useEffect(()=>{
+    const url = new URL(window.location.href)   
+    const value = url.searchParams.get("value")?.split('+') as string[]
+        value.forEach(element=>{
+            const find_data_in_products = produits.filter(item=>item.title.toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
+            const find_data_in_services = services.filter(item=>item.name.toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
 
-       if(find_data_in_products.length!==0)setData(find_data_in_products)
-         else if (find_data_in_services.length!==0)setData(find_data_in_services)
-       if(find_data_in_products.length!==0 && find_data_in_services.length!==0) setData([...find_data_in_services,...find_data_in_products])
-            else if(find_data_in_products.length===0 && find_data_in_services.length===0) setData(null)
-    })
-},[])
+          if(find_data_in_products.length!==0)setData(find_data_in_products)
+            else if (find_data_in_services.length!==0)setData(find_data_in_services)
+          if(find_data_in_products.length!==0 && find_data_in_services.length!==0) setData([...find_data_in_services,...find_data_in_products])
+                else if(find_data_in_products.length===0 && find_data_in_services.length===0) setData(null)
+        })
+    },[location])
 
 if(data===null){
     return (
