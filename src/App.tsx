@@ -117,6 +117,7 @@ const getData = async ()=>{
           prize: element.data().prize,
           img: element.data().img,
           desc: element.data().desc,
+          video:element.data().video,
           rating:element.data().rating===undefined ? 4:element.data().rating
         }
         return itemService

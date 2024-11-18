@@ -9,6 +9,7 @@ import navigation from './../data/navigation.json'
 import { OffCanvasCart } from "./OffCanvas";
 import SelectLanguage from "../components/SelectLanguage";
 import { useTranslation } from "react-i18next";
+import SearchBar from "../components/SearchBar";
 function Header() {
   const {t} = useTranslation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -49,11 +50,11 @@ function Header() {
           </div>
           <div className="hidden lg:flex  lg:gap-x-12">
             {navigation.map((item) => (
-              <NavLink key={item.name} to={item.href} className="text-sm transition hover:text-rose-400  font-semibold leading-6 text-gray-900">
+              <NavLink key={item.name} to={item.href} className="text-sm transition hover:text-[#ff66c4da]  font-semibold leading-6 text-gray-900">
                 {t(item.name)}
               </NavLink>
             ))}
-           
+            <SearchBar/>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end me-7">
           {
@@ -111,7 +112,7 @@ function Header() {
                      {t(item.name)}
                     </NavLink>
                   ))}
-                   
+                     <SearchBar/>
                 </div>
                 {
                 !location.pathname.includes('payment') && <div className="py-6">

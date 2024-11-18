@@ -11,7 +11,7 @@
 }
 .active{
    
-  @apply text-rose-400 ;
+    color: #ff66c4da;;
     text-decoration: underline;
     text-underline-offset: 5px;
     text-decoration-thickness: 3.5px; /* ajustez la valeur selon vos besoins */
@@ -290,3 +290,14 @@
   font-style: italic;
 }
 
+
+
+.search-input{
+  border:none;
+   @apply bg-slate-200;
+  border-radius: 15px;
+
+}
+.search-holder {
+  position: relative;
+}
