@@ -5,7 +5,7 @@ function SearchBar() {
   const [value,setValue]=useState("")
   const navigateTo = useNavigate()
     const searchToggle = ()=>{
-       if(value.trim().length!==0) navigateTo(`/search/results?value=${value.split(" ").join('+')}`)
+       if(value.trim().length!==0) window.location.href=`/search/results?value=${value.split(" ").join('+')}`
     }
   return (
       <div className="search-holder text-black inline -mt-2">
