@@ -5,6 +5,7 @@ function SearchBar({closeDialog}:{closeDialog?:(state:boolean)=>void}) {
   const [value,setValue]=useState("")
   const navigateTo = useNavigate()
     const searchToggle = ()=>{
+<<<<<<< HEAD
 
        if(value.trim().length!==0) {
          if(closeDialog){
@@ -13,6 +14,9 @@ function SearchBar({closeDialog}:{closeDialog?:(state:boolean)=>void}) {
          }
          navigateTo(`/search/results?value=${value.split(" ").join('+')}`,{unstable_viewTransition:true})
        }
+=======
+       if(value.trim().length!==0) window.location.href=`/search/results?value=${value.split(" ").join('+')}`
+>>>>>>> 4afdef6a6b2e59c28771c4c000cb55554c36d95d
     }
   return (
       <div className="search-holder text-black inline -mt-2">
