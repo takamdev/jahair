@@ -3,7 +3,6 @@ import  { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, useLocation } from 'react-router-dom'
-import { Link } from "react-router-dom";
 import useStore from "../store";
 import navigation from './../data/navigation.json'
 import { OffCanvasCart } from "./OffCanvas";
