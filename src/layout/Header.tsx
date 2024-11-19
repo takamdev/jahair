@@ -17,7 +17,6 @@ function Header() {
   const [isOpen,setIsOpen]=useState(false)
   const location = useLocation()
  const setting = useStore(state=>state.setting)
-  const cartLink = "#"
   const Cart = useStore((state)=>state.Cart)
   window.addEventListener('scroll',()=>{
     if(window.scrollY>10) setshadow("shadow-lg")
@@ -59,19 +58,19 @@ function Header() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end me-7">
           {
             !location.pathname.includes('payment') &&
-            <Link to={cartLink} onClick={()=>{setIsOpen(!isOpen)}} className="text-sm relative container-icon  font-semibold leading-6 text-gray-900 scale-150">
+            <p onClick={()=>{setIsOpen(!isOpen)}} className="text-sm relative container-icon  font-semibold leading-6 text-gray-900 scale-150">
               <span className="icon absolute -top-3 -right-5 text-gray-500">({Cart.length})</span>
               <FaShopify className="scale-150" />
-            </Link>
+            </p>
           
           }
          </div>
            <SelectLanguage className="hidden lg:block ms-4 "/>
            {
-            !location.pathname.includes('payment') &&  <Link to={cartLink} onClick={()=>{setIsOpen(!isOpen)}} className="text-sm lg:hidden absolute right-24 container-icon  font-semibold leading-6 text-gray-900 scale-125">
+            !location.pathname.includes('payment') &&  <p onClick={()=>{setIsOpen(!isOpen)}} className="text-sm lg:hidden absolute right-24 container-icon  font-semibold leading-6 text-gray-900 scale-125">
             <span className="icon absolute -top-3 -right-5 text-gray-500">({Cart.length})</span>
             <FaShopify className="scale-150" />
-          </Link>
+          </p>
            }
            
         </nav>
@@ -116,14 +115,14 @@ function Header() {
                 </div>
                 {
                 !location.pathname.includes('payment') && <div className="py-6">
-                      <Link
-                        to={cartLink}
+                      <p
+                        
                         onClick={()=>{setIsOpen(!isOpen)}}
                         className="-mx-3 inline lg:block relative container-icon  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-black hover:bg-gray-50"
                       >
                       <span className="icon absolute top-5 -right-6  text-gray-500">({Cart.length})</span>
                       <FaShopify className="scale-150 " />
-                      </Link>
+                      </p>
                     </div>
                 }
                
