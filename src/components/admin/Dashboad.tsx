@@ -243,7 +243,7 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
                       </td>
 
                       <td className="px-6 py-4">
-                         <input value={setting.livrason_option} onChange={(e)=>{editePropertie("livrason_option",e.target.value)}} maxLength={15} placeholder="Options d'expédition" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
+                         <input value={setting.livrason_option} onChange={(e)=>{editePropertie("livrason_option",e.target.value)}}  placeholder="Options d'expédition" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
                       </td>
 
                       <td className="px-6 py-4">

@@ -64,6 +64,9 @@ function Init_payment() {
 
     const [dataForm,setDataForm]=useState<info|null>(null)
 
+    //const optionlist = setting.livrason_option.split('&')
+
+
     const [defaultCountry,setDefaultCountry] = useState<string|null>(null)
 
     const carttiltle = Cart.map(item=>{
@@ -85,6 +88,10 @@ function Init_payment() {
       },[activeVue])
     
 useEffect(()=>{
+  
+
+
+
    axios.get('https://ipapi.co/json/').then(res=>{
     
     // verifier si la livarson est disponible pour le pays
