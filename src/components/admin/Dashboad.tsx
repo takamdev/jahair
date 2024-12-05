@@ -9,16 +9,17 @@ import { addFile } from "../../firebase/addFile";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editDoc } from "../../firebase/editDoc";
 import { deleteFile } from "../../firebase/deleteFile";
+import { type_setting } from "../../types/type_setting";
 function Dashboad() {
 
-  const CurrentSetting = useStore((state)=>state.setting)
-  const setCurrentSetting=useStore(state=>state.setSetting)
+  const currentSetting = useStore((state)=>state.setting)
+
+  const [setting,setSetting] = useState<type_setting>(useStore((state)=>state.setting))
   const [openModal, setOpenModal] = useState(false);
   const [openModalConfirm, setOpenModalConfirm] = useState(false);
   const refInputPicture = useRef<HTMLInputElement>(null)  
   const refInputLogo = useRef<HTMLInputElement>(null)
   const refInputWelcom = useRef<HTMLInputElement>(null)
-  const AboutDoc = useRef<HTMLInputElement>(null)  
   const privacy_policyDoc = useRef<HTMLInputElement>(null)
   const terms_conditionsDoc = useRef<HTMLInputElement>(null)  
   const faqDoc = useRef<HTMLInputElement>(null)
@@ -38,17 +39,16 @@ const updateCollection= async ()=>{
   setLoad(true)
   // rensemblement des liens de  fichiers
   const fileLink = [
-{url_name:CurrentSetting.profile_admin,type:"image/webp",key:"profile_admin"},
-{type:"image/webp",url_name:CurrentSetting.logo,key:"logo"},
-{url_name:CurrentSetting.img_welcome,type:"image/web",key:"img_welcome"},
-{url_name:CurrentSetting.about_us,type:"application/pdf",key:"about_us"},
-{url_name:CurrentSetting.privacy_policy,type:"application/pdf",key:"privacy_policy"},
-{url_name:CurrentSetting.terms_conditions,type:"application/pdf",key:"terms_conditions"},
-{url_name:CurrentSetting.faq,type:"application/pdf",key:"faq"}
+{url_name:setting.profile_admin,type:"image/webp",key:"profile_admin"},
+{type:"image/webp",url_name:setting.logo,key:"logo"},
+{url_name:setting.img_welcome,type:"image/web",key:"img_welcome"},
+{url_name:setting.privacy_policy,type:"application/pdf",key:"privacy_policy"},
+{url_name:setting.terms_conditions,type:"application/pdf",key:"terms_conditions"},
+{url_name:setting.faq,type:"application/pdf",key:"faq"}
     
   ]
 
-  let settingUpdate = CurrentSetting
+  let settingUpdate = setting
   //envoie des fichiers
   for(const item of fileLink){
       if(item.url_name!==""){
@@ -65,14 +65,44 @@ const updateCollection= async ()=>{
 //modification de parametre
 const ref = {
   collection_name:"setting",
-  id_doc:CurrentSetting.id,
+  id_doc:setting.id,
   data:settingUpdate
 }
 
- editDoc(ref).then(()=>{
+ editDoc(ref).then( async ()=>{
     setLoad(false)
-    const images = fileLink.map(item=>item.url_name)
-    deleteFile(images)
+    const files = fileLink.map(item=>item.url_name)// parametre charger dans les inputs
+
+    // verifier si les fichier ont été modifier
+
+    const currentFile = [ // parametre actuelle
+      {url_name:currentSetting.profile_admin,type:"image/webp",key:"profile_admin"},
+      {type:"image/webp",url_name:currentSetting.logo,key:"logo"},
+      {url_name:currentSetting.img_welcome,type:"image/web",key:"img_welcome"},
+      {url_name:currentSetting.privacy_policy,type:"application/pdf",key:"privacy_policy"},
+      {url_name:currentSetting.terms_conditions,type:"application/pdf",key:"terms_conditions"},
+      {url_name:currentSetting.faq,type:"application/pdf",key:"faq"}
+          
+        ]
+
+    const fileToDelete = files.map((item,index)=>{
+
+      if(currentFile[index].url_name===item){
+         return 
+        
+      }
+        else {
+          return currentFile[index].url_name
+          
+        }
+  
+    }).filter(item=>item!==undefined)
+   
+    
+    
+    // suppression de fichiers
+   await deleteFile(fileToDelete)
+
   }).catch(err=>{
     console.log(err);
     setLoad(false)
@@ -97,15 +127,15 @@ const convertObjectToArray = (object:{[key:string]: string})=>{
   const editePropertie = (key:string,value:string,links?:boolean)=>{
     // si la proprieté a modifier est liens
     if(links){
-      const newSetting = {...CurrentSetting,social_links:{
-        ...CurrentSetting.social_links,
+      const newSetting = {...setting,social_links:{
+        ...setting.social_links,
         [key]:value
       }}
-      setCurrentSetting(newSetting)
+      setSetting(newSetting)
     }else{
       
-      const newSetting={...CurrentSetting,[key]:value}
-      setCurrentSetting(newSetting)
+      const newSetting={...setting,[key]:value}
+      setSetting(newSetting)
     }
    
   }
@@ -150,7 +180,7 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">réseaux sociaux</h3>
             <div className="flex flex-col  ">
               {
-               convertObjectToArray(CurrentSetting.social_links).map((item)=>{
+               convertObjectToArray(setting.social_links).map((item)=>{
                
                const key_liste = Object.keys(item) 
                const key =key_liste[0]
@@ -201,50 +231,47 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td className="px-6 py-4">
                           <input ref={refInputPicture} onChange={(e)=>{getURLFile(e.target.files,"profile_admin")}} type="file" accept="image/webp"/>
-                          <div id='img' onClick={()=>{focusInput(refInputPicture)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${CurrentSetting.profile_admin.length===0?"":"text-green-400"}`}>
+                          <div id='img' onClick={()=>{focusInput(refInputPicture)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${setting.profile_admin.length===0?"":"text-green-400"}`}>
                             photo admin<AiOutlineArrowDown />
                           </div>
                       </td>
                       <td className="px-6 py-4">
                           <input onChange={(e)=>{getURLFile(e.target.files,"logo")}} ref={refInputLogo}  type="file" accept="image/webp"/>
-                          <div onClick={()=>{focusInput(refInputLogo)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${CurrentSetting.logo.length===0?"":"text-green-400"}`}>
+                          <div onClick={()=>{focusInput(refInputLogo)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${setting.logo.length===0?"":"text-green-400"}`}>
                             logo<AiOutlineArrowDown />
                           </div>
                       </td>
 
                       <td className="px-6 py-4">
-                          <input onChange={(e)=>{getURLFile(e.target.files,"about_us")}} ref={AboutDoc}  type="file" accept="application/pdf"/>
-                          <div onClick={()=>{focusInput(AboutDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${CurrentSetting.about_us.length===0?"":"text-green-400"}`}>
-                            a propos<AiOutlineArrowDown />
-                          </div>
+                         <input value={setting.livrason_option} onChange={(e)=>{editePropertie("livrason_option",e.target.value)}} maxLength={15} placeholder="Options d'expédition" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
                       </td>
 
                       <td className="px-6 py-4">
                           <input onChange={(e)=>{getURLFile(e.target.files,"privacy_policy")}} ref={privacy_policyDoc}  type="file" accept="application/pdf"/>
-                          <div onClick={()=>{focusInput(privacy_policyDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${CurrentSetting.privacy_policy.length===0?"":"text-green-400"}`}>
+                          <div onClick={()=>{focusInput(privacy_policyDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${setting.privacy_policy.length===0?"":"text-green-400"}`}>
                           Politique de confidentialité<AiOutlineArrowDown />
                           </div>
                       </td>
                       <td className="px-6 py-4">
                           <input onChange={(e)=>{getURLFile(e.target.files,"terms_conditions")}} ref={terms_conditionsDoc}  type="file" accept="application/pdf"/>
-                          <div onClick={()=>{focusInput(terms_conditionsDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${CurrentSetting.terms_conditions.length===0?"":"text-green-400"}`}>
+                          <div onClick={()=>{focusInput(terms_conditionsDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${setting.terms_conditions.length===0?"":"text-green-400"}`}>
                           condition général d'utilisation<AiOutlineArrowDown />
                           </div>
                       </td>
                       <td className="px-6 py-4">
                           <input onChange={(e)=>{getURLFile(e.target.files,"faq")}} ref={faqDoc}  type="file" accept="application/pdf"/>
-                          <div onClick={()=>{focusInput(faqDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${CurrentSetting.faq.length===0?"":"text-green-400"}`}>
+                          <div onClick={()=>{focusInput(faqDoc)}} id='img' className={` cursor-pointer  flex items-center    rounded-sm h-8 ${setting.faq.length===0?"":"text-green-400"}`}>
                             FAQ<AiOutlineArrowDown />
                           </div>
                       </td>
                   </tr>
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td className="px-6 py-4">
-                         <input value={CurrentSetting.admin_name} onChange={(e)=>{editePropertie("admin_name",e.target.value)}} maxLength={15} placeholder="nom d'admin" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
+                         <input value={setting.admin_name} onChange={(e)=>{editePropertie("admin_name",e.target.value)}} maxLength={15} placeholder="nom d'admin" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="text"/>
                       </td>
                       <td className="py-4">
                         <label htmlFor="money" className=" me-2">devise de vente</label> 
-                        <select id="money" className="className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400'" value={CurrentSetting.symbole_devise} onChange={(e)=>{editePropertie("symbole_devise",e.target.value)}} >
+                        <select id="money" className="className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400'" value={setting.symbole_devise} onChange={(e)=>{editePropertie("symbole_devise",e.target.value)}} >
                           <option value="$">dollar</option>
                           <option value="€">euro</option>
                         </select>
@@ -254,16 +281,16 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
                       </td>
 
                       <td className="ps-6 py-4">
-                        <textarea  cols={20}  value={CurrentSetting.desc_site} onChange={(e)=>{editePropertie("desc_site",e.target.value)}}  placeholder="petite description du site" className='border py-1 ps-1 text-sm  focus:ring-0 resize-none overflow-y-scroll  rounded-lg focus:border-2 focus:border-rose-400' />
+                        <textarea  cols={20}  value={setting.desc_site} onChange={(e)=>{editePropertie("desc_site",e.target.value)}}  placeholder="petite description du site" className='border py-1 ps-1 text-sm  focus:ring-0 resize-none overflow-y-scroll  rounded-lg focus:border-2 focus:border-rose-400' />
                       </td>
                       <td className="ps-14 py-4">
                       <input ref={refInputWelcom} onChange={(e)=>{getURLFile(e.target.files,"img_welcome")}} type="file" accept="image/webp"/>
-                          <div id='img' onClick={()=>{focusInput(refInputWelcom)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${CurrentSetting.img_welcome.length===0?"":"text-green-400"}`}>
+                          <div id='img' onClick={()=>{focusInput(refInputWelcom)}} className={` cursor-pointer  flex items-center  rounded-sm h-8 ${setting.img_welcome.length===0?"":"text-green-400"}`}>
                             image welcome<AiOutlineArrowDown />
                           </div> 
                       </td>
                       <td className="pe-5 py-4">
-                         <input value={CurrentSetting.email_site} onChange={(e)=>{editePropertie("email_site",e.target.value)}}  placeholder="email du site" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="email"/>
+                         <input value={setting.email_site} onChange={(e)=>{editePropertie("email_site",e.target.value)}}  placeholder="email du personnel" className='border py-1 ps-1 focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400' type="email"/>
                       </td>
                   </tr>
               </tbody>
@@ -287,11 +314,4 @@ const focusInput = (ref:React.RefObject<HTMLInputElement>)=>{
   )
 }
 
-/*
-function Input({placeholder,setSetting,key}:{placeholder:string,key:string,setSetting:(value:string,key:string)=>void}){
-  const [value,setValue]=useState("")
-  return(
-    <input  type="text" placeholder={placeholder} onBlur={()=>{setSetting(value,key)}} onChange={(e)=>{setValue(e.target.value)}} className="border py-1   focus:ring-0  rounded-lg focus:border-2 focus:border-rose-400" value={value} />
-  )
-}*/
 export default Dashboad

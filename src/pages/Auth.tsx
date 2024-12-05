@@ -84,7 +84,6 @@ return ()=>{
        // si admin 
        admin.forEach(doc=>{
         const getAdmin = doc.data()
-         console.log(getAdmin);
          
         const isvalid = bcrypt.compareSync(data.password, getAdmin.password);
        

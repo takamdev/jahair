@@ -6,7 +6,7 @@ export type type_setting = {
         faq:string,
         privacy_policy:string,
         terms_conditions:string,
-        about_us:string,
+        livrason_option:string,
         logo:string,
         social_links:{
         whatsapp:string,

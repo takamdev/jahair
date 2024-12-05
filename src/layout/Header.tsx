@@ -57,7 +57,7 @@ function Header() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end me-7">
           {
             !location.pathname.includes('payment') &&
-            <p onClick={()=>{setIsOpen(!isOpen)}} className="text-sm relative container-icon  font-semibold leading-6 text-gray-900 scale-150">
+            <p onClick={()=>{setIsOpen(!isOpen)}} className="text-sm cursor-pointer relative container-icon  font-semibold leading-6 text-gray-900 scale-150">
               <span className="icon absolute -top-3 -right-5 text-gray-500">({Cart.length})</span>
               <FaShopify className="scale-150" />
             </p>

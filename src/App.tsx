@@ -46,7 +46,7 @@ const getData = async ()=>{
         faq:element.data().faq,
         privacy_policy:element.data().privacy_policy,
         terms_conditions:element.data().terms_conditions,
-        about_us:element.data().about_us,
+        livrason_option:element.data().livrason_option,
         logo:element.data().logo,
         social_links:{
             whatsapp:element.data().social_links.whatsapp,
