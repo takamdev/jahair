@@ -11,7 +11,7 @@
 }
 .active{
    
-    color: #ff66c4da;;
+    color: #ff66c4da;
     text-decoration: underline;
     text-underline-offset: 5px;
     text-decoration-thickness: 3.5px; /* ajustez la valeur selon vos besoins */
