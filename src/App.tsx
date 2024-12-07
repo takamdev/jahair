@@ -174,8 +174,8 @@ if(acceptCookies==="true") setRequestCookies(true)
           )
         }
         {
-          !requetCookies && <div className='bg-black w-full opacity-80 text-white roboto-bold  text-center lg:h-16 h-24 fixed  bottom-20 lg:bottom-0'>
-          <p className='my-5'>{t("request_cookies_action")}<button onClick={setAuthorization}  className='border border-white py-1 px-2 mx-2'>{t("accept")}</button> <a className='btn p-2' href="/terms-and-conditions">{t('Find_out_more')}</a> </p>
+          !requetCookies && <div className='bg-black w-full opacity-80 text-white roboto-bold  text-center lg:h-16 h-auto fixed  bottom-20 lg:bottom-0'>
+          <p className='my-5'>{t("request_cookies_action")}<button onClick={setAuthorization}  className='border border-white py-1 px-2 mx-2'>{t("accept")}</button> <a className='btn p-2 mt-2 block w-48 mx-auto lg:mt-0 lg:inline' href="/terms-and-conditions">{t('Find_out_more')}</a> </p>
         </div>
         }
         
