@@ -81,7 +81,7 @@ setRequestCookies(true)
   useEffect(()=>{
     setLoad(true)//loading
     getData()
-
+    Cookies.set("authaurisation_value","false")
     const promesses = [
       getAllCollection("product"),
       getAllCollection("service")
@@ -164,7 +164,7 @@ if(acceptCookies==="true") setRequestCookies(true)
   
                 <Footer/>
                 <SelectLanguage className='lg:hidden fixed bottom-7 left-3 overflow-y-scroll'/>
-                <a target='blank' href={`https://wa.me/${setting.social_links.whatsapp.trim()}`} className="fixed w-12 bottom-7 right-3  md:w-16 md:bottom-7 md:right-7">
+                <a target='blank' href={`https://wa.me/${setting.social_links.whatsapp.replace(/ /g,"")}`} className="fixed w-12 bottom-7 right-3  md:w-16 md:bottom-7 md:right-7">
                   <img src="/logo_whatsapp.svg"  alt="whatsapp" />
                 </a>
             </>
@@ -174,7 +174,7 @@ if(acceptCookies==="true") setRequestCookies(true)
           )
         }
         {
-          !requetCookies && <div className='bg-black opacity-80 text-white roboto-bold  text-center h-16 fixed w-full bottom-0'>
+          !requetCookies && <div className='bg-black w-full opacity-80 text-white roboto-bold  text-center lg:h-16 h-24 fixed  bottom-20 lg:bottom-0'>
           <p className='my-5'>{t("request_cookies_action")}<button onClick={setAuthorization}  className='border border-white py-1 px-2 mx-2'>{t("accept")}</button> <a className='btn p-2' href="/terms-and-conditions">{t('Find_out_more')}</a> </p>
         </div>
         }
