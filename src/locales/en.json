@@ -77,7 +77,11 @@
 
     "motivation":"We're not in business simply to do business, but to create satisfied customers.",
     "motivation_footer":"Reveal your inner beauty with our elegant, comfortable wigs. We offer a range of hair solutions tailored to your needs, without compromising on quality or the environment.",
-    "no_fount_search":"NO RESULTS FOUND"
+    "no_fount_search":"NO RESULTS FOUND",
+    "request_cookies_action":"We use cookies to track usage and preferences.",
+    "accept":"I agree",
+    "Find_out_more":"Find out more"
+
 
     
 }

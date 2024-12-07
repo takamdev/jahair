@@ -2,7 +2,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './layout/Header'
 import Footer from './layout/Footer'
-
 import { useEffect, useState } from 'react'
 import useStore from './store'
 import { getAllCollection } from './firebase/getCollections'
@@ -13,6 +12,8 @@ import { type_setting } from './types/type_setting'
 import Load from './layout/Load'
 import { type_service } from './types/type_service'
 import SelectLanguage from './components/SelectLanguage'
+import Cookies from "js-cookie"
+import { useTranslation } from 'react-i18next'
 
 function App() {
   const location = useLocation()
@@ -22,6 +23,8 @@ function App() {
   const setting = useStore(state=>state.setting)
   const setProduct = useStore((state)=>(state.setProduct))
   const setService = useStore(state=>state.setService)
+  const [requetCookies,setRequestCookies]=useState(false)
+   const {t}=useTranslation()
   useEffect(()=>{
   
     if(location.pathname.includes("admin")) setter(false)
@@ -68,6 +71,12 @@ const getData = async ()=>{
     
   }
 }
+const setAuthorization = ()=>{
+Cookies.set("authaurisation_value","true",{ expires: 1 })
+setRequestCookies(true)
+
+}
+
 
   useEffect(()=>{
     setLoad(true)//loading
@@ -129,6 +138,13 @@ const getData = async ()=>{
    ).finally(()=>{
     setLoad(false)
    })
+
+
+const acceptCookies = Cookies.get('authaurisation_value') as string
+
+if(acceptCookies==="true") setRequestCookies(true)
+  else setRequestCookies(false)
+
   },[])
 
   if(load){
@@ -157,7 +173,12 @@ const getData = async ()=>{
             null
           )
         }
-     
+        {
+          !requetCookies && <div className='bg-black opacity-80 text-white roboto-bold  text-center h-16 fixed w-full bottom-0'>
+          <p className='my-5'>{t("request_cookies_action")}<button onClick={setAuthorization}  className='border border-white py-1 px-2 mx-2'>{t("accept")}</button> <a className='btn p-2' href="/terms-and-conditions">{t('Find_out_more')}</a> </p>
+        </div>
+        }
+        
       </main>
     )
   }

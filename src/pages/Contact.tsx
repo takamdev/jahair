@@ -10,6 +10,7 @@ import ScrollReveal from 'scrollreveal'
 import useStore from "../store"
 import { useTranslation } from "react-i18next"
 import '../i18n'; // Assure-toi d'importer la configuration i18n
+import axios from "axios"
 
 type info = {
   fistname:string,
@@ -36,7 +37,7 @@ function Contact() {
   const ref = useRef(null)
   const setting = useStore(state=>state.setting)
 useEffect(()=>{
-  setLoad(false)//inutil
+
   ScrollReveal().reveal(ref.current||"", {
     duration: 1000,
     distance:"100px",
@@ -58,7 +59,25 @@ return ()=>{
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data:info) => console.log(data)
+  const onSubmit = (data:info) => {
+    setLoad(true)
+    const body = {
+      html:`<p>bonjour ${data.lastname}</p> `,
+      subjet:"message d'un client de jahairstyle",
+      email:setting.email_site
+    }
+
+    axios.post(process.env.baseURL+"/api/sendmail",body).then(res=>{
+      console.log(res.data);
+     
+
+      
+    }).catch(errors=>console.log(errors)
+    ).finally(()=>{
+      setLoad(false)
+
+    })
+  }
 
   return (
     <div className="container my-14 lg:my-48 h-full mx-auto">

@@ -8,6 +8,7 @@ import useStore from "../store"
 import { useTranslation } from "react-i18next"
 import '../i18n'; // Assure-toi d'importer la configuration i18n
 import { type_service } from "../types/type_service"
+import axios from "axios"
 
 type info = {
   fistname:string,
@@ -45,6 +46,7 @@ function RequestAppointment() {
   
   const {id}=useParams()
   const [serviceName,setServiceName] = useState<serviceName>()
+  const setting = useStore(state=>state.setting)
   const [load,setLoad]=useState(false)
   const ref = useRef(null)
 useEffect(()=>{
@@ -80,7 +82,25 @@ return ()=>{
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data:info) => console.log(data)
+  const onSubmit = (data:info) =>{
+    setLoad(true)
+    const body = {
+      html:`<p>bonjour ${data.lastname}</p> `,
+      subjet:`demande d'un rendez-vous pour le service ${serviceName!==undefined&&serviceName.fr}`,
+      email:setting.email_site
+    }
+
+    axios.post(process.env.baseURL+"/api/sendmail",body).then(res=>{
+      console.log(res.data);
+     
+
+      
+    }).catch(errors=>console.log(errors)
+    ).finally(()=>{
+      setLoad(false)
+
+    })
+  }
 
   return (
     <div className="container my-14 lg:my-24 h-full mx-auto">
