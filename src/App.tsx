@@ -81,7 +81,6 @@ setRequestCookies(true)
   useEffect(()=>{
     setLoad(true)//loading
     getData()
-    Cookies.set("authaurisation_value","false")
     const promesses = [
       getAllCollection("product"),
       getAllCollection("service")
