@@ -17,7 +17,8 @@ type info = {
   postcode:string
   adresse:string,
   city:string,
-  date:Date
+  date:Date,
+  phone:string
 }
 
 type serviceName = {
@@ -75,6 +76,7 @@ return ()=>{
 
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -85,20 +87,53 @@ return ()=>{
   const onSubmit = (data:info) =>{
     setLoad(true)
     const body = {
-      html:`<p>bonjour ${data.lastname}</p> `,
-      subjet:`demande d'un rendez-vous pour le service ${serviceName!==undefined&&serviceName.fr}`,
+      html:`
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+     
+
+      <main className="container">
+         <h1 className="title">${data.lastname} ${data.fistname} démande un rendez-vous</h1>
+
+         <div className="contain">
+         <h2>bonjour prisca!</h2>
+
+           ${data.lastname} démande un rendez-vous pour <b>${serviceName!==undefined&&serviceName.fr}</b>
+           <br> <br>
+
+          <b>Address</b>: ${data.adresse} <br>
+          <b>Ville</b>: ${data.city} <br>
+           <b>Code Postal</b>: ${data.postcode} <br>
+           <b>Téléphone</b>: ${data.phone} <br>
+
+           la date de rendez-vous souhaité est: <h3>${data.date}</h3>
+
+         </div>
+
+        <button style="margin-top: 15px;" className="btn"> <a className="link" href="mailto:${data.email}">répondre</a></button>
+      </main>
+   </body>
+</html>
+
+      `,
+      subjet:`demande d'un rendez-vous pour ${serviceName!==undefined&&serviceName.fr}`,
       email:setting.email_site
     }
 
-    axios.post(process.env.baseURL+"/api/sendmail",body).then(res=>{
-      console.log(res.data);
+    axios.post(process.env.baseURL+"/api/sendmail",body).then(()=>{
      
 
       
     }).catch(errors=>console.log(errors)
     ).finally(()=>{
       setLoad(false)
-
+      reset()
     })
   }
 

@@ -305,7 +305,7 @@ if(load){
                                 <span><a href={`https://www.facebook.com/sharer.php?u=${window.location.href}`} target="_blank"><BsFacebook className="scale-150"/></a></span>
                                 <span><a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank"><FaXTwitter className="scale-150" /></a></span>
                                 <span><a href={`https://wa.me/?text=${window.location.href}`} target="_blank"><BsWhatsapp className="scale-150" /></a></span>
-                                <span><a href={`mailto:?subject=${product?.title}&body=${window.location.href}`} target="_blank"><AiOutlineMail className="scale-150" /></a></span>
+                                <span><a href={`mailto:?subject=${title[i18n.language as keyof typeof title]}&body=${window.location.href}`} target="_blank"><AiOutlineMail className="scale-150" /></a></span>
                             
                             </p>
                         </div>

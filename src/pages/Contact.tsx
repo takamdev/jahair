@@ -55,6 +55,7 @@ return ()=>{
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   })
@@ -62,8 +63,28 @@ return ()=>{
   const onSubmit = (data:info) => {
     setLoad(true)
     const body = {
-      html:`<p>bonjour ${data.lastname}</p> `,
-      subjet:"message d'un client de jahairstyle",
+      html:`
+      <!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Contact</title>
+   </head>
+   <body>
+
+      <main className="container">
+         <h1 className="title">${data.lastname} ${data.fistname} vous a envoyé un message</h1>
+
+         <div className="contain">
+           ${data.message}
+         </div>
+        <a style="margin-top: 15px;" className="link" href="mailto:${data.email}">répondre</a>
+      </main>
+   </body>
+</html>
+      `,
+      subjet:"client de jahairstyle",
       email:setting.email_site
     }
 
@@ -74,6 +95,7 @@ return ()=>{
       
     }).catch(errors=>console.log(errors)
     ).finally(()=>{
+      reset()
       setLoad(false)
 
     })
