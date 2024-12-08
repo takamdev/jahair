@@ -46,12 +46,12 @@ function StripeContainer({amount,email}:{amount:number,email:string}) {
   }
 
   
-  useEffect(()=>{
+  useEffect(()=>{    
      const data = {
       amount:amount,
       currency:setting.symbole_devise==="$"?"usd":"eur"
     }
-    axios.post(process.env.baseURL+`/api/create-payment-intent`,data).then(res=>{
+    axios.post(`${process.env.baseURL}/api/create-payment-intent`,data).then(res=>{
      const getSecret = res.data.clientSecret     
      setClientSecret(getSecret)
     }).catch(err=>{console.log(err.data);

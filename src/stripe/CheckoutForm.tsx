@@ -2,6 +2,7 @@ import {LinkAuthenticationElement, PaymentElement, useElements, useStripe} from 
 import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 
 const CheckoutForm = ({email}:{email:string}) => {
@@ -32,6 +33,18 @@ const CheckoutForm = ({email}:{email:string}) => {
 
       navigateTo(`payment-succeeded?id=${confirm.paymentIntent.id}&amount=${confirm.paymentIntent.amount}&currency=${confirm.paymentIntent.currency}&status=${confirm.paymentIntent.status}`,{unstable_viewTransition:true})
       setIsLoading(false);
+    }else{
+       
+      if(confirm.error?.code==="card_declined") {
+        toast.warning("carte refusé essaiyer avec une autre carte ou une autre methode",{className:"text-red-500"})
+        setIsLoading(false);
+
+      }else{
+        toast.warning("essaiyer une autre carte ou une autre methode",{className:"text-red-500"})
+        setIsLoading(false);
+      }
+      
+      
     }
     
   }
