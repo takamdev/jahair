@@ -79,6 +79,7 @@ setRequestCookies(true)
 
 
   useEffect(()=>{
+    
     setLoad(true)//loading
     getData()
     const promesses = [

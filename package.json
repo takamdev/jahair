@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node generateSitemap.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:sitemap": "node generateSitemap.js"
   },
   "dependencies": {
     "@google-cloud/local-auth": "2.1.0",
@@ -28,6 +29,7 @@
     "firebase": "^10.13.2",
     "flowbite-react": "^0.10.2",
     "framer-motion": "^11.11.0",
+    "fs": "0.0.1-security",
     "html-react-parser": "^5.1.18",
     "i18next": "^23.16.2",
     "js-cookie": "^3.0.5",
@@ -40,6 +42,7 @@
     "react-router-dom": "^6.26.2",
     "react-table": "^7.8.0",
     "scrollreveal": "^4.0.9",
+    "sitemap": "^8.0.0",
     "sonner": "^1.5.0",
     "ts-node": "^10.9.2",
     "yup": "^1.4.0",
