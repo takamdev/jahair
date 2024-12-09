@@ -3,13 +3,15 @@ import { type_testimonials } from "../../types/type_testimonials";
 import { getAllCollection } from "../../firebase/getCollections";
 import { editDoc } from "../../firebase/editDoc";
 import {Popover } from "flowbite-react";
+import Load from "../../layout/Load";
 
 
 function Testimonials() {
   const [data, setData] = useState<type_testimonials[]>([]);
-
+  const [load,setLoad]=useState(false)
 
   useEffect(()=>{
+    setLoad(true)
    getAllCollection('testimonials').then(res=>{
    const testimonials:type_testimonials[] = res.docs.map(element=>{
       return{
@@ -23,6 +25,7 @@ function Testimonials() {
       }
     })
     setData(testimonials)
+    setLoad(false)
    })
   },[])
 
@@ -57,7 +60,7 @@ function Testimonials() {
 
 
   }
-
+  if(load) return <Load/>
   return (
     <div className='bg-white mx-auto h-full p-4 mt-6'>
        {data.length === 0 ? (
