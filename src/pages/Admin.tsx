@@ -1,6 +1,6 @@
+import { MdOutlineReviews } from "react-icons/md"; 
 import { FaHandSparkles } from "react-icons/fa"; 
 import { SiFuturelearn } from "react-icons/si"; 
-import { SiApplenews } from "react-icons/si"; 
 import { FaServicestack } from "react-icons/fa"; 
 import { TbBrandProducthunt } from "react-icons/tb"; 
 import { GoKey } from "react-icons/go"; 
@@ -9,7 +9,7 @@ import { useState } from "react";
 import Dashboad from "../components/admin/Dashboad";
 import Product from "../components/admin/Product";
 import Services from "../components/admin/Services";
-import Promote from "../components/admin/Promote";
+import Testimonials from "../components/admin/Testimonials";
 import Income from "../components/admin/Income";
 import { Navigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -19,7 +19,7 @@ const cssClassButtonActive = "btn rounded-lg text-start px-3 py-2 flex gap-2 ite
 const cssClassButtonInactive = "text-slate-500 flex gap-2 items-center text-start px-3 py-2"
 function Admis() {
 
-  const onglet = [<Dashboad/>,<Product/>,<Services/>,<Promote/>,<Income/>]
+  const onglet = [<Dashboad/>,<Product/>,<Services/>,<Testimonials/>,<Income/>]
 
   const {token}=useParams()
   const tokenstore = Cookies.get("token")
@@ -53,7 +53,7 @@ function Admis() {
            <button onClick={()=>{changeCssClassButton(0)}}  className={buttonActive[0]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><GoKey /></span>dashboard</button>
            <button onClick={()=>{changeCssClassButton(1)}}  className={buttonActive[1]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><TbBrandProducthunt /></span>products</button>
            <button onClick={()=>{changeCssClassButton(2)}}  className={buttonActive[2]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><FaServicestack /></span>services</button>
-           <button onClick={()=>{changeCssClassButton(3)}}  className={buttonActive[3]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiApplenews /></span>promote</button>
+           <button onClick={()=>{changeCssClassButton(3)}}  className={buttonActive[3]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><MdOutlineReviews /></span>Testimonials</button>
            <button onClick={()=>{changeCssClassButton(4)}}  className={buttonActive[4]?cssClassButtonActive:cssClassButtonInactive}><span className="border p-1 rounded-lg "><SiFuturelearn /></span>income</button>
           <div className="flex gap-2 mt-auto mb-2">
             <img src={setting.profile_admin} className="object-cover" style={{borderRadius:'100%',height:"50px" ,width:"50px"}} alt="tof" />
