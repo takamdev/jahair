@@ -20,7 +20,6 @@ import { FeaturedVideoGallery } from "../components/Gallery";
 import { useTranslation } from "react-i18next";
 import { type_service } from '../types/type_service';
 import Note_product from "../components/Note_product";
-import Load from "../layout/Load";
 
 
 type info = {

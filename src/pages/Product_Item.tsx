@@ -22,7 +22,6 @@ import { moyenne } from "../helper/mean";
 import { editDoc } from "../firebase/editDoc";
 import { FeaturedImageGallery } from "../components/Gallery";
 import { useTranslation } from "react-i18next";
-import Load from "../layout/Load";
 
 type info = {
   fistname:string,
