@@ -162,7 +162,7 @@ addCollection("testimonials",testimonials).then(()=>{
        </section>
        
         <div className='py-3 lg:p-6 text-sm relative flex items-center flex-col lg:flex-row lg:justify-center lg:gap-1 bordureFooter'>
-          <span> Copyright © 2024 <b className="font-semibold">JAHAIR STYLE</b></span>. <p>All rights reserved Designed by <a target="blank" className="underline text-red-700 font-bold" href="https://takam-loic-junior.vercel.app">Loic Takam</a></p> 
+          <span> Copyright © 2024 <b className="font-semibold">JAHAIRSTYLE</b></span>. <p>All rights reserved Designed by <a target="blank" className="underline text-red-700 font-bold" href="https://takam-loic-junior.vercel.app">Loic Takam</a></p> 
         </div>
     </footer>
   )
