@@ -12,7 +12,7 @@
     "discover_services":"découvrez nos services",
     "home":"Acceuil",
     "about":"A propos",
-    "services":"Servives",
+    "services":"Services",
     "products":"Produits",
     "faq":"FAQ",
 
@@ -87,7 +87,9 @@
     "filter":"filtre",
     "witnessed":"Témoigné",
     "to_support_us":"témoigné pour nous soutenir",
-    "select_photo":"choisir une photo"
+    "select_photo":"choisir une photo",
+    "testimonials":"Testimonianze"
+
 
     
 

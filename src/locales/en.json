@@ -11,7 +11,7 @@
     "invalid_email":"invalid email",
     "home":"Home",
     "about":"About",
-    "services":"Servives",
+    "services":"Services",
     "products":"Products",
     "faq":"FAQ",
     
@@ -86,7 +86,8 @@
     "filter":"filter",
     "witnessed":"Witnessed",
     "to_support_us":"testified in support of us",
-    "select_photo":"select a photo"
+    "select_photo":"select a photo",
+    "testimonials":"Testimonials"
 
 
     
