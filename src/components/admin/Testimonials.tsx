@@ -1,9 +1,11 @@
+import { AiFillDelete } from "react-icons/ai"; 
 import { useEffect, useState } from "react";
 import { type_testimonials } from "../../types/type_testimonials";
 import { getAllCollection } from "../../firebase/getCollections";
 import { editDoc } from "../../firebase/editDoc";
 import {Popover } from "flowbite-react";
 import Load from "../../layout/Load";
+import { deleteDocById } from "../../firebase/deleteDoc";
 
 
 function Testimonials() {
@@ -60,6 +62,18 @@ function Testimonials() {
 
 
   }
+  
+  const deleteTest = async (id:string)=>{
+    try {
+      await deleteDocById({collection_name:"testimonials",id_doc:id})
+      const newData = data.filter(item=>item.id!==id)
+      setData(newData)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   if(load) return <Load/>
   return (
     <div className='bg-white mx-auto h-full p-4 mt-6'>
@@ -78,6 +92,8 @@ function Testimonials() {
                    <th>message</th>
                    <th>photo</th>
                    <th>rendre visible</th>
+                   <th>action</th>
+
                  </tr>
                </thead>
                <tbody className="table-body">
@@ -106,7 +122,15 @@ function Testimonials() {
                         </td>
                         <td> <img src={item.img} style={{borderRadius:"100%",height:"50px",width:"50px"}} alt="photo" /> </td>
                         <td> <input type="checkbox" defaultChecked={item.show} onChange={(e)=>{show(e.target.checked,item.id)}} /> </td>
+                        <td>
 
+                        <AiFillDelete
+                                 onClick={() => {
+                                    deleteTest(item.id);
+                                 }}
+                                 className="scale-150 text-red-600 cursor-pointer"
+                              />
+                        </td>
                       </tr>
                     )
                   })

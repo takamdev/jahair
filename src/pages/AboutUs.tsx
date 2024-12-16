@@ -1,4 +1,5 @@
 import parse from "html-react-parser"
+import { Helmet } from "react-helmet"
 import { useTranslation } from "react-i18next"
 
 const about = {
@@ -220,7 +221,11 @@ const about = {
 function AboutUs() {
   const {i18n} = useTranslation()
   return (
-    parse(about[i18n.language as keyof typeof about])
+    <div>
+      <Helmet> <title>Accueil</title> <meta name="description" content="Bienvenue sur la page apropos de jahairstyle." /> </Helmet>
+      {parse(about[i18n.language as keyof typeof about])}
+    </div>
+    
   )
 }
 

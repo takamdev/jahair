@@ -5,7 +5,7 @@ import { FaServicestack } from "react-icons/fa";
 import { TbBrandProducthunt } from "react-icons/tb"; 
 import { GoKey } from "react-icons/go"; 
 import { TbSettings2 } from "react-icons/tb"; 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dashboad from "../components/admin/Dashboad";
 import Product from "../components/admin/Product";
 import Services from "../components/admin/Services";
@@ -20,12 +20,24 @@ const cssClassButtonInactive = "text-slate-500 flex gap-2 items-center text-star
 function Admis() {
 
   const onglet = [<Dashboad/>,<Product/>,<Services/>,<Testimonials/>,<Income/>]
-
+  const [brouillion,setBrouillion]=useState('')
   const {token}=useParams()
   const tokenstore = Cookies.get("token")
   const [buttonActive,setButtonActive]=useState([true,false,false,false,false])
   const [showOnglet,setShowOnglet]= useState(<Dashboad/>)
   const setting = useStore((state)=>state.setting)
+
+const updatebrouillion = (value:string)=>{
+  setBrouillion(value)
+  localStorage.setItem('brouillion',value)
+}
+
+  useEffect(()=>{
+    const brouillion = localStorage.getItem('brouillion') as string
+    setBrouillion(brouillion)
+
+  },[])
+
 
   const changeCssClassButton = (index:number)=>{
       const newButtonActive = buttonActive.map((item,i)=>{
@@ -42,7 +54,7 @@ function Admis() {
   }
 
   return (
-    <main className='flex text-black mt-8  p-10'>
+    <main className='flex text-black h-[800px] mt-8  p-10'>
       {
         //sibar
       }
@@ -70,6 +82,10 @@ function Admis() {
           {
             showOnglet
           }
+      </div>
+
+      <div className="absolute left-9 -bottom-5 ">
+        <textarea value={brouillion} onChange={(e)=>{updatebrouillion(e.target.value)}} name="brouillion" placeholder="brouillion" className=" bg-slate-200 p-2 focus:ring-0 focus:border-0 border-0 rounded-sm  resize-none" cols={20} rows={5} id="brullon"></textarea>
       </div>
     </main>
   )

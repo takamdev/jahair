@@ -11,7 +11,7 @@ function Card({service,className,reveal}:{service:type_service,className?:string
     const setting = useStore(state=>state.setting)
     const {i18n,t}=useTranslation()
 
-      // recuperation des tradustions
+      // recuperation des traductions
   const prepareTranslate = (object:string)=>{
     return {fr:object.split(",")[0],en:object.split(',')[1],it:object.split(',')[2]}
   }

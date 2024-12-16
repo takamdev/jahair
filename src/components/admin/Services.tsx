@@ -41,11 +41,11 @@ function Service() {
               prize: element.data().prize,
               video: element.data().video,
               desc: element.data().desc,
+              img: element.data().img,
               rating:element.data().rating===undefined ? 4:element.data().rating
             }
             return itemProduct
            })
-         console.log(data);
          
            setData(data);
            setLoad(false)
@@ -81,6 +81,7 @@ function Service() {
       setData(updateData);
    };
 
+console.log(data);
 
    // supprimer un service
    const deleteService = async (id: string) => {
@@ -182,8 +183,7 @@ function Service() {
                                     </td>
                                  );
 
-                                 if (index === 5)
-                                 
+                                 if (index === 5)                                 
                                     return (
                                        <td  key={cell.id}>
                                           <div className="flex  items-center">

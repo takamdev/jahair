@@ -23,12 +23,17 @@ function App() {
   const setting = useStore(state=>state.setting)
   const setProduct = useStore((state)=>(state.setProduct))
   const setService = useStore(state=>state.setService)
-  const [requetCookies,setRequestCookies]=useState(false)
+  const [requetCookies,setRequestCookies]=useState(false)  
+  const [authCookies,setAuthCookies]=useState(false)
+
    const {t}=useTranslation()
   useEffect(()=>{
   
     if(location.pathname.includes("admin")) setter(false)
-      else setter(true)
+      else {
+        localStorage.setItem('brouillion',"")
+        setter(true)
+      }
     
     document.title=`Jahairstyle-${location.pathname === "/" ? "Home":location.pathname.replace('/','')}`
     window.scrollTo({top:0,  behavior: 'smooth'});
@@ -79,7 +84,13 @@ setRequestCookies(true)
 
 
   useEffect(()=>{
-    
+   // Cookies.set("authaurisation_value","false",{ expires: 1 }) // réinitialisation de cookies l'or des testes
+
+    const acceptCookies = Cookies.get('authaurisation_value') as string
+
+    if(acceptCookies==="true") setAuthCookies(true)
+      else setAuthCookies(false)
+
     setLoad(true)//loading
     getData()
     const promesses = [
@@ -140,10 +151,7 @@ setRequestCookies(true)
    })
 
 
-const acceptCookies = Cookies.get('authaurisation_value') as string
 
-if(acceptCookies==="true") setRequestCookies(true)
-  else setRequestCookies(false)
 
   },[])
 
@@ -174,7 +182,7 @@ if(acceptCookies==="true") setRequestCookies(true)
           )
         }
         {
-          !requetCookies && <div className='bg-black w-full opacity-80 text-white roboto-bold  text-center lg:h-16 h-auto fixed  bottom-20 lg:bottom-0'>
+          <div className={`bg-black ${authCookies && "hidden"} ${requetCookies && "showRequetCookies"} w-full opacity-80 text-white roboto-bold  text-center lg:h-16 h-auto fixed  bottom-20 lg:bottom-0`}>
           <p className='my-5'>{t("request_cookies_action")}<button onClick={setAuthorization}  className='border block mx-auto mt-2 border-white py-1 px-2 lg:inline lg:mx-2'>{t("accept")}</button> <a className='btn p-2 mt-2 block w-48 mx-auto lg:mt-0 lg:inline' href="/terms-and-conditions">{t('Find_out_more')}</a> </p>
         </div>
         }

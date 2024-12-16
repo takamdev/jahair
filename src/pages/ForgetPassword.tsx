@@ -10,6 +10,7 @@ import * as yup from "yup"
 import { editDoc } from "../firebase/editDoc"
 import { getAllCollection } from "../firebase/getCollections"
 import  bcrypt  from "bcryptjs";
+import { useLocation, useNavigate } from "react-router-dom";
 const labelClass ="self-start mt-3"
 
 type info = {
@@ -120,7 +121,7 @@ function ResetPassword(){
   const [load,setLoad]=useState(false)
   const [inputType1,setInputType1]=useState('password')
   const [inputType2,setInputType2]=useState('password')
-
+  const navigateTo = useNavigate()
 const {
   register,
   handleSubmit,
@@ -151,7 +152,7 @@ const onSubmit = async (data:info) =>{
  }
   editDoc(params).then(()=>{
     setLoad(false)
-
+    navigateTo('/admin')
   }).catch(err=>console.log(err)
   )
 // takamLOIC25@

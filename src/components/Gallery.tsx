@@ -15,12 +15,12 @@ export function FeaturedImageGallery({img}:{img:string[]}) {
 
  
   return (
-    <div className="grid gap-4">
-      <div>
+    <div className="grid gap-4 mt-16 lg:mt-0">
+      <div className="h-auto">
         <img
-          className=" w-full max-w-full rounded-lg  object-center md:h-[480px]"
+          className=" w-full max-w-full h-auto rounded-lg  object-center md:h-[480px]"
           src={active}
-          alt=""
+          alt="image_gallery"
         />
       </div>
       <div className="grid grid-cols-5 gap-2">
