@@ -10,7 +10,7 @@ import * as yup from "yup"
 import { editDoc } from "../firebase/editDoc"
 import { getAllCollection } from "../firebase/getCollections"
 import  bcrypt  from "bcryptjs";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const labelClass ="self-start mt-3"
 
 type info = {
