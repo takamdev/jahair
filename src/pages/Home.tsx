@@ -69,13 +69,15 @@ useEffect(()=>{
             style={{ backgroundImage: `url(${setting.img_welcome})` }}
             className="mt-14 img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative"
          >
-               <p className=" absolute top-0 py-3 w-full text-center bg-neutral-200 roboto-light-italic text-lg"> 
-              {
+            {  income!==undefined &&  <p className=" absolute top-0 py-3 w-full text-center bg-neutral-200 roboto-light-italic text-lg"> 
+              
 
-               income!==undefined && income![i18n.language as keyof typeof income] 
-              }
-            </p>
-
+                     {  
+                        income![i18n.language as keyof typeof income]
+                     }
+             
+               </p>
+            }
 
             {parse(t("welcome"))}
             <p className="lg:text-2xl italic text-black text-center w-full ">
