@@ -35,11 +35,11 @@ function App() {
         setter(true)
       }
     
-    document.title=`Jahairstyle-${location.pathname === "/" ? "Home":location.pathname.replace('/','')}`
+    document.title=`Jahairstyle | ${location.pathname === "/" ? "Home":location.pathname.replace('/','')}`
     window.scrollTo({top:0,  behavior: 'smooth'});
   },[location.pathname])
 
-
+ 
 //recuperation de parametres
 const getData = async ()=>{
   try {

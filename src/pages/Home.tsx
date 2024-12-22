@@ -16,25 +16,47 @@ export default function Home() {
    const product = useStore((state) => state.product);
    const service = useStore((state) => state.service);
    const [testi,setTesti]= useState<type_testimonials[]|[undefined]>([])
-   const { t } = useTranslation();
-
+   const { t ,i18n } = useTranslation();
+   const [income,setIncome]=useState<{fr:string,en:string,it:string}|undefined>(undefined) 
 // chagement des testimonials
 useEffect(()=>{
-  getAllCollection('testimonials').then(res =>{
-   const t = res.docs.map(item=>{
-     const testimonials:type_testimonials = {
-         name: item.data().name,
-         message:  item.data().message,
-         email:  item.data().email,
-         note:  item.data().note,
-         img:  item.data().img,
-         show:  item.data().show,
-         id: item.id,
-      }
-      return testimonials
-   })
-   setTesti(t)
-  }).catch(err =>console.log(err))
+   const promesses = [
+      getAllCollection("testimonials"),
+      getAllCollection("income")
+    ];
+
+    Promise.all(promesses).then(res =>{
+      // recuperation des témoignages
+      const testimonials = res[0]
+      const t = testimonials.docs.map(item=>{
+        const testimonials:type_testimonials = {
+            name: item.data().name,
+            message:  item.data().message,
+            email:  item.data().email,
+            note:  item.data().note,
+            img:  item.data().img,
+            show:  item.data().show,
+            id: item.id,
+         }
+         return testimonials
+      })
+      setTesti(t)
+
+       // récuperation de l'annonce
+
+     const income = res[1].docs[0].data().income as string
+
+     const t_income = {
+      fr:income.split("&")[0],
+      en:income.split("&")[1],
+      it:income.split("&")[2]
+
+
+     }
+     setIncome(t_income)
+     console.log(t_income);
+     
+     }).catch(err =>console.log(err))
 },[])
 
    return (
@@ -42,10 +64,19 @@ useEffect(()=>{
          <Helmet>
            <meta name="description" content="Reveal your inner beauty with our elegant, comfortable wigs. We offer a range of hair solutions tailored to your needs, without compromising on quality or the environment."/>
          </Helmet>
+       
          <div
             style={{ backgroundImage: `url(${setting.img_welcome})` }}
             className="mt-14 img-welcome w-full  flex flex-col items-center justify-center h-72 lg:h-[700px] md:h-96 roboto-regular origin-top relative"
          >
+               <p className=" absolute top-0 py-3 w-full text-center bg-neutral-200 roboto-light-italic text-lg"> 
+              {
+
+               income!==undefined && income![i18n.language as keyof typeof income] 
+              }
+            </p>
+
+
             {parse(t("welcome"))}
             <p className="lg:text-2xl italic text-black text-center w-full ">
                <Link
