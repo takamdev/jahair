@@ -1,6 +1,6 @@
 import { AiOutlineArrowRight } from "react-icons/ai"; 
 import { AiOutlineArrowDown } from "react-icons/ai"; 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useStore from "../../store"
 import { toast } from "sonner"
 import {Button, Modal } from "flowbite-react";
@@ -10,6 +10,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editDoc } from "../../firebase/editDoc";
 import { deleteFile } from "../../firebase/deleteFile";
 import { type_setting } from "../../types/type_setting";
+import translator from "../../helper/translator";
 function Dashboad() {
 
   const currentSetting = useStore((state)=>state.setting)
@@ -25,7 +26,14 @@ function Dashboad() {
   const faqDoc = useRef<HTMLInputElement>(null)
   const [load,setLoad]=useState(false)
 
+useEffect( ()=>{
 
+  translator("bonjour",'en').then(res=>{
+    console.log(res.text);
+    
+  }).catch(err=>console.log(err)
+  )
+},[])
 
 // transformer social_links en tableau
 
@@ -62,11 +70,48 @@ const updateCollection= async ()=>{
         }
 
   }
+
+  // traduction
+const objetTranslation ={
+  desc_site:settingUpdate.desc_site,
+  livrason_option:settingUpdate.livrason_option
+} 
+
+ const translationToEn =  await translator(objetTranslation,'en')
+ const translationToIt=  await translator(objetTranslation,'it')
+
+
+ const fd = {...settingUpdate,
+  desc_site:{
+    fr:settingUpdate.desc_site,
+    en:translationToEn.desc_site.text,
+    it:translationToIt.desc_site.text
+  },
+  livrason_option:{
+    fr:settingUpdate.livrason_option,
+    en:translationToEn.livrason_option.text,
+    it:translationToIt.livrason_option.text
+  }
+}
+
+ console.log(fd);
+ 
 //modification de parametre
 const ref = {
   collection_name:"setting",
   id_doc:setting.id,
-  data:settingUpdate
+  data:{...settingUpdate,
+    desc_site:{
+      fr:settingUpdate.desc_site,
+      en:translationToEn.desc_site.text,
+      it:translationToIt.desc_site.text
+    },
+    livrason_option:{
+      fr:settingUpdate.livrason_option,
+      en:translationToEn.livrason_option.text,
+      it:translationToIt.livrason_option.text
+    }
+  }
 }
 
  editDoc(ref).then( async ()=>{

@@ -18,6 +18,7 @@ import { getAllCollection } from "../../firebase/getCollections";
 import product from "../../data/product.json"
 import Load from "../../layout/Load";
 import { deleteFile } from "../../firebase/deleteFile";
+import translator from "../../helper/translator";
 const columns = ColumnHelper();
 
 function Product() {
@@ -35,14 +36,14 @@ function Product() {
         const data = res.docs.map(element=>{
           const itemProduct:type_product={
             id: element.id,
-            category:element.data().category,
-            title:element.data().title,
+            category:element.data().category.fr,
+            title:element.data().title.fr,
             prize: element.data().prize,
             img: element.data().img,
             in_stock:element.data().in_stock,
-            desc: element.data().desc,
+            desc: element.data().desc.fr,
             rating:element.data().rating===undefined ? 4:element.data().rating,
-            caracteristique:element.data().caracteristique,
+            caracteristique:element.data().caracteristique.fr,
             taille:element.data().taille
           }
           return itemProduct
@@ -115,7 +116,7 @@ function Product() {
       /**/
    };
 
-   const updateCollection = () => {
+   const updateCollection = async () => {
       setUpload(true);
 
       data.map(async (item) => {
@@ -124,11 +125,48 @@ function Product() {
             //reconvertie en objet
             Object.entries(item).filter(([cle]) => cle !== "id") // transformer un objet en tableau de cle valeur et elemine la cle valeur id
          );
+         // traduction
+        const  objetTranslation = {
+         caracteristique:doc.caracteristique as string,
+         category:doc.category as string,
+         desc:doc.desc as string,
+         title:doc.title as string
 
+        }
+
+       
+         const translationToEn =  await translator(objetTranslation,'en')
+         const translationToIt=  await translator(objetTranslation,'it')
+
+         console.log(translationToIt.desc.text);
+         
+          
          const data = {
             collection_name: "product",
             id_doc: item.id,
-            data: doc,
+            data: {
+               ...doc,
+               caracteristique:{
+                  en:translationToEn.caracteristique.text,
+                  fr:doc.caracteristique,
+                  it:translationToIt.caracteristique.text
+               },
+               category:{
+                  en:translationToEn.category.text,
+                  fr:doc.category,
+                  it:translationToIt.category.text
+               },
+               desc:{
+                  en:translationToEn.desc.text,
+                  fr:doc.desc,
+                  it:translationToIt.desc.text
+               },
+               title:{
+                  en:translationToEn.title.text,
+                  fr:doc.title,
+                  it:translationToIt.title.text
+               }
+            },
          };
          try {
             const res = await editDoc(data);

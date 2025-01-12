@@ -70,7 +70,7 @@ function Init_payment() {
     const [defaultCountry,setDefaultCountry] = useState<string|null>(null)
 
     const carttiltle = Cart.map(item=>{
-        return {...item,title:{fr:item.title.split(",")[0],en:item.title.split(",")[1],it:item.title.split(",")[2]}}
+        return {...item,title:item.title}
     })
 
      const livrason_price = 20

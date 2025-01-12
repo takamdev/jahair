@@ -54,7 +54,7 @@ const getData = async ()=>{
         faq:element.data().faq,
         privacy_policy:element.data().privacy_policy,
         terms_conditions:element.data().terms_conditions,
-        livrason_option:element.data().livrason_option,
+        livrason_option:element.data().livrason_option.fr,
         logo:element.data().logo,
         social_links:{
             whatsapp:element.data().social_links.whatsapp,
@@ -63,7 +63,7 @@ const getData = async ()=>{
             tiktok:element.data().social_links.tiktok,
             twitter:element.data().social_links.twitter,
         },
-        desc_site:element.data().desc_site,
+        desc_site:element.data().desc_site.fr,
         img_welcome:element.data().img_welcome,
         email_site:element.data().email_site,
       }

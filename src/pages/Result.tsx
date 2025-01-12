@@ -11,14 +11,14 @@ function Result() {
     const services = useStore(state=>state.service)
     const produits = useStore(state=>state.product)
     const [data,setData]=useState<any>(undefined)
-    const {t} =useTranslation()
+    const {t,i18n} =useTranslation()
     const location = useLocation()
     useEffect(()=>{
     const url = new URL(window.location.href)   
     const value = url.searchParams.get("value")?.split('+') as string[]
         value.forEach(element=>{
-            const find_data_in_products = produits.filter(item=>item.title.toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
-            const find_data_in_services = services.filter(item=>item.name.toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
+            const find_data_in_products = produits.filter(item=>item.title[i18n.language as keyof typeof item.title].toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
+            const find_data_in_services = services.filter(item=>item.name[i18n.language as keyof typeof item.name].toLocaleLowerCase().includes(element.toLocaleLowerCase())) 
 
           if(find_data_in_products.length!==0)setData(find_data_in_products)
             else if (find_data_in_services.length!==0)setData(find_data_in_services)

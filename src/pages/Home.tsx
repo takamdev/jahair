@@ -44,17 +44,10 @@ useEffect(()=>{
 
        // récuperation de l'annonce
 
-     const income = res[1].docs[0].data().income as string
+     const t_income = res[1].docs[0].data().income 
 
-     const t_income = {
-      fr:income.split("&")[0],
-      en:income.split("&")[1],
-      it:income.split("&")[2]
-
-
-     }
+    
      setIncome(t_income)
-     console.log(t_income);
      
      }).catch(err =>console.log(err))
 },[])

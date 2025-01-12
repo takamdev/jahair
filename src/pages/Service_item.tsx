@@ -146,19 +146,20 @@ getAllCollection('avis').then( async res=>{
 
 
 // description en fonction des langues
-const desc = {
-  fr:service?.desc.split(',')[0],
-  en:service?.desc.split(',')[1],
-  it:service?.desc.split(',')[2]
+const desc = service?.desc as {
+  it:string,
+  en:string,
+  fr:string
 }
 
 
 // titre en fonction des langues
-const name = {
-  fr:service?.name.split(',')[0],
-  en:service?.name.split(',')[1],
-  it:service?.name.split(',')[2]
+const name = service?.name  as {
+  it:string,
+  en:string,
+  fr:string
 }
+
     if(load){
       return(
         <div className="flex items-center justify-center w-screen h-screen border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">

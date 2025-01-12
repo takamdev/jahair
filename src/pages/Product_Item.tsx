@@ -162,7 +162,6 @@ getAllCollection('avis').then( async res=>{
     //calcule de la moyenne des notes
     const Avis =[...res.docs.map((doc) => doc.data() as type_avis),avis]
     const note = moyenne(Avis,id!)
-    console.log(note);
     
     // mise a jour du rating de ce produit
     const data = {
@@ -186,27 +185,25 @@ getAllCollection('avis').then( async res=>{
   
 }
 // description en fonction des langues
-const desc = {
-  fr:product?.desc.split(',')[0],
-  en:product?.desc.split(',')[1],
-  it:product?.desc.split(',')[2]
+const desc = product?.desc as  {
+  fr: string;
+  en: string;
+  it: string;
 }
 
 //carateristique en fonction des langues
-const caract = {
-  fr:product?.caracteristique.split('&')[0].split(','),
-  en:product?.caracteristique.split('&')[1].split(','),
-  it:product?.caracteristique.split('&')[2].split(','),
-
+const caract = product?.caracteristique  as  {
+  fr: string;
+  en: string;
+  it: string;
 }
 
 // titre en fonction des langues
-const title = {
-  fr:product?.title.split(',')[0],
-  en:product?.title.split(',')[1],
-  it:product?.title.split(',')[2]
+const title = product?.title  as  {
+  fr: string;
+  en: string;
+  it: string;
 }
-
 if(load){
     return(
       <div className="flex items-center justify-center w-screen h-screen border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -287,7 +284,7 @@ if(load){
                           <h4 className="mt-5">{t("features")}:</h4>
                           <ul className="max-w-md mx-10  space-y-1 text-color list-disc list-inside dark:text-gray-400">
                             {
-                              caract[i18n.language as keyof typeof caract]?.map(element=>{
+                              caract[i18n.language as keyof typeof caract].split(',').map(element=>{
                                 return <li>{element}</li>
 
                               })

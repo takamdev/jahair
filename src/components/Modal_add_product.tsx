@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { type_product } from "../types/type_product";
 import { addFile } from "../firebase/addFile";
 import { addCollection } from "../firebase/addCollection";
+import translator from "../helper/translator";
 
 
 
@@ -70,25 +71,54 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
           }
         }
 
+          // traduction
+          const  objetTranslation = {
+            caracteristique:data.caracteristique,
+            category:data.category,
+            desc:data.desc,
+            title:data.name
+   
+           }
+          console.log(objetTranslation);
+          
+            const translationToEn =  await translator(objetTranslation,'en')
+            const translationToIt=  await translator(objetTranslation,'it')
+   
+
       // construit le produit
         const product = {
-          category: data.category,
-          title: data.name,
+          category: {
+            en:translationToEn.category.text,
+            fr:data.category,
+            it:translationToIt.category.text
+          },
+          title:  {
+            en:translationToEn.title.text,
+            fr:data.name,
+            it:translationToIt.title.text
+          },
           prize: data.prize,
           img: urlList,
           in_stock:true,
-          desc:data.desc,
+          desc: {
+            en:translationToEn.desc.text,
+            fr:data.desc,
+            it:translationToIt.desc.text
+          },
           rating:4,
-          caracteristique:data.caracteristique,
+          caracteristique:{
+            en:translationToEn.caracteristique.text,
+            fr:data.caracteristique,
+            it:translationToIt.caracteristique.text
+          },
           taille:data.taille
         } 
         //ajout du produit et recuperation de l'id
         addCollection("product",product).then(res=>{
-          
           const Product = {
             id:res.id,
             ...product
-            
+         
           } 
           //mise a jour du tableau dans le dom
           setData((v)=>([...v,Product]))

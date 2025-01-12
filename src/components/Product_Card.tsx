@@ -7,16 +7,12 @@ import { useTranslation } from "react-i18next"
 function Card({product,className,reveal}:{product:type_product,className?:string,reveal?:any}) {
   const setting = useStore(state=>state.setting)
 
-  // recuperation des tradustions
-  const prepareTranslate = (object:string)=>{
-    return {fr:object.split(",")[0],en:object.split(',')[1],it:object.split(',')[2]}
-  }
   const {i18n,t}=useTranslation()
   
   const {img,desc,title,rating,prize,in_stock,id} = {
     ...product,
-    title:prepareTranslate(product.title),
-    desc: prepareTranslate(product.desc),
+    title:product.title,
+    desc: product.desc,
   }
   const addCart = useStore((state)=>(state.addCart))  
   const Cart = useStore((state)=>(state.Cart))

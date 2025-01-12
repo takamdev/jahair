@@ -16,17 +16,13 @@ function Produit() {
  
   useEffect(()=>{
     const getCategorie = product.map(item=>{
-      return {
-        fr:item.category.split(",")[0],
-        en:item.category.split(",")[1],
-        it:item.category.split(",")[2]
-      }
+      return item.category
     })
     setCathegorie(getCategorie)
   },[])
   
   const filter = (value:string)=>{
-     const newListProduct = getproduct.filter(item =>item.category.includes(value))
+     const newListProduct = getproduct.filter(item =>item.category[i18n.language as keyof typeof item.category].includes(value))
      setProduct(newListProduct)
      if(value.length===0)setProduct(getproduct)
 

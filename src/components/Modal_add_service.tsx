@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { addFile } from "../firebase/addFile";
 import { addCollection } from "../firebase/addCollection";
 import { type_service } from "../types/type_service";
+import translator from "../helper/translator";
 
 
 
@@ -68,21 +69,41 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
       // envoie des fichiers et recuperaation des urls de partage sur firebase
      for (const element of fileSelect as string[]) {
       const res = await addFile(element, "video/mp4");
-      console.log(res);
       
       url.push(res)
      }
      img = await addFile(imgSelect as string, "image/webp")
     // fin d'envoie de fichiers sur firebase
 
+    // traduction
+
+              
+    const  objetTranslation = {
+      desc:data.desc as string,
+      name:data.name as string
+
+    }
+
+
+      const translationToEn =  await translator(objetTranslation,'en')
+      const translationToIt=  await translator(objetTranslation,'it')
+
 
         // construit le produit
         const service = {
-          name: data.name,
+          name: {
+            en:translationToEn.name.text,
+            fr:data.name,
+            it:translationToIt.name.text
+          },
           prize: data.prize,
           video: url,
           rating:4,
-          desc:data.desc,
+          desc: {
+            en:translationToEn.desc.text,
+            fr:data.desc,
+            it:translationToIt.desc.text
+          },
           img: img
       } 
       //ajout du produit et recuperation de l'id
@@ -224,10 +245,7 @@ const removeInSelect = (name:string)=>{
                           load?"patientez...":"envoyer"
                         }
                       </button>
-                      <p className="mt-3 text-justify">
-                        <span className="font-bold">NB: </span>
-                        reseignez les differentes langue en separant pas une virgule et dans l'ordre Fr En It 
-                      </p>
+                      
                   </form>
                 </div>
               </div>

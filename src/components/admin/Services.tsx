@@ -19,6 +19,7 @@ import static_service from "./../../data/service.json"
 import { getAllCollection } from "../../firebase/getCollections";
 import Load from "../../layout/Load";
 import { deleteFile } from "../../firebase/deleteFile";
+import translator from "../../helper/translator";
 
 const columns = ColumnHelper();
 
@@ -37,10 +38,10 @@ function Service() {
          const data = res.docs.map(element=>{
             const itemProduct:type_service={
               id: element.id,
-              name:element.data().name,
+              name:element.data().name.fr,
               prize: element.data().prize,
               video: element.data().video,
-              desc: element.data().desc,
+              desc: element.data().desc.fr,
               img: element.data().img,
               rating:element.data().rating===undefined ? 4:element.data().rating
             }
@@ -81,7 +82,6 @@ function Service() {
       setData(updateData);
    };
 
-console.log(data);
 
    // supprimer un service
    const deleteService = async (id: string) => {
@@ -113,11 +113,36 @@ console.log(data);
             //reconvertie en objet
             Object.entries(item).filter(([cle]) => cle !== "id") // transformer un objet en tableau de cle valeur et elemine la cle valeur id
          );
+         // traduction
 
+          
+         const  objetTranslation = {
+            desc:doc.desc as string,
+            name:doc.name as string
+   
+           }
+   
+          
+            const translationToEn =  await translator(objetTranslation,'en')
+            const translationToIt=  await translator(objetTranslation,'it')
+   
+   
          const data = {
             collection_name: "service",
             id_doc: item.id,
-            data: doc,
+            data: {
+               ...doc,
+               desc: {
+                  en:translationToEn.desc.text,
+                  fr:doc.desc,
+                  it:translationToIt.desc.text
+               },
+               name: {
+                  en:translationToEn.name.text,
+                  fr:doc.name,
+                  it:translationToIt.name.text
+               }
+            },
          };
          try {
             const res = await editDoc(data);

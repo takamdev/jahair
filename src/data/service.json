@@ -1,26 +1,49 @@
 [
     {
-        "name":"Coupe Cheveux Tres Long",
+        "name":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        },
         "rating":4,
         "prize":45,
         "id":"kll",
         "video":["sffsfsf"],
-        "desc":"fsfsfs"
+        "desc":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        }
     },
     {
-        "name":"Coupe Cheveux Tres Long",
+        "name":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        },
         "rating":4,
         "prize":45,
         "id":"kll",
-        "video":[""],
-        "desc":""
-    },
-    {
-        "name":"Coupe Cheveux Tres Long",
+        "video":["sffsfsf"],
+        "desc":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        }
+    },  {
+        "name":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        },
         "rating":4,
         "prize":45,
-        "video":[""],
         "id":"kll",
-        "desc":""
+        "video":["sffsfsf"],
+        "desc":{
+            "it":"Coupe Cheveux Tres Long",
+            "en":"Coupe Cheveux Tres Long",
+            "fr":"Coupe Cheveux Tres Long"
+        }
     }
 ]

@@ -11,13 +11,10 @@ function Card({service,className,reveal}:{service:type_service,className?:string
     const setting = useStore(state=>state.setting)
     const {i18n,t}=useTranslation()
 
-      // recuperation des traductions
-  const prepareTranslate = (object:string)=>{
-    return {fr:object.split(",")[0],en:object.split(',')[1],it:object.split(',')[2]}
-  }
+
     const {img,name,rating,prize,id} = {
       ...service,
-      name:prepareTranslate(service.name),
+      name:service.name,
     }
     const ref = useRef(null)
     const navigate=useNavigate()

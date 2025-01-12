@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { addCollection } from "../firebase/addCollection";
 import { getAllCollection } from "../firebase/getCollections";
 import { editDoc } from "../firebase/editDoc";
+import translator from "../helper/translator";
 const cssClassButtonActive = "btn rounded-lg text-start px-3 py-2 flex gap-2 items-center text-white"
 const cssClassButtonInactive = "text-slate-500 flex gap-2 items-center text-start px-3 py-2"
 function Admis() {
@@ -69,6 +70,8 @@ const updatebrouillion = (value:string)=>{
    
     if(textIncome.length!==0){ // vérifier si le champ n'est pas vide
       setLoadIncome(true) // activer le loader
+      const translationToEn =  await translator(textIncome,'en')
+      const translationToIt=  await translator(textIncome,'it')
       try {
 
         const income = await getAllCollection("income") // recuperer l'annonce
@@ -76,7 +79,16 @@ const updatebrouillion = (value:string)=>{
         // verifier si il y'a une annonce dans la bd
         if(income.size===0){ 
           // il y'a pas d'annonce
-          await addCollection('income',{income:textIncome}) // ajout de l'annonce dans la bd
+
+          // traduction
+          
+           
+
+          
+           
+          
+
+          await addCollection('income',{income:{fr:textIncome , en:translationToEn.text,it:translationToIt.text}}) // ajout de l'annonce dans la bd
           setLoadIncome(false) // arret du chargement
         }else{
 
@@ -84,11 +96,13 @@ const updatebrouillion = (value:string)=>{
           const data = {
             collection_name:"income",
             id_doc:id,
-            data:{income:textIncome}
+            data:{income:{fr:textIncome , en:translationToEn.text,it:translationToIt.text}}
         }
         // modification de l'annonce
           editDoc(data).finally(()=>{
+
             setLoadIncome(false) // arret du chargement
+            setTextIncome("")
           })
 
         }

@@ -55,10 +55,10 @@ useEffect(()=>{
 
   if(service.length!==0){
     const findService = service.find(item=>item.id===id) as type_service
-    const serviceName = {
-      fr:findService.name.split(",")[0],
-      en:findService.name.split(',')[1],
-      it:findService.name.split(',')[2]
+    const serviceName = findService.name as {
+      fr:string
+      en:string,
+      it:string,
      }
      setServiceName(serviceName)
   }

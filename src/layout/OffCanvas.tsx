@@ -52,7 +52,7 @@ export function OffCanvasCart({isOpen,setIsOpen}:{setIsOpen(value:boolean):void,
  // cart qui incluree les titre sur differente langue
 
 const carttiltle = Cart.map(item=>{
-  return {...item,title:{fr:item.title.split(",")[0],en:item.title.split(",")[1],it:item.title.split(",")[2]}}
+  return {...item,title:item.title}
  })
  
  const resetCart = useStore(state=>state.resetCart)

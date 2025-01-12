@@ -2,14 +2,30 @@ import { DocumentData, DocumentReference, DocumentSnapshot, QuerySnapshot } from
 
 export type type_product = {
     id: string
-    category: string
-    title: string
+    category: {
+      fr:string,
+      en:string,
+      it:string
+    }
+    title: {
+      fr:string,
+      en:string,
+      it:string
+    }
     prize: number
     img: string[]
     in_stock:boolean,
-    desc:string,
+    desc:{
+      fr:string,
+      en:string,
+      it:string
+    },
     rating:number,
-    caracteristique:string,
+    caracteristique:{
+      fr:string,
+      en:string,
+      it:string
+    },
     taille:string
   } 
 
