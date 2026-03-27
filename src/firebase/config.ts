@@ -6,12 +6,13 @@ import { getStorage } from "firebase/storage";
 
 export const firebaseConfig = {
   apiKey: process.env.apiKey,
-  authDomain: "jahair-style.firebaseapp.com",
-  projectId: "jahair-style",
-  storageBucket: "jahair-style.appspot.com",
+  authDomain: "jahairstyle-7ed77.firebaseapp.com",
+  projectId: "jahairstyle-7ed77",
+  storageBucket: "jahairstyle-7ed77.firebasestorage.app",
   messagingSenderId: "725382733393",
   appId:process.env.appId
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
