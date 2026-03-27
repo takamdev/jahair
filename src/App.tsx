@@ -23,7 +23,6 @@ function App() {
   const setSetting = useStore(state=>state.setSetting)
   const setting = useStore(state=>state.setting)
   const setProduct = useStore((state)=>(state.setProduct))
-  const product = useStore((state) => state.product);
   
   const setService = useStore(state=>state.setService)
   const [requetCookies,setRequestCookies]=useState(false)  
