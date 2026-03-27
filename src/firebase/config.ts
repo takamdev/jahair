@@ -9,7 +9,7 @@ export const firebaseConfig = {
   authDomain: "jahair-style.firebaseapp.com",
   projectId: "jahair-style",
   storageBucket: "jahair-style.appspot.com",
-  messagingSenderId: "437994101250",
+  messagingSenderId: "725382733393",
   appId:process.env.appId
 };
 
