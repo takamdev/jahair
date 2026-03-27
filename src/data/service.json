@@ -14,6 +14,7 @@
             "en":"Coupe Cheveux Tres Long",
             "fr":"Coupe Cheveux Tres Long"
         }
+        ,"img":"/img/coup3.webp"
     },
     {
         "name":{
@@ -29,7 +30,8 @@
             "it":"Coupe Cheveux Tres Long",
             "en":"Coupe Cheveux Tres Long",
             "fr":"Coupe Cheveux Tres Long"
-        }
+        },
+        "img":"/img/coup2.webp"
     },  {
         "name":{
             "it":"Coupe Cheveux Tres Long",
@@ -44,6 +46,7 @@
             "it":"Coupe Cheveux Tres Long",
             "en":"Coupe Cheveux Tres Long",
             "fr":"Coupe Cheveux Tres Long"
-        }
+        },
+        "img":"/img/coup1.webp"
     }
 ]

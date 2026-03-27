@@ -18,8 +18,11 @@ export default function Home() {
    const [testi,setTesti]= useState<type_testimonials[]|[undefined]>([])
    const { t ,i18n } = useTranslation();
    const [income,setIncome]=useState<{fr:string,en:string,it:string}|undefined>(undefined) 
+   
 // chagement des testimonials
 useEffect(()=>{
+  
+   
    const promesses = [
       getAllCollection("testimonials"),
       getAllCollection("income")
@@ -44,7 +47,7 @@ useEffect(()=>{
 
        // récuperation de l'annonce
 
-     const t_income = res[1].docs[0].data().income 
+     const t_income = res[1].docs[0].data().income||null
 
     
      setIncome(t_income)
@@ -99,6 +102,7 @@ useEffect(()=>{
          <section className="flex justify-center">
             <article className="grid grid-cols-1 px-3 md:gap-14 lg:gap-14 place-content-center lg:grid-cols-4 md:grid-cols-2  ">
                {product.slice(0, 4).map((item, index) => {
+
                   return (
                      <div key={index} className="mb-3">
                         <Card_product reveal={{ reset: true }} product={item} />

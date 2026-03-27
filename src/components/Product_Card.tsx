@@ -42,7 +42,7 @@ return ()=>{
       <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
         <a href={`/product/${id}`}>
         <img
-          src={img[2]}
+          src={img[0]}
           alt="picture"
           className="h-full w-full object-cover rounded-md"
         />

@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react'
 import useStore from './store'
 import { getAllCollection } from './firebase/getCollections'
 import { type_product } from './types/type_product'
-import product from "./data/product.json"
-import service from './data/service.json'
+import inernalProduct from "./data/product.json"
+import internalService from './data/service.json'
+import stt from './data/setting.json'
 import { type_setting } from './types/type_setting'
 import Load from './layout/Load'
 import { type_service } from './types/type_service'
@@ -22,6 +23,8 @@ function App() {
   const setSetting = useStore(state=>state.setSetting)
   const setting = useStore(state=>state.setting)
   const setProduct = useStore((state)=>(state.setProduct))
+  const product = useStore((state) => state.product);
+  
   const setService = useStore(state=>state.setService)
   const [requetCookies,setRequestCookies]=useState(false)  
   const [authCookies,setAuthCookies]=useState(false)
@@ -69,7 +72,9 @@ const getData = async ()=>{
       }
       return itemSetting
      })
-     setSetting(settingData[0])
+
+     
+     setSetting(settingData[0]||stt)
      
   } catch (error) {
     console.log(error);
@@ -100,51 +105,70 @@ setRequestCookies(true)
     
     Promise.all(promesses)
       .then(querySnapshots => {
+        
+        // si la bd produit est vide
         if(querySnapshots[0].size===0){
-          setProduct(product)
+          
+          
+          setProduct(inernalProduct)
+
+          
+          
+         }else{
+            //contruction des données produits
+                  
+                const data_product = querySnapshots[0].docs.map(element=>{
+                  const itemProduct:type_product={
+                    id: element.id,
+                    category:element.data().category,
+                    title:element.data().title,
+                    prize: element.data().prize,
+                    img: element.data().img,
+                    in_stock:element.data().in_stock,
+                    desc: element.data().desc,
+                    rating:element.data().rating===undefined ? 4:element.data().rating,
+                    caracteristique:element.data().caracteristique,
+                    taille:element.data().taille
+                  }
+                  return itemProduct
+                })
+
+              //mise a jour de l'etat
+              setProduct(data_product)
          }
 
 
-         //contruction des données produits
-      const data_product = querySnapshots[0].docs.map(element=>{
-        const itemProduct:type_product={
-          id: element.id,
-          category:element.data().category,
-          title:element.data().title,
-          prize: element.data().prize,
-          img: element.data().img,
-          in_stock:element.data().in_stock,
-          desc: element.data().desc,
-          rating:element.data().rating===undefined ? 4:element.data().rating,
-          caracteristique:element.data().caracteristique,
-          taille:element.data().taille
-        }
-        return itemProduct
-       })
-      
-       //mise a jour de l'etat
-       setProduct(data_product)
+       
+    
 
+       // si la bd service est vide 
         if(querySnapshots[1].size===0){
-          setService(service)
+
+          setService(internalService)
+        
+
+         }else{
+                //contruction des données services
+            const data_service = querySnapshots[1].docs.map(element=>{
+              const itemService:type_service={
+                id: element.id,
+                name:element.data().name,
+                prize: element.data().prize,
+                img: element.data().img,
+                desc: element.data().desc,
+                video:element.data().video,
+                rating:element.data().rating===undefined ? 4:element.data().rating
+              }
+              return itemService
+            })
+            
+            //mise a jour de l'etat
+            setService(data_service)
+            
          }
         
-          //contruction des données services
-      const data_service = querySnapshots[1].docs.map(element=>{
-        const itemService:type_service={
-          id: element.id,
-          name:element.data().name,
-          prize: element.data().prize,
-          img: element.data().img,
-          desc: element.data().desc,
-          video:element.data().video,
-          rating:element.data().rating===undefined ? 4:element.data().rating
-        }
-        return itemService
-       })
-      
-       //mise a jour de l'etat
-       setService(data_service)
+         
+
       }).catch(err=>console.error(err)
    ).finally(()=>{
     setLoad(false)
