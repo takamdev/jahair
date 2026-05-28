@@ -1,39 +1,22 @@
-import { deleteObject, getMetadata, ref } from "firebase/storage";
-import { storage } from "./config";
 
+import { supabase } from "./supabaseConfig"
 export const deleteFile = async (fileURL:string[])=>{
 
 // parcourt des urls
   fileURL.forEach( async element => {
-    // reference vers le storage a partie de l'url
-      const storageRef = ref(storage, element);
-      
-   
-         try {
-          // recuperation du nom du fichier grace a storageRef
-          const res = await  getMetadata(storageRef)
-          const name = res.name
-          
-          // reference vers le fichier a partie de du nom
-          
-          const refStorage = ref(storage,`fichiers/${name}`);
-          
-          // supression du fichier
-          deleteObject(refStorage).then(() => {
+   const urlParts = element.split(`/storage/v1/object/public/images/`)
+  
+  if (urlParts.length < 2) {
+    throw new Error("URL invalide ou bucket incorrect")
+  }
 
-           return {success:true}
+  const filePath = decodeURIComponent(urlParts[1])
 
-          }).catch((error) => {
-            console.error('Erreur lors de la suppression du fichier:', error);
-            return {success:false}
+  const { error } = await supabase.storage
+    .from("images")
+    .remove([filePath])
 
-
-          });
-         } catch (error) {
-           console.log(error);
-           return {success:false}
-           
-         }
+  if (error) throw new Error(`Suppression échouée : ${error.message}`)
       
         
     });

@@ -1,18 +1,28 @@
-import { storage } from "./config";
-import { getDownloadURL, ref ,uploadBytes } from "firebase/storage";
 import { CreateFile } from "../helper/createfile";
+import { supabase } from "./supabaseConfig"
+
+
+
 
 
 export const addFile =async (url_name:string,type:string):Promise<string>=>{
-    const fichier = await CreateFile(url_name,type)
-    const storageRef = ref(storage, `fichiers/${url_name.split(' ')[1]}`);
-    try {
-       return await uploadBytes(storageRef, fichier).then( async()=>{
-           return await getDownloadURL(storageRef)
-        })
+    const file = await CreateFile(url_name,type)
+    const fileName = `img_${Date.now()}_${file.name}`
+    
+    const { error: uploadError } = await supabase.storage
+    .from("images")
+    .upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type
+    })
 
-    } catch (error:any) {
-        return error
-    }
+  if (uploadError) throw new Error(`Upload échoué : ${uploadError.message}`)
+
+  const { data } = supabase.storage
+    .from("images")
+    .getPublicUrl(fileName)
+
+  return data.publicUrl
     
 }

@@ -5,12 +5,12 @@ import { getStorage } from "firebase/storage";
 
 
 export const firebaseConfig = {
-  apiKey: process.env.apiKey,
+  apiKey: import.meta.env.apiKey,
   authDomain: "jahairstyle-7ed77.firebaseapp.com",
   projectId: "jahairstyle-7ed77",
   storageBucket: "jahairstyle-7ed77.firebasestorage.app",
   messagingSenderId: "725382733393",
-  appId:process.env.appId
+  appId:import.meta.env.appId
 };
 
 
