@@ -29,7 +29,7 @@ function Dashboad() {
 useEffect( ()=>{
 
   translator("bonjour",'en').then(res=>{
-    console.log(res.text);
+    console.log(res);
     
   }).catch(err=>console.log(err)
   )

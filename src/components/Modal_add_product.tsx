@@ -84,7 +84,8 @@ export default function Modal({open,onClose,setData}:{open:boolean,onClose(value
             const translationToEn =  await translator(objetTranslation,'en')
             const translationToIt=  await translator(objetTranslation,'it')
    
-
+           console.log(translationToEn);
+              
       // construit le produit
         const product = {
           category: {
