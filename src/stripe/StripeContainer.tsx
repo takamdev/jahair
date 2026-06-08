@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckoutForm";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useStore from "../store";
-const stripePromise = loadStripe(process.env.PUBLIC_KEY as string);
+const stripePromise = loadStripe(process.env.PUBLIC_KEY as string );
 const appearance:Appearance = {
   theme: 'stripe',
   variables: {
@@ -52,12 +52,13 @@ function StripeContainer({amount,email}:{amount:number,email:string}) {
       currency:setting.symbole_devise==="$"?"usd":"eur"
     }
     
+    console.log(process.env.baseURL);
     
     axios.post(`${process.env.baseURL}/api/create-payment-intent`,data).then(res=>{
      const getSecret = res.data.clientSecret 
        
      setClientSecret(getSecret)
-    }).catch(err=>{console.log(err.data);
+    }).catch(err=>{console.log(err.response.data);
     })
   },[])
 
