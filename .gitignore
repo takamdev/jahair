@@ -25,3 +25,4 @@ dist-ssr
 .vercel
 html_mail.html
 .codegpt
+.env
